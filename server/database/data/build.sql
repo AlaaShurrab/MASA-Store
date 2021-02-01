@@ -30,8 +30,8 @@ CREATE TABLE products (
   category VARCHAR(255),
   rating FLOAT,
   number_of_orders INTEGER DEFAULT 0,
-  old_price INTEGER,
-  new_price INTEGER,
+  old_price FLOAT,
+  new_price FLOAT,
   quantity INTEGER DEFAULT 100,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
