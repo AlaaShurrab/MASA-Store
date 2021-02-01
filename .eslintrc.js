@@ -6,7 +6,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
-    ["plugin:jest/recommended"],
+    'plugin:jest/recommended',
   ],
   parserOptions: {
     ecmaVersion: 12,
