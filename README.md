@@ -60,7 +60,7 @@ we will use `Heroku` Platform to deploy our website.
 
 ### Database Schema :file_cabinet:
 
-![schema](https://i.imgur.com/RoemH6h.png)
+![schema](https://dbdiagram.io/embed/6016a66780d742080a3886d8)
 
 ### Technologies :computer:
 
