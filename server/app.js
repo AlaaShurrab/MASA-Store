@@ -1,4 +1,3 @@
-
 const express = require('express');
 const { join } = require('path');
 const compression = require('compression');
