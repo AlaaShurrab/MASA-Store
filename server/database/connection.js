@@ -22,7 +22,7 @@ switch (NODE_ENV) {
 
 const options = {
   connectionString: urlDb,
-  ssl: process.env.NODE_ENV === 'production',
+  ssl: false, // && process.env.NODE_ENV === 'production',
 };
 
 module.exports = new Pool(options);

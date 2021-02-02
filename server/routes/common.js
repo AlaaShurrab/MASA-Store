@@ -1,7 +1,7 @@
 const commonRouter = require('express').Router();
 
-const { handleClientError } = require('../controllers/errors');
+const { handlerAllProducts } = require('../controllers/common');
 
-commonRouter.get(handleClientError);
+commonRouter.get('/products', handlerAllProducts);
 
 module.exports = commonRouter;
