@@ -60,7 +60,8 @@ we will use `Heroku` Platform to deploy our website.
 
 ### Database Schema :file_cabinet:
 
-![schema](https://i.imgur.com/RoemH6h.png)
+![schema](https://cdn.discordapp.com/attachments/803011551418122266/806090190359232542/Untitled_2.png)
+[schema link](https://dbdiagram.io/embed/6016a66780d742080a3886d8)
 
 ### Technologies :computer:
 
@@ -78,7 +79,7 @@ we will use `Heroku` Platform to deploy our website.
 
 #### Database
 
-- Postgres
+- PostgreSQL
 
 ### Stretch Goal :
 
