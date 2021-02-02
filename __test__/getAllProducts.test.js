@@ -4,18 +4,6 @@ const connection = require('../server/database/connection');
 const buildDb = require('../server/database/data/build');
 const { getAllProducts } = require('../server/database/quieres');
 
-// test('/products - GET ALL PRODUCTS', (done) => request(app)
-//   .get('/api/v1/products')
-//   .expect(200)
-//   .expect('Content-Type', /json/)
-//   .end((err, res) => {
-//     if (err) {
-//       return done(err);
-//     }
-//     expect(1).toBe(1);
-//     done();
-//   }));
-
 describe('Test Routes, Test Database getClients query', () => {
   beforeEach(() => buildDb());
   afterAll(() => connection.end());
@@ -24,11 +12,17 @@ describe('Test Routes, Test Database getClients query', () => {
     .then((result) => {
       const actual = result.rows[0];
       const expected = {
-        id: 1, img_url: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg', name: 'حقيبة لابتوب 15 بوصة', new_price: 109.95, old_price: null, rating: 3.2366492489753718,
+        id: 1,
+        img_url: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+        name: 'حقيبة لابتوب 15 بوصة',
+        new_price: 109.95,
+        old_price: null,
+        rating: 3.236,
       };
       expect(actual).toEqual(expected);
     })
     .catch());
+
   // eslint-disable-next-line jest/no-done-callback
   test('Route GET /api/v1/products', (done) => request(app)
     .get('/api/v1/products')
