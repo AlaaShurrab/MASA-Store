@@ -78,7 +78,7 @@ we will use `Heroku` Platform to deploy our website.
 
 #### Database
 
-- Postgres
+- PostgreSQL
 
 ### Stretch Goal :
 
