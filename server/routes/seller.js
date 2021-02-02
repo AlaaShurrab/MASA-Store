@@ -1,5 +1,5 @@
 const sellerRouter = require('express').Router();
-const { getClientsHandler } = require('../controllers/seller');
+const { getClientsHandler } = require('../controllers');
 
 sellerRouter.get('/clients', getClientsHandler);
 
