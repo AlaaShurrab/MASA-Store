@@ -38,12 +38,13 @@ CREATE TABLE products (
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE,
+  product_id INTEGER REFERENCES products(id) ON UPDATE CASCADE,
   quantity INTEGER,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  price INTEGER,
-  payment_method VARCHAR(255),
-  user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE,
-  product_id INTEGER REFERENCES products(id) ON UPDATE CASCADE
+  price FLOAT,
+  order_number VARCHAR(255),
+  payment_method VARCHAR(255)
 );
 
 CREATE TABLE product_img (
