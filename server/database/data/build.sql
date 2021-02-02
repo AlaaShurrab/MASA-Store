@@ -24,26 +24,27 @@ CREATE TABLE users (
 
 CREATE TABLE products (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  description VARCHAR(255),
+  name TEXT NOT NULL,
+  description TEXT,
   img_url TEXT,
   category VARCHAR(255),
   rating FLOAT,
   number_of_orders INTEGER DEFAULT 0,
-  old_price INTEGER,
-  new_price INTEGER,
+  old_price FLOAT,
+  new_price FLOAT,
   quantity INTEGER DEFAULT 100,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE,
+  product_id INTEGER REFERENCES products(id) ON UPDATE CASCADE,
   quantity INTEGER,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  price INTEGER,
-  payment_method VARCHAR(255),
-  user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE,
-  product_id INTEGER REFERENCES products(id) ON UPDATE CASCADE
+  price FLOAT,
+  order_number VARCHAR(255),
+  payment_method VARCHAR(255)
 );
 
 CREATE TABLE product_img (
