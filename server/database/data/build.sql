@@ -24,7 +24,7 @@ CREATE TABLE users (
 
 CREATE TABLE products (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
+  name TEXT NOT NULL,
   description TEXT,
   img_url TEXT,
   category VARCHAR(255),
