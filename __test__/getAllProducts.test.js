@@ -12,11 +12,14 @@ describe('Test Routes, Test Database getClients query', () => {
     .then((result) => {
       const actual = result.rows[0];
       const expected = {
+        category: 'fashion',
+        description: 'حقيبتي المثالية للاستخدام اليومي والمشي في الغابة قم بتخزين الكمبيوتر المحمول حتى 15 بوصة في الجراب المبطّن كل يوم',
         id: 1,
         img_url: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
         name: 'حقيبة لابتوب 15 بوصة',
         new_price: 109.95,
         old_price: null,
+        quantity: 100,
         rating: 3.236,
       };
       expect(actual).toEqual(expected);
