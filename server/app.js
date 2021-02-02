@@ -2,6 +2,7 @@ const express = require('express');
 const { join } = require('path');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+const routes = require('./routes');
 
 const app = express();
 
@@ -16,6 +17,8 @@ const middleware = [
 ];
 
 app.use(middleware);
+
+app.use('/api/v1', routes);
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
