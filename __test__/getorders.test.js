@@ -16,7 +16,7 @@ describe('Test Routes, Test Database getOrders query', () => {
     })
     .catch());
   // eslint-disable-next-line jest/no-done-callback
-  test('Route GET /api/v1/clients', (done) => request(app)
+  test('Route GET /api/v1/orders', (done) => request(app)
     .get('/api/v1/orders')
     .expect(200)
     .expect('Content-Type', /json/)
