@@ -1,5 +1,5 @@
-const handlerAllProducts = require('./handlerAllProducts');
+const allProductsHandler = require('./allProductsHandler');
 
 module.exports = {
-  handlerAllProducts,
+  allProductsHandler,
 };

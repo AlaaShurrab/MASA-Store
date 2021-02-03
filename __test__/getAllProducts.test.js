@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../server/app');
 const connection = require('../server/database/connection');
 const buildDb = require('../server/database/data/build');
-const { getAllProducts } = require('../server/database/quieres');
+const { getAllProducts } = require('../server/database/queries');
 
 describe('Test Routes, Test Database getAllProducts query', () => {
   beforeEach(() => buildDb());
