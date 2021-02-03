@@ -4,11 +4,11 @@ const connection = require('../server/database/connection');
 const buildDb = require('../server/database/data/build');
 const { getAllProducts } = require('../server/database/quieres');
 
-describe('Test Routes, Test Database getClients query', () => {
+describe('Test Routes, Test Database getAllProducts query', () => {
   beforeEach(() => buildDb());
   afterAll(() => connection.end());
 
-  test('getAllProducts >> This test will return clients data', () => getAllProducts()
+  test('getAllProducts >> This test will return all of the products data', () => getAllProducts()
     .then((result) => {
       const actual = result.rows[0];
       const expected = {
