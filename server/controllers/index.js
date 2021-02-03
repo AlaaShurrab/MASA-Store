@@ -1,3 +1,9 @@
-const { getClientsHandler } = require('./seller');
+const {
+  getClientsHandler,
+  getOrdersHandler,
+} = require('./seller');
 
-module.exports = { getClientsHandler };
+module.exports = {
+  getClientsHandler,
+  getOrdersHandler,
+};
