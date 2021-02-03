@@ -1,4 +1,4 @@
-const { getOrders } = require('../../database/quieres');
+const { getOrders } = require('../../database/queries');
 
 const getOrdersHandler = (req, res, next) => {
   getOrders()
