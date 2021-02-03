@@ -1,4 +1,4 @@
-const { getClients } = require('../../database/quieres');
+const { getClients } = require('../../database/queries');
 
 const getClientsHandler = (req, res, next) => {
   getClients()
