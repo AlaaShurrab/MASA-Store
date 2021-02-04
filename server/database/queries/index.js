@@ -1,4 +1,5 @@
 const signUp = require('./signUp');
+const signIn = require('./signIn');
 const getAllProducts = require('./getAllProducts');
 const getClientDataByEmail = require('./getClientDataByEmail');
 const getProductById = require('./getProductById');
@@ -11,6 +12,7 @@ const getOrders = require('./getOrders');
 
 module.exports = {
   signUp,
+  signIn,
   getAllProducts,
   getClientDataByEmail,
   getProductById,
