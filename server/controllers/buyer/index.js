@@ -1,6 +1,11 @@
-const getCartProducts = require('../../database/queries/getCartProducts');
 const getCartHandler = require('./getCartHandler');
+const getFavoriteHandler = require('./getFavoriteHandler');
+const addFavoriteHandler = require('./addFavoriteProduct');
+const deleteFromFavoriteHandler = require('./deleteFromFavoriteHandler');
 
 module.exports = {
+  getFavoriteHandler,
+  addFavoriteHandler,
+  deleteFromFavoriteHandler,
   getCartHandler,
 };
