@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const { join } = require('path');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+
 const routes = require('./routes');
 
 const app = express();
@@ -20,8 +22,11 @@ app.use(middleware);
 
 app.use('/api/v1', routes);
 
+const root = join(__dirname, '..', 'client', 'build');
+
+app.use(express.static(root));
 app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
+  res.sendFile('index.html', { root });
 });
 
 module.exports = app;
