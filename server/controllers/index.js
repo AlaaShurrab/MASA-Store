@@ -6,6 +6,7 @@ const {
 const {
   getFavoriteHandler,
   addFavoriteHandler,
+  deleteFromFavoriteHandler,
 } = require('./buyer');
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
   getOrdersHandler,
   getFavoriteHandler,
   addFavoriteHandler,
+  deleteFromFavoriteHandler,
 };
