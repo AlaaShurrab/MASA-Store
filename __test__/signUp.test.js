@@ -20,7 +20,7 @@ describe('Test Routes, Test Database sign up query', () => {
   test('Route POST /api/v1/signup', (done) => request(app)
     .post('/api/v1/signup')
     .send({
-      email: 'text@email.com', first_name: 'masa', last_name: 'G9', password: 'PASSWORD',
+      email: 'tessst@email.com', first_name: 'masa1', last_name: 'G91', password: 'PASSWORD',
     })
     .expect(200)
     .expect('Content-Type', /json/)
