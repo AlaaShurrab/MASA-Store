@@ -4,11 +4,11 @@ const connection = require('../server/database/connection');
 const buildDb = require('../server/database/data/build');
 const { signUp } = require('../server/database/queries');
 
-describe('Test Routes, Test Database getAllProducts query', () => {
+describe('Test Routes, Test Database sign up query', () => {
   beforeEach(() => buildDb());
   afterAll(() => connection.end());
 
-  test('getAllProducts >> This test will return all of the products data', () => signUp('test@ce.com', 'msa', 'test', 'dddd')
+  test('signUp>> This test will return all of the users data', () => signUp('test@ce.com', 'msa', 'test', 'dddd')
     .then((result) => {
       const actual = result.rowCount;
       const expected = 1;
