@@ -10,7 +10,7 @@ INSERT INTO
         city) VALUES
     (
         'john@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'john',
         'doe',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -20,7 +20,7 @@ INSERT INTO
     ),
 (
         'morrison@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'david',
         'morrison',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -30,7 +30,7 @@ INSERT INTO
     ),
 (
         'kevin@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'kevin',
         'ryan',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -40,7 +40,7 @@ INSERT INTO
     ),
 (
         'don@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'don',
         'romer',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -50,7 +50,7 @@ INSERT INTO
     ),
 (
         'derek@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'derek',
         'powell',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -60,7 +60,7 @@ INSERT INTO
     ),
 (
         'david_r@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'david',
         'russell',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -70,7 +70,7 @@ INSERT INTO
     ),
 (
         'miriam@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'miriam',
         'snyder',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -80,7 +80,7 @@ INSERT INTO
     ),
 (
         'william@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'william',
         'hopkins',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -90,7 +90,7 @@ INSERT INTO
     ),
 (
         'kate@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'kate',
         'hale',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
@@ -100,7 +100,7 @@ INSERT INTO
     ),
 (
         'jimmie@gmail.com',
-        'PASSWORD',
+        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
         'jimmie',
         'klein',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
