@@ -31,15 +31,15 @@ describe('Test Routes, Test Database get products by catogory query', () => {
     }));
 
   // eslint-disable-next-line jest/no-done-callback
-  test('Route GET /api/v1/product/:productId when given a productId not in the database', (done) => request(app)
-    .get('/api/v1/product/66')
+  test('Route GET /api/v1/product/:productId when given a CATEGORY not in the database', (done) => request(app)
+    .get('/api/v1/products/fashiondfdsf')
     .expect(404)
     .expect('Content-Type', /json/)
     .end((err, res) => {
       if (err) return done(err);
       // console.log(JSON.parse(res.text), '**************************');
-      // expect(JSON.parse(res.text).data.length).toBe(0);
-      // expect(JSON.parse(res.text).message).toBe('product does not exist within this catogory ');
+      expect(JSON.parse(res.text).data.length).toBe(0);
+      expect(JSON.parse(res.text).message).toBe('product does not exist within this catogory ');
       expect(res.status).toBe(404);
       return done();
     }));
