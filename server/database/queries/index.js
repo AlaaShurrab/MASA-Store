@@ -8,6 +8,7 @@ const checkFavoriteProduct = require('./checkFavoriteProduct');
 const getFavorite = require('./getFavorite');
 const addFavoriteProduct = require('./addFavoriteProduct');
 const deleteFromFavorite = require('./deleteFromFavorite');
+const getCartProducts = require('./getCartProducts');
 const getClients = require('./getClients');
 const getOrders = require('./getOrders');
 
@@ -22,6 +23,7 @@ module.exports = {
   getFavorite,
   addFavoriteProduct,
   deleteFromFavorite,
+  getCartProducts,
   getClients,
   getOrders,
 };
