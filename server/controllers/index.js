@@ -1,18 +1,18 @@
 const {
-  getClientsHandler,
-  getOrdersHandler,
-} = require('./seller');
-
-const {
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,
 } = require('./buyer');
 
-module.exports = {
+const {
   getClientsHandler,
   getOrdersHandler,
+} = require('./seller');
+
+module.exports = {
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,
+  getClientsHandler,
+  getOrdersHandler,
 };
