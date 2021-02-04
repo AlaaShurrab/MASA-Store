@@ -2,7 +2,6 @@ const { getProductsByCatogory, getAllProducts } = require('../../database/querie
 
 const productSearchBycategoryHandler = (req, res, next) => {
   const { word, category } = req.query;
-  console.log(word);
   if (!word) {
     return res.status(404).json({
       status: 404,
@@ -12,24 +11,25 @@ const productSearchBycategoryHandler = (req, res, next) => {
   } if (!category) {
     return getAllProducts()
       .then(({ rows }) => {
-        if (!rows.length) {
+        const newRows = rows.filter((product) => product.name.includes(word));
+        if (!newRows.length) {
           return res.status(404).json({
             status: 404,
-            message: 'product does not exist',
+            message: 'no search results',
             data: [],
           });
         }
-        rows.filter((product) => product.name.includes(word));
         return res.status(200).json({
           status: 200,
-          data: rows.filter((product) => product.name.includes(word)),
+          data: newRows,
         });
       })
       .catch(next);
   }
   return getProductsByCatogory(category)
     .then(({ rows }) => {
-      if (!rows.length) {
+      const newRows = rows.filter((product) => product.name.includes(word));
+      if (!newRows.length) {
         return res.status(404).json({
           status: 404,
           message: 'there is no item with like this in this category',
@@ -38,7 +38,7 @@ const productSearchBycategoryHandler = (req, res, next) => {
       }
       return res.status(200).json({
         status: 200,
-        data: rows.filter((product) => product.name.includes(word)),
+        data: newRows,
       });
     })
     .catch(next);
