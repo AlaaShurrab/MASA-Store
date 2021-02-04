@@ -1,5 +1,4 @@
+const { signUpHandler } = require('./signUpHandler');
 const allProductsHandler = require('./allProductsHandler');
 
-module.exports = {
-  allProductsHandler,
-};
+module.exports = { signUpHandler, allProductsHandler };
