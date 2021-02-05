@@ -1,4 +1,5 @@
 const signUp = require('./signUp');
+const getProfileDataById = require('./getProfileUser');
 const getAllProducts = require('./getAllProducts');
 const getProductsByTopRating = require('./getProductsByTopRating');
 const getProductsByTrending = require('./getProductsByTrending');
@@ -30,4 +31,5 @@ module.exports = {
   addCartProduct,
   getClients,
   getOrders,
+  getProfileDataById,
 };
