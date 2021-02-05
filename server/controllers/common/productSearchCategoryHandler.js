@@ -1,6 +1,6 @@
-const { getProductsByCatogory, getAllProducts } = require('../../database/queries');
+const { getProductsByCategory, getAllProducts } = require('../../database/queries');
 
-const productSearchBycategoryHandler = (req, res, next) => {
+const productSearchCategoryHandler = (req, res, next) => {
   const { word, category } = req.query;
   if (!word) {
     return res.status(404).json({
@@ -26,7 +26,7 @@ const productSearchBycategoryHandler = (req, res, next) => {
       })
       .catch(next);
   }
-  return getProductsByCatogory(category)
+  return getProductsByCategory(category)
     .then(({ rows }) => {
       const newRows = rows.filter((product) => product.name.includes(word));
       if (!newRows.length) {
@@ -44,4 +44,4 @@ const productSearchBycategoryHandler = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = productSearchBycategoryHandler;
+module.exports = productSearchCategoryHandler;

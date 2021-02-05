@@ -4,7 +4,7 @@ const app = require('../server/app');
 const connection = require('../server/database/connection');
 const buildDb = require('../server/database/data/build');
 
-describe('Test Routes, Test Database get products-search in a categorys query', () => {
+describe('Test Routes, Test Database get products-search in a category query', () => {
   beforeEach(() => buildDb());
   afterAll(() => connection.end());
 

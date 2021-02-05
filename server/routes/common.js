@@ -2,14 +2,20 @@ const commonRouter = require('express').Router();
 
 const {
   allProductsHandler,
-  productsByCatogoryHandler,
-  productSearchBycategoryHandler,
+  productsByCategoryHandler,
+  productSearchCategoryHandler,
   productByIdHandler,
+  productsByTopRatingHandler,
+  productsByTrendingHandler,
+  signUpHandler,
 } = require('../controllers/common');
 
+commonRouter.post('/signup', signUpHandler);
 commonRouter.get('/products', allProductsHandler);
-commonRouter.get('/products/:catogory', productsByCatogoryHandler);
-commonRouter.get('/product-search', productSearchBycategoryHandler);
+commonRouter.get('/products/top-rated', productsByTopRatingHandler);
+commonRouter.get('/products/trending', productsByTrendingHandler);
+commonRouter.get('/products/:category', productsByCategoryHandler);
+commonRouter.get('/product-search', productSearchCategoryHandler);
 commonRouter.get('/products', allProductsHandler);
 commonRouter.get('/product/:productId', productByIdHandler);
 

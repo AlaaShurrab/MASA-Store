@@ -3,13 +3,13 @@ const request = require('supertest');
 const app = require('../server/app');
 const connection = require('../server/database/connection');
 const buildDb = require('../server/database/data/build');
-const { getProductsByCatogory } = require('../server/database/queries');
+const { getProductsByCategory } = require('../server/database/queries');
 
-describe('Test Routes, Test Database get products by catogory query', () => {
+describe('Test Routes, Test Database get products by category query', () => {
   beforeEach(() => buildDb());
   afterAll(() => connection.end());
 
-  test('getProductsByCatogory >> This test will return all of the data of a product using id', () => getProductsByCatogory('fashion')
+  test('getProductsByCategory >> This test will return all of the data of a product using id', () => getProductsByCategory('fashion')
     .then((result) => {
       const actual = result.rows[0].category;
       const expected = 'fashion';
@@ -39,7 +39,7 @@ describe('Test Routes, Test Database get products by catogory query', () => {
       if (err) return done(err);
       // console.log(JSON.parse(res.text), '**************************');
       expect(JSON.parse(res.text).data.length).toBe(0);
-      expect(JSON.parse(res.text).message).toBe('product does not exist within this catogory ');
+      expect(JSON.parse(res.text).message).toBe('product does not exist within this category ');
       expect(res.status).toBe(404);
       return done();
     }));
