@@ -9,22 +9,21 @@ describe('Test Routes, Test Database getOrdersByUsersId query', () => {
   beforeEach(() => buildDb());
   afterAll(() => connection.end());
 
-  test('getOrders >> This test will return orders by user id', () => getOrdersByUsersId(1)
+  test('getOrders >> This test will return orders by user id', () => getOrdersByUsersId(4)
     .then((result) => {
       const actual = result.rows.length;
-      const expected = 1;
+      const expected = result.rowCount;
       expect(actual).toBe(expected);
     })
     .catch());
   // eslint-disable-next-line jest/no-done-callback
   test('Route GET /api/v1/orders/:userId', (done) => request(app)
-    .get('/api/v1/orders/1')
+    .get('/api/v1/orders/4')
     .expect(200)
     .expect('Content-Type', /json/)
     .end((err, res) => {
       if (err) return done(err);
-      expect(JSON.parse(res.text).data.length).toBe(1);
-      expect(JSON.parse(res.text).data[0].quantity).toBe(5);
+      expect(JSON.parse(res.text).data[0].user_id).toBe(4);
       expect(res.status).toBe(200);
       return done();
     }));

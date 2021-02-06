@@ -1,23 +1,23 @@
 const connection = require('../connection');
 
 const addOrdersById = (
-  userId,
   productId,
   quantity,
   price,
   paymentMethod,
   orderNumber,
+  userId,
 ) => {
   const sql = {
     text:
-    'insert into orders( user_id, product_id,quantity,price,payment_method,order_number) values ($1, $2)',
+    'insert into orders(product_id,quantity,price,payment_method,order_number,user_id) values ($1,$2,$3,$4,$5,$6) returning*',
     values: [
-      userId,
       productId,
       quantity,
       price,
       paymentMethod,
       orderNumber,
+      userId,
     ],
   };
   return connection.query(sql);
