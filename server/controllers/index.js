@@ -6,6 +6,7 @@ const {
   getCartHandler,
   addCartProductHandler,
   deleteFromCartHandler,
+  getUserOrders,
 } = require('./buyer');
 const {
   getClientsHandler,
@@ -22,4 +23,5 @@ module.exports = {
   deleteFromCartHandler,
   getClientsHandler,
   getOrdersHandler,
+  getUserOrders,
 };
