@@ -2,6 +2,7 @@ const signUp = require('./signUp');
 const getProfileDataById = require('./getProfileUser');
 const putProfileDataById = require('./putProfileUser');
 const getAllProducts = require('./getAllProducts');
+const getProductsByCategory = require('./getProductsByCategory');
 const getProductsByTopRating = require('./getProductsByTopRating');
 const getProductsByTrending = require('./getProductsByTrending');
 const getProductById = require('./getProductById');
@@ -24,6 +25,7 @@ module.exports = {
   getProfileDataById,
   putProfileDataById,
   getAllProducts,
+  getProductsByCategory,
   getProductsByTopRating,
   getProductsByTrending,
   getClientDataByEmail,
