@@ -16,6 +16,7 @@ const addCartProduct = require('./addCartProduct');
 const deleteFromCart = require('./deleteFromCart');
 const getClients = require('./getClients');
 const getOrders = require('./getOrders');
+const deleteProduct = require('./deleteProduct');
 
 module.exports = {
   signUp,
@@ -26,6 +27,7 @@ module.exports = {
   getProductsByTrending,
   getClientDataByEmail,
   getProductById,
+  deleteProduct,
   checkFavoriteProduct,
   getFavorite,
   addFavoriteProduct,
