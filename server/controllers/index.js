@@ -6,6 +6,7 @@ const {
   getCartHandler,
   addCartProductHandler,
   getProfileUserId,
+  putProfileUser,
 } = require('./buyer');
 const {
   getClientsHandler,
@@ -22,4 +23,5 @@ module.exports = {
   getClientsHandler,
   getOrdersHandler,
   getProfileUserId,
+  putProfileUser,
 };

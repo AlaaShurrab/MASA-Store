@@ -4,6 +4,7 @@ const deleteFromFavoriteHandler = require('./deleteFromFavoriteHandler');
 const getCartHandler = require('./getCartHandler');
 const addCartProductHandler = require('./addCartProductHandler');
 const getProfileUserId = require('./getProfileUSerById');
+const putProfileUser = require('./putProfileDataById');
 
 module.exports = {
   getFavoriteHandler,
@@ -12,4 +13,5 @@ module.exports = {
   getCartHandler,
   addCartProductHandler,
   getProfileUserId,
+  putProfileUser,
 };
