@@ -13,6 +13,7 @@ const deleteFromFavorite = require('./deleteFromFavorite');
 const checkCartProduct = require('./checkCartProduct');
 const getCartProducts = require('./getCartProducts');
 const addCartProduct = require('./addCartProduct');
+const deleteFromCart = require('./deleteFromCart');
 const getClients = require('./getClients');
 const getOrders = require('./getOrders');
 
@@ -32,6 +33,7 @@ module.exports = {
   checkCartProduct,
   getCartProducts,
   addCartProduct,
+  deleteFromCart,
   getClients,
   getOrders,
 };

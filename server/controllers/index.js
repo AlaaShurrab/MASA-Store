@@ -7,6 +7,7 @@ const {
   addCartProductHandler,
   getProfileUserId,
   putProfileUser,
+  deleteFromCartHandler,
 } = require('./buyer');
 const {
   getClientsHandler,
@@ -20,6 +21,7 @@ module.exports = {
   deleteFromFavoriteHandler,
   getCartHandler,
   addCartProductHandler,
+  deleteFromCartHandler,
   getClientsHandler,
   getOrdersHandler,
   getProfileUserId,
