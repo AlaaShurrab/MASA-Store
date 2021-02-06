@@ -3,7 +3,6 @@ const { putProduct, getProductById } = require('../../database/queries');
 const putProductHandler = (req, res, next) => {
   const { id } = req.params;
   getProductById(id).then(({ rows }) => {
-    console.log('hi');
     if (!rows.length) {
       return res.status(400).json({
         status: 400,
