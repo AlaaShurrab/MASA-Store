@@ -9,7 +9,7 @@ const updateCartHandler = (req, res, next) => {
       if (!rowCount) {
         throw throwError(400, 'This product does not exist in your cart!');
       }
-      if (quantity < 1) {
+      if (quantity < 1 || !quantity) {
         throw throwError(400, 'Quantity must be larger than 0');
       }
       return updateCart(userId, productId, quantity);
