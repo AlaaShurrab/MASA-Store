@@ -1,18 +1,19 @@
 const { getProfileDataById } = require('../../database/queries');
 const { putProfileDataById } = require('../../database/queries');
+const { throwError } = require('../../utilities');
 
 const putProfileUser = (req, res, next) => {
   const {
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     avatar,
-    shipping_address1,
-    shipping_address2,
+    shippingAddress1,
+    shippingAddress2,
     city,
-    payment_method,
-    payment_card_name,
-    payment_card_number,
-    payment_card_expire_date,
+    paymentMethod,
+    paymentCardName,
+    paymentCardNumber,
+    paymentCardExpireDate,
   } = req.body;
   const { userId } = req.params;
   getProfileDataById(userId)
@@ -25,22 +26,21 @@ const putProfileUser = (req, res, next) => {
         });
       } else {
         return putProfileDataById(
-          first_name,
-          last_name,
+          firstName,
+          lastName,
           avatar,
-          shipping_address1,
-          shipping_address2,
+          shippingAddress1,
+          shippingAddress2,
           city,
-          payment_method,
-          payment_card_name,
-          payment_card_number,
-          payment_card_expire_date,
+          paymentMethod,
+          paymentCardName,
+          paymentCardNumber,
+          paymentCardExpireDate,
           userId,
         );
       }
     })
     .then(({ rows }) => res.json({ status: 200, data: rows, message: 'Update successfully' }))
-
-    .catch(next);
+    .catch(() => next(throwError(400, 'please check your entered data')));
 };
 module.exports = putProfileUser;
