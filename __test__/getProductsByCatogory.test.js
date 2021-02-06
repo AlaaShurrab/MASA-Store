@@ -37,7 +37,6 @@ describe('Test Routes, Test Database get products by category query', () => {
     .expect('Content-Type', /json/)
     .end((err, res) => {
       if (err) return done(err);
-      // console.log(JSON.parse(res.text), '**************************');
       expect(JSON.parse(res.text).data.length).toBe(0);
       expect(JSON.parse(res.text).message).toBe('product does not exist within this category ');
       expect(res.status).toBe(404);
