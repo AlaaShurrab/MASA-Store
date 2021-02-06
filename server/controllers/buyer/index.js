@@ -6,6 +6,7 @@ const addCartProductHandler = require('./addCartProductHandler');
 const getProfileUserId = require('./getProfileUSerById');
 const putProfileUser = require('./putProfileDataById');
 const deleteFromCartHandler = require('./deleteFromCartHandler');
+const updateCartHandler = require('./updateCartHandler');
 
 module.exports = {
   getFavoriteHandler,
@@ -16,4 +17,5 @@ module.exports = {
   getProfileUserId,
   putProfileUser,
   deleteFromCartHandler,
+  updateCartHandler,
 };
