@@ -10,12 +10,14 @@ const {
   deleteFromCartHandler,
 } = require('./buyer');
 const {
+  addProductHandler,
   getClientsHandler,
   getOrdersHandler,
 } = require('./seller');
 
 module.exports = {
   signUpHandler,
+  addProductHandler,
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,
