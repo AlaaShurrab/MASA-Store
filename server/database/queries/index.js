@@ -15,6 +15,8 @@ const deleteFromCart = require('./deleteFromCart');
 const getClients = require('./getClients');
 const getOrders = require('./getOrders');
 const getOrdersByUsersId = require('./getOrdersByUsersId');
+const addOrdersById = require('./addOrdersByUsersId');
+const getUsersOrdersByProductId = require('./getUsersOrdersByProductId');
 
 module.exports = {
   signUp,
@@ -34,4 +36,6 @@ module.exports = {
   getClients,
   getOrders,
   getOrdersByUsersId,
+  addOrdersById,
+  getUsersOrdersByProductId,
 };
