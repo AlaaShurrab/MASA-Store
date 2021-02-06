@@ -5,16 +5,21 @@ const {
   deleteFromFavoriteHandler,
   getCartHandler,
   addCartProductHandler,
+  getProfileUserId,
+  putProfileUser,
   deleteFromCartHandler,
   updateCartHandler,
 } = require('./buyer');
 const {
+  addProductHandler,
   getClientsHandler,
   getOrdersHandler,
+  deleteProductHandler,
 } = require('./seller');
 
 module.exports = {
   signUpHandler,
+  addProductHandler,
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,
@@ -24,4 +29,7 @@ module.exports = {
   updateCartHandler,
   getClientsHandler,
   getOrdersHandler,
+  getProfileUserId,
+  putProfileUser,
+  deleteProductHandler,
 };
