@@ -13,6 +13,7 @@ const {
   addProductHandler,
   getClientsHandler,
   getOrdersHandler,
+  deleteProductHandler,
 } = require('./seller');
 
 module.exports = {
@@ -28,4 +29,5 @@ module.exports = {
   getOrdersHandler,
   getProfileUserId,
   putProfileUser,
+  deleteProductHandler,
 };
