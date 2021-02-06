@@ -6,7 +6,7 @@ const getUserOrders = (req, res, next) => {
       if (rowCount === 0) {
         res.status(400).json({
           status: 400,
-          message: 'Order Not Found',
+          message: 'no orders for this user',
           data: [],
         });
       } else {
