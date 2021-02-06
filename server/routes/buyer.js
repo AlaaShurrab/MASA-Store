@@ -6,6 +6,7 @@ const {
   deleteFromFavoriteHandler,
   getCartHandler,
   addCartProductHandler,
+  deleteFromCartHandler,
   updateCartHandler,
 } = require('../controllers');
 
@@ -14,6 +15,7 @@ buyerRouter.post('/favorite/:userId', addFavoriteHandler);
 buyerRouter.delete('/favorite/:userId', deleteFromFavoriteHandler);
 buyerRouter.get('/cart/:userId', getCartHandler);
 buyerRouter.post('/cart/:userId', addCartProductHandler);
+buyerRouter.delete('/cart/:userId', deleteFromCartHandler);
 buyerRouter.put('/cart/:userId', updateCartHandler);
 
 module.exports = buyerRouter;
