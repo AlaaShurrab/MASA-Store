@@ -5,6 +5,8 @@ const getAllProducts = require('./getAllProducts');
 const getProductsByTopRating = require('./getProductsByTopRating');
 const getProductsByTrending = require('./getProductsByTrending');
 const getProductById = require('./getProductById');
+const addProduct = require('./addProduct');
+const addImg = require('./addImg');
 const getClientDataByEmail = require('./getClientDataByEmail');
 const checkFavoriteProduct = require('./checkFavoriteProduct');
 const getFavorite = require('./getFavorite');
@@ -28,6 +30,8 @@ module.exports = {
   getClientDataByEmail,
   getProductById,
   deleteProduct,
+  addProduct,
+  addImg,
   checkFavoriteProduct,
   getFavorite,
   addFavoriteProduct,
