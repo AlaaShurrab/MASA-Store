@@ -11,6 +11,7 @@ const {
 } = require('./buyer');
 const {
   addProductHandler,
+  putProductHandler,
   getClientsHandler,
   getOrdersHandler,
 } = require('./seller');
@@ -18,6 +19,7 @@ const {
 module.exports = {
   signUpHandler,
   addProductHandler,
+  putProductHandler,
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,
