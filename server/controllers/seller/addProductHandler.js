@@ -12,7 +12,7 @@ const addProductHandler = (req, res, next) => {
     }))
     .then(() => res.status(200).json({
       status: 200,
-      message: 'added successfully',
+      message: 'The product is added successfully',
     }))
     .catch(next);
 };
