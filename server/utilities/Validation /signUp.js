@@ -1,16 +1,25 @@
 const Joi = require('joi');
 
 const signUpValidation = ({
-  email, first_name, last_name, password,
+  email, firstName, lastName, password,
 }) => {
   const schema = Joi.object({
     email: Joi.string().email().required(),
-    first_name: Joi.string().required(),
-    last_name: Joi.string().required(),
-    password: Joi.string().alphanum().min(6).required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    password: Joi.string()
+      .pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
+      .message({
+        'string.pattern.base':
+          'Password must contain 8 Characters,and at least uppercase, lowercase, number and special Character',
+      })
+      .required(),
   });
   const result = schema.validateAsync({
-    email, first_name, last_name, password,
+    email,
+    firstName,
+    lastName,
+    password,
   });
   return result;
 };

@@ -7,106 +7,117 @@ INSERT INTO
         avatar,
         shipping_address1,
         shipping_address2,
-        city) VALUES
+        city,
+        role) VALUES
     (
         'john@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'john',
         'doe',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'new road',
         '7682',
-        'kilcoole'
+        'kilcoole',
+        'user'
     ),
 (
         'morrison@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'david',
         'morrison',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'Lovers Ln',
         '7267',
-        'kilcoole'
+        'kilcoole',
+        'user'
     ),
 (
         'kevin@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'kevin',
         'ryan',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'Frances Ct',
         '86',
-        'Cullman'
+        'Cullman',
+        'user'
     ),
 (
         'don@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'don',
         'romer',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'Hunters Creek Dr',
         '6454',
-        'San Antonio'
+        'San Antonio',
+        'user'
     ),
 (
         'derek@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'derek',
         'powell',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'adams St',
         '245',
-        'san Antonio'
+        'san Antonio',
+        'user'
     ),
 (
         'david_r@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'david',
         'russell',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'prospect st',
         '124',
-        'el paso'
+        'el paso',
+        'user'
     ),
 (
         'miriam@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'miriam',
         'snyder',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'saddle st',
         '1342',
-        'fresno'
+        'fresno',
+        'user'
     ),
 (
         'william@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'william',
         'hopkins',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'vally view ln',
         '1342',
-        'mesa'
+        'mesa',
+        'user'
     ),
 (
         'kate@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'kate',
         'hale',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'avondale ave',
         '345',
-        'miami'
+        'miami',
+        'user'
     ),
 (
         'jimmie@gmail.com',
-        '$2b$10$RIRB.RnUQaUxo/JJ9TiYquodoMssKCU/kwYrUDZwq3mFal14OBVQu',
+        '$2b$10$o5ApmeRcnZ.uuvZhdyl3euT8a3tWbbC39zbm2NzhZMUBB4F.HNWdK',
         'jimmie',
         'klein',
         'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
         'oak lawn ave',
         '526',
-        'fort wayne'
+        'fort wayne',
+        'admin'
     );
 
 INSERT INTO
