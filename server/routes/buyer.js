@@ -9,6 +9,7 @@ const {
   getProfileUserId,
   putProfileUser,
   deleteFromCartHandler,
+  updateCartHandler,
 } = require('../controllers');
 
 buyerRouter.get('/favorite/:userId', getFavoriteHandler);
@@ -19,5 +20,6 @@ buyerRouter.post('/cart/:userId', addCartProductHandler);
 buyerRouter.get('/profile/:userId', getProfileUserId);
 buyerRouter.put('/profile/:userId', putProfileUser);
 buyerRouter.delete('/cart/:userId', deleteFromCartHandler);
+buyerRouter.put('/cart/:userId', updateCartHandler);
 
 module.exports = buyerRouter;
