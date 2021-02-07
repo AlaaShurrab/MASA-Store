@@ -24,6 +24,8 @@ const getOrdersByUsersId = require('./getOrdersByUsersId');
 const addOrdersById = require('./addOrdersByUsersId');
 const getUsersOrdersByProductId = require('./getUsersOrdersByProductId');
 const deleteProduct = require('./deleteProduct');
+const updateUserFinancialStatement = require('./updateUserFinancialStatement');
+const updateProductById = require('./updateProductById');
 
 module.exports = {
   signUp,
@@ -52,4 +54,7 @@ module.exports = {
   getOrdersByUsersId,
   addOrdersById,
   getUsersOrdersByProductId,
+  updateUserFinancialStatement,
+  updateProductById,
+
 };
