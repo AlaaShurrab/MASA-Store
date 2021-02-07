@@ -1,4 +1,5 @@
-const signUp = require('./signUp');
+const addUser = require('./addUser');
+const getAllClientDataByEmail = require('./getAllClientDataByEmail');
 const getProfileDataById = require('./getProfileUser');
 const putProfileDataById = require('./putProfileUser');
 const getAllProducts = require('./getAllProducts');
@@ -24,7 +25,8 @@ const getOrders = require('./getOrders');
 const deleteProduct = require('./deleteProduct');
 
 module.exports = {
-  signUp,
+  addUser,
+  getAllClientDataByEmail,
   getProfileDataById,
   putProfileDataById,
   getAllProducts,
