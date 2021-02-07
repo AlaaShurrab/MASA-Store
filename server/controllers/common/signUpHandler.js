@@ -28,6 +28,7 @@ const signUpHandler = (req, res, next) => {
       id, role, ...restOfData
     }) => {
       clientData = restOfData;
+      clientData.role = role;
       clientData.id = id;
       clientData.password = 'hidden for your security';
       return jwtString({ userID: id, role });
