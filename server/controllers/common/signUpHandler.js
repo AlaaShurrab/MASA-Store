@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const { signUpValidation, throwError, jwtString } = require('../../utilities');
-const { signUp, getClientDataByEmail } = require('../../database/queries');
+const { addUser, getClientDataByEmail } = require('../../database/queries');
 
 const signUpHandler = (req, res, next) => {
   const {
@@ -22,7 +22,7 @@ const signUpHandler = (req, res, next) => {
         return bcrypt.hash(password, 10);
       }
     })
-    .then((hashPassword) => signUp(email, firstName, lastName, hashPassword))
+    .then((hashPassword) => addUser(email, firstName, lastName, hashPassword))
     .then((userData) => userData.rows[0])
     .then(({
       id, role, ...restOfData

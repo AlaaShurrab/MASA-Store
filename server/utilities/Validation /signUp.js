@@ -5,8 +5,8 @@ const signUpValidation = ({
 }) => {
   const schema = Joi.object({
     email: Joi.string().email().required(),
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
+    firstName: Joi.string().min(3).max(40).required(),
+    lastName: Joi.string().min(3).max(40).required(),
     password: Joi.string()
       .pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
       .message({
