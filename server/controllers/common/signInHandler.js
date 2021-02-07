@@ -31,7 +31,6 @@ const signInHandler = (req, res, next) => {
       );
     })
     .then((token) => {
-      delete clientData.role;
       clientData.password = 'hidden for your security ';
       res
         .cookie('token', token, { httpOnly: true })
