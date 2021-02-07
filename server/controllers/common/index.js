@@ -1,5 +1,5 @@
-const { signUpHandler } = require('./signUpHandler');
-const { signInHandler } = require('./signInHandler');
+const signUpHandler = require('./signUpHandler');
+const signInHandler = require('./signInHandler');
 const allProductsHandler = require('./allProductsHandler');
 const productsByCategoryHandler = require('./productsByCategoryHandler');
 const productSearchCategoryHandler = require('./productSearchCategoryHandler');

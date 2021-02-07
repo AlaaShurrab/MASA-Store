@@ -45,4 +45,4 @@ const signUpHandler = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { signUpHandler };
+module.exports = signUpHandler;

@@ -38,4 +38,4 @@ const signInHandler = (req, res, next) => {
     })
     .catch(next);
 };
-module.exports = { signInHandler };
+module.exports = signInHandler;
