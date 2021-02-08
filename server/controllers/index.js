@@ -1,4 +1,4 @@
-const { signUpHandler } = require('./common');
+const { signUpHandler, signInHandler } = require('./common');
 const {
   getFavoriteHandler,
   addFavoriteHandler,
@@ -14,6 +14,7 @@ const {
 } = require('./buyer');
 const {
   addProductHandler,
+  putProductHandler,
   getClientsHandler,
   getOrdersHandler,
   deleteProductHandler,
@@ -21,7 +22,9 @@ const {
 
 module.exports = {
   signUpHandler,
+  signInHandler,
   addProductHandler,
+  putProductHandler,
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,

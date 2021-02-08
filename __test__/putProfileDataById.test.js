@@ -31,7 +31,6 @@ describe('Test Routes, Test Database putProfileDataById query', () => {
         last_name: 'doe',
         avatar:
             'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
-        role: null,
         shipping_address1: 'new road',
         shipping_address2: '7682',
         city: 'kilcoole',

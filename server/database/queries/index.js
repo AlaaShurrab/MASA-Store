@@ -1,4 +1,5 @@
-const signUp = require('./signUp');
+const addUser = require('./addUser');
+const getAllClientDataByEmail = require('./getAllClientDataByEmail');
 const getProfileDataById = require('./getProfileUser');
 const putProfileDataById = require('./putProfileUser');
 const getAllProducts = require('./getAllProducts');
@@ -8,6 +9,7 @@ const getProductsByTrending = require('./getProductsByTrending');
 const getProductById = require('./getProductById');
 const addProduct = require('./addProduct');
 const addImg = require('./addImg');
+const putProduct = require('./putProduct');
 const getClientDataByEmail = require('./getClientDataByEmail');
 const checkFavoriteProduct = require('./checkFavoriteProduct');
 const getFavorite = require('./getFavorite');
@@ -28,7 +30,8 @@ const updateUserFinancialStatement = require('./updateUserFinancialStatement');
 const updateProductById = require('./updateProductById');
 
 module.exports = {
-  signUp,
+  addUser,
+  getAllClientDataByEmail,
   getProfileDataById,
   putProfileDataById,
   getAllProducts,
@@ -40,6 +43,7 @@ module.exports = {
   deleteProduct,
   addProduct,
   addImg,
+  putProduct,
   checkFavoriteProduct,
   getFavorite,
   addFavoriteProduct,
