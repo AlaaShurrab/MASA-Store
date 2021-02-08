@@ -1,5 +1,6 @@
-const { signUpHandler, signInHandler, signoutHandler } = require('./common');
+const { signUpHandler, signInHandler } = require('./common');
 const {
+  signoutHandler,
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,

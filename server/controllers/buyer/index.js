@@ -1,3 +1,4 @@
+const signoutHandler = require('./signoutHandler');
 const getFavoriteHandler = require('./getFavoriteHandler');
 const addFavoriteHandler = require('./addFavoriteProduct');
 const deleteFromFavoriteHandler = require('./deleteFromFavoriteHandler');
@@ -9,6 +10,7 @@ const deleteFromCartHandler = require('./deleteFromCartHandler');
 const updateCartHandler = require('./updateCartHandler');
 
 module.exports = {
+  signoutHandler,
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,

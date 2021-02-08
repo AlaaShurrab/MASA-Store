@@ -7,9 +7,8 @@ const {
   productsByTopRatingHandler,
   productsByTrendingHandler,
 } = require('../controllers/common');
-const { signUpHandler, signInHandler, signoutHandler } = require('../controllers');
+const { signUpHandler, signInHandler } = require('../controllers');
 
-commonRouter.put('/signout', signoutHandler);
 commonRouter.post('/signup', signUpHandler);
 commonRouter.post('/signin', signInHandler);
 commonRouter.get('/products', allProductsHandler);
