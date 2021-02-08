@@ -1,64 +1,42 @@
+const { placeOrder } = require('../../database/queries/placeOrder');
 const { throwError, addOrderValidation } = require('../../utilities');
-const {
-  addOrdersById,
-  getProductById,
-  getProfileDataById,
-  updateUserFinancialStatement,
-  updateProductById,
-} = require('../../database/queries');
-// check order array
-// added to database =>orders
-// update product quantiy and no orders
-// updae user total spending and last order date
 
 const addUserOrdersById = (req, res, next) => {
-  const { order, paymentMethod } = req.body;
-
+  const { orders, paymentMethod } = req.body;
   const { userId } = req.params;
-  const orderType = Array.isArray(order);
-  const orderNumber = `${Date.now()}‏${userId}`;
-  const unCompletedOrder = [];
-  if (!orderType || order.length === 0) {
+  const orderType = Array.isArray(orders);
+  const unCompletedOrders = [];
+  if (!orderType || orders.length === 0) {
     throw throwError(400, 'orders must be array with one product at least');
   } else {
-    order.forEach((products) => {
-      let quantity;
-      return addOrderValidation(products)
-        .catch((err) => {
-          throw throwError(400, `something wrong ${err.details[0].message}`);
+    const orderNumber = `${Date.now()}‏${userId}`;
+    orders.forEach((order, index) => {
+      const { productId, quantity } = order;
+      addOrderValidation(order)
+        .then(() => placeOrder(
+          productId,
+          quantity,
+          paymentMethod,
+          orderNumber,
+          userId,
+        ))
+        .then((isFailed) => {
+          if (isFailed) {
+            unCompletedOrders.push(isFailed);
+          }
+          if (index === orders.length - 1) {
+            if (unCompletedOrders.length > 0) {
+              res.status(200).json({
+                message: 'order completed partially',
+                failedItem: unCompletedOrders,
+              });
+            } else {
+              res.status(200).json({ message: 'order complete' });
+            }
+          }
         })
-        .then((result) => {
-          quantity = result.quantity;
-          return getProductById(result.productId);
-        }).catch((err) => { console.log(err); })
-        .then(({ rows }) => {
-          const { id, new_price: price } = rows[0];
-          console.log(rows, 'jkldfjl;askfjadsl;kfj');
-          return addOrdersById(
-            id,
-            quantity,
-            price * quantity,
-            paymentMethod,
-            orderNumber,
-            userId,
-          );
-        })
-        .catch((err) => console.log(err))
-
-        .then(({ rows }) => {
-          getProductById(rows);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-      // .then(() => res.json({
-      //   status: 200,
-      //   message: 'order added successfully',
-      // }))
-      // .catch(next);
+        .catch(next);
     });
-    // console.log(orderPromise, 'zzzzzzzzzzzzzzzzzzz');
-    // Promise.all([orderPromise]).then((res) => console.log(res, 'kjflkajflkafjal;kfj')).catch(next);
   }
 };
 module.exports = addUserOrdersById;
