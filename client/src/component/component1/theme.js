@@ -6,6 +6,7 @@ const theme = createMuiTheme({
   direction: Globals.direction,
   palette: {
     primary: {
+      //main orange color
       main: '#E24928',
     },
     secondary: {
@@ -13,9 +14,12 @@ const theme = createMuiTheme({
        main: '#F4F4F4',
     },
     text: {
+      //text color for description, gray colored text
       secondary: '#666666',
     },
     background: {
+      //background color of sign in , sign up pages
+      // other pages => primary
       secondary: '#F6F6F6',
     },
   },
