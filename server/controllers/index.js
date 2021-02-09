@@ -16,6 +16,7 @@ const {
   getClientsHandler,
   getOrdersHandler,
   deleteProductHandler,
+  searchHandler,
 } = require('./seller');
 
 module.exports = {
@@ -35,4 +36,5 @@ module.exports = {
   getProfileUserId,
   putProfileUser,
   deleteProductHandler,
+  searchHandler,
 };
