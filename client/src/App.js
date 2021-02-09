@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function App() {
-  return <div>Welcome to MASA STORE</div>
+  return <div>Welcome to MASA STORE</div>;
 }
 
-export default App
+export default App;
