@@ -1,6 +1,7 @@
 const buyerRouter = require('express').Router();
 
 const {
+  signoutHandler,
   getFavoriteHandler,
   addFavoriteHandler,
   deleteFromFavoriteHandler,
@@ -12,6 +13,7 @@ const {
   updateCartHandler,
 } = require('../controllers');
 
+buyerRouter.post('/signout', signoutHandler);
 buyerRouter.get('/favorite/:userId', getFavoriteHandler);
 buyerRouter.post('/favorite/:userId', addFavoriteHandler);
 buyerRouter.delete('/favorite/:userId', deleteFromFavoriteHandler);

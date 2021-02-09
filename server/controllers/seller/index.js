@@ -3,6 +3,7 @@ const getClientsHandler = require('./getClientsHandler');
 const getOrdersHandler = require('./getOrdersHandler');
 const putProductHandler = require('./putProductHandler');
 const deleteProductHandler = require('./deleteProductHandler');
+const searchHandler = require('./searchHandler');
 
 module.exports = {
   addProductHandler,
@@ -10,4 +11,5 @@ module.exports = {
   getOrdersHandler,
   putProductHandler,
   deleteProductHandler,
+  searchHandler,
 };
