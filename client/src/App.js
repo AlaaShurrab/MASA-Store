@@ -2,7 +2,7 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset, ThemeProvider } from '@material-ui/core/styles';
 
-import theme from './component/component1/theme';
+import theme from './component/theme/theme';
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
