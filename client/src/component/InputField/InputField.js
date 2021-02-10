@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   large: {
@@ -17,9 +18,8 @@ const useStyles = makeStyles({
   },
 });
 
-function InputField(props) {
+function InputField({ className, size, multiline, ...props }) {
   const classes = useStyles();
-  const { size, placeholder, label, id } = props;
 
   return (
     <TextField
@@ -30,22 +30,22 @@ function InputField(props) {
           </InputAdornment>
         ),
       }}
-      id={id}
-      label={label}
-      placeholder={placeholder}
+      {...props}
+      multiline={multiline || false}
       style={{ margin: 8 }}
       margin="normal"
       InputLabelProps={{
         shrink: true,
       }}
       variant="outlined"
-      className={
+      className={clsx(
         size === 'small'
           ? classes.small
           : size === 'medium'
           ? classes.medium
-          : classes.large
-      }
+          : classes.large,
+        className
+      )}
     />
   );
 }
@@ -55,12 +55,20 @@ InputField.propTypes = {
   id: PropTypes.string,
   placeholder: PropTypes.string,
   label: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  multiline: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 InputField.defaultProps = {
   id: 'edit',
-  label: '',
   placeholder: '',
+  label: '',
+  name: '',
+  multiline: false,
+  className: '',
 };
 
 export default InputField;
