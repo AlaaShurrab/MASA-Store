@@ -8,6 +8,7 @@ const getProfileUserId = require('./getProfileUSerById');
 const putProfileUser = require('./putProfileDataById');
 const deleteFromCartHandler = require('./deleteFromCartHandler');
 const updateCartHandler = require('./updateCartHandler');
+const isAuth = require('./isAuth');
 
 module.exports = {
   signoutHandler,
@@ -20,4 +21,5 @@ module.exports = {
   putProfileUser,
   deleteFromCartHandler,
   updateCartHandler,
+  isAuth,
 };

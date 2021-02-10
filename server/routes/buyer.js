@@ -11,8 +11,10 @@ const {
   putProfileUser,
   deleteFromCartHandler,
   updateCartHandler,
+  isAuth,
 } = require('../controllers');
 
+buyerRouter.get('/isAuth', isAuth);
 buyerRouter.post('/signout', signoutHandler);
 buyerRouter.get('/favorite/:userId', getFavoriteHandler);
 buyerRouter.post('/favorite/:userId', addFavoriteHandler);

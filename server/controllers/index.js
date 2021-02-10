@@ -10,6 +10,7 @@ const {
   putProfileUser,
   deleteFromCartHandler,
   updateCartHandler,
+  isAuth,
 } = require('./buyer');
 const {
   addProductHandler,
@@ -39,4 +40,5 @@ module.exports = {
   putProfileUser,
   deleteProductHandler,
   searchHandler,
+  isAuth,
 };
