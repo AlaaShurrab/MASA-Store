@@ -22,7 +22,12 @@ const deleteFromCart = require('./deleteFromCart');
 const updateCart = require('./updateCart');
 const getClients = require('./getClients');
 const getOrders = require('./getOrders');
+const getOrdersByUsersId = require('./getOrdersByUsersId');
+const addOrdersById = require('./addOrdersByUsersId');
+const getUsersOrdersByProductId = require('./getUsersOrdersByProductId');
 const deleteProduct = require('./deleteProduct');
+const updateUserFinancialStatement = require('./updateUserFinancialStatement');
+const updateProductById = require('./updateProductById');
 
 module.exports = {
   addUser,
@@ -50,4 +55,10 @@ module.exports = {
   updateCart,
   getClients,
   getOrders,
+  getOrdersByUsersId,
+  addOrdersById,
+  getUsersOrdersByProductId,
+  updateUserFinancialStatement,
+  updateProductById,
+
 };
