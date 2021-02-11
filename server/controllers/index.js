@@ -9,6 +9,8 @@ const {
   getProfileUserId,
   putProfileUser,
   deleteFromCartHandler,
+  getUserOrders,
+  addUserOrdersById,
   updateCartHandler,
 } = require('./buyer');
 const {
@@ -35,6 +37,8 @@ module.exports = {
   updateCartHandler,
   getClientsHandler,
   getOrdersHandler,
+  getUserOrders,
+  addUserOrdersById,
   getProfileUserId,
   putProfileUser,
   deleteProductHandler,
