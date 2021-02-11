@@ -1,7 +1,3 @@
-import Footer from './Footer';
-import Header from './Header';
+import InputField from './InputField/index';
 
-export {
-    Footer,
-    Header,
-};
+export default InputField;

@@ -18,7 +18,7 @@ CREATE TABLE users (
   payment_card_number INTEGER,
   payment_card_expire_date INTEGER,
   join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  total_spending INTEGER DEFAULT 0,
+  total_spending FLOAT DEFAULT 0,
   last_order TIMESTAMP
 );
 

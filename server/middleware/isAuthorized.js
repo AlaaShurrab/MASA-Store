@@ -2,8 +2,8 @@ const { verifyToken, throwError } = require('../utilities');
 
 const isAuthorized = (req, res, next) => {
   verifyToken(req.cookies.token)
-    .then(({ userId, role }) => {
-      req.userId = userId;
+    .then(({ userID, role }) => {
+      req.userID = userID;
       req.role = role;
       next();
     })
