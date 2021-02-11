@@ -1,0 +1,60 @@
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-logoDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 20px;
+}
+.footer-logoDiv img {
+  width: 58px;
+}
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.faceBookIcon {
+  color: #115293;
+  margin: 5px;
+  border-radius: 5px;
+}
+.InstagramIcon {
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  color: #fff;
+  margin: 5px;
+  vertical-align: middle;
+  background: #d6249f;
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+}
+.TwitterIcon {
+  color: #1da1f2;
+  margin: 5px;
+  border-radius: 5px;
+}
+.footer-p20 {
+  padding: 20px;
+}
+.footer-hDivider {
+  margin: 20px 40px !important;
+}
