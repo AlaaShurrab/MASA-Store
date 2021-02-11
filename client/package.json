@@ -10,6 +10,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "clsx": "^1.1.1",
+    "jss": "^10.5.1",
     "jss-rtl": "^0.3.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
