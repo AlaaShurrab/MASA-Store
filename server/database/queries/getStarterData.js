@@ -3,23 +3,36 @@ const {
   getProfileDataById,
   getFavorite,
   getCartProducts,
+  getOrders,
 } = require('./index');
 
 const getStarterData = async (userId) => {
   let favoriteData = [];
   let cartProducts = [];
+  let orderData = [];
   try {
     await connection.query('BEGIN');
-    const profileDataQuery = await getProfileDataById(userId);
-    const profileData = profileDataQuery.rows[0];
+    const { rows: [profileData] } = await getProfileDataById(userId);
     if (profileData.role !== 'admin') {
-      const favoriteDataQuery = await getFavorite(userId);
+      const [
+        favoriteDataQuery,
+        cartProductsQuery,
+        ordersQuery,
+      ] = await Promise.all([
+        getFavorite(userId),
+        getCartProducts(userId),
+        getOrders(userId),
+      ]);
       favoriteData = favoriteDataQuery.rows;
-      const cartProductsQuery = await getCartProducts(userId);
       cartProducts = cartProductsQuery.rows;
+      orderData = ordersQuery.rows;
     }
     const data = {
-      profileData, favoriteData, cartProducts, role: profileData.role,
+      profileData,
+      favoriteData,
+      cartProducts,
+      orderData,
+      role: profileData.role,
     };
     await connection.query('COMMIT');
     return data;
