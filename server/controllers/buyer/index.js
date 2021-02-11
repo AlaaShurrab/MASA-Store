@@ -10,6 +10,7 @@ const deleteFromCartHandler = require('./deleteFromCartHandler');
 const getUserOrders = require('./getOrdersByUsersId');
 const addUserOrdersById = require('./addUserOrdersById');
 const updateCartHandler = require('./updateCartHandler');
+const isAuth = require('./isAuth');
 
 module.exports = {
   signoutHandler,
@@ -24,4 +25,5 @@ module.exports = {
   getUserOrders,
   addUserOrdersById,
   updateCartHandler,
+  isAuth,
 };
