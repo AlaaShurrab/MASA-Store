@@ -29,6 +29,7 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: ['Tajawal', 'Harmattan', 'sans-serif'].join(','),
+    body2: { fontSize: '0.8rem' },
   },
   breakpoints: {
     values: {
