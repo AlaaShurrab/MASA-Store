@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { create } from 'jss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 import rtl from 'jss-rtl';
 import {
   StylesProvider,
@@ -36,6 +37,25 @@ const App = () => {
   const [role, setRole] = useState('user');
   const [userData, setData] = useState({});
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const { data: response } = await axios('api/v1/isAuth');
+      if (response.status !== 200) {
+        setRole('guest');
+        setData({
+          cartProducts: [],
+          favoriteData: [],
+          orderData: [],
+          profileData: [],
+        });
+      } else {
+        setRole(response.data.role);
+        setData(response.data);
+      }
+    };
+    fetchUserData();
+  }, [role]);
+
   switch (role) {
     case 'user':
       return (
@@ -49,25 +69,25 @@ const App = () => {
                 <CategoryProductPage role={role} userData={userData} />
               </Route>
               <Route exact path="/product/:productId">
-                <ProductDetailsPage />
+                <ProductDetailsPage role={role} userData={userData} />
               </Route>
               <Route exact path="/profile">
-                <ProfilePage role={role} />
+                <ProfilePage role={role} userData={userData} />
               </Route>
               <Route exact path="/favorite">
-                <FavoritePage role={role} />
+                <FavoritePage role={role} userData={userData} />
               </Route>
               <Route exact path="/payment">
-                <PaymentPage role={role} />
+                <PaymentPage role={role} userData={userData} />
               </Route>
               <Route exact path="/order">
-                <OrderPage role={role} />
+                <OrderPage role={role} userData={userData} />
               </Route>
               <Route exact path="/cart">
-                <CartPage role={role} />
+                <CartPage role={role} userData={userData} />
               </Route>
               <Route>
-                <NotFoundPage />
+                <NotFoundPage role={role} />
               </Route>
             </Switch>
           </ThemeProvider>
@@ -98,7 +118,7 @@ const App = () => {
                 <EditProductsAdminPage role={role} />
               </Route>
               <Route>
-                <NotFoundPage />
+                <NotFoundPage role={role} />
               </Route>
             </Switch>
           </ThemeProvider>
@@ -122,10 +142,10 @@ const App = () => {
                 <SignUpPage setRole={setRole} setData={setData} />
               </Route>
               <Route exact path="/product/:productId">
-                <ProductDetailsPage />
+                <ProductDetailsPage role={role} userData={userData} />
               </Route>
               <Route>
-                <NotFoundPage />
+                <NotFoundPage role={role} />
               </Route>
             </Switch>
           </ThemeProvider>
