@@ -16,6 +16,7 @@ function App() {
   return (
     <StylesProvider jss={jss}>
       <ThemeProvider theme={theme}>
+        <div color="primary">Welcome to MASA STORE</div>
         <CartCard />
       </ThemeProvider>
     </StylesProvider>
