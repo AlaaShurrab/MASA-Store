@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
@@ -22,7 +22,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
+    maxWidth: 250,
     border: '1px solid #DADADA',
     borderRadius: 10,
   },
@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
     height: 20,
     width: 'auto',
     paddingBottom: 5,
-    // border: '1px solid #DADADA',
+  },
+  rating: {
+    paddingRight: 200,
   },
   ph: {
     fontSize: 20,
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 3,
   },
   content: {
-    width: 280,
+    width: 250,
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -65,28 +67,23 @@ export default function ProductCard(props) {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(isFavorite);
   const [added, setAddCart] = React.useState(isCart);
-  useEffect(() => {
+
+  const handelChecked = (e) => {
+    setChecked(e.target.checked);
     if (checked) {
       props.addFavorite(data.id);
     } else {
       props.deleteFavorite(data.id);
     }
-  }, [checked, data.id, props]);
+  };
 
-  useEffect(() => {
+  const handelAddCart = (e) => {
+    setAddCart(e.target.checked);
     if (added) {
       props.addCart(data.id);
     } else {
       props.deleteCart(data.id);
     }
-  }, [added, data.id, props]);
-
-  const handelChecked = (e) => {
-    setChecked(e.target.checked);
-  };
-
-  const handelAddCart = (e) => {
-    setAddCart(e.target.checked);
   };
 
   return (
@@ -120,8 +117,9 @@ export default function ProductCard(props) {
             <FormControlLabel control={<pre> ₪ </pre>} label={data.new_price} />
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item xs={1}>
             <FormControlLabel
+              className={classes.rating}
               control={<StarIcon className={classes.star} />}
               label={parseFloat(data.rating).toPrecision(2)}
             />
@@ -129,7 +127,7 @@ export default function ProductCard(props) {
 
           <Grid item xs={3}>
             {type !== 'buyer' ? null : (
-              <IconButton aria-label="add to cart">
+              <IconButton aria-label="add to cart" className={classes.addCart}>
                 <Checkbox
                   icon={<AddShoppingCartIcon fontSize="small" />}
                   checkedIcon={
