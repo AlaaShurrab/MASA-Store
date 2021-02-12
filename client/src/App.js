@@ -153,11 +153,9 @@ const App = () => {
               </Route>
               <Route exact path="/sign-in">
                 <SignInPage setRole={setRole} setData={setData} />
-                <Footer />
               </Route>
               <Route exact path="/sign-up">
                 <SignUpPage setRole={setRole} setData={setData} />
-                <Footer />
               </Route>
               <Route exact path="/product/:productId">
                 <ProductDetailsPage role={role} userData={userData} />
