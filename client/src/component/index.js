@@ -1,3 +1,4 @@
 import InputField from './InputField/index';
+import NotificationCard from './NotificationCard';
 
-export default InputField;
+export { InputField, NotificationCard };
