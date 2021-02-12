@@ -14,6 +14,7 @@ import OrdersPage from './Admin/OrdersPage';
 import ClientsPage from './Admin/ClientsPage';
 import EditProductsAdminPage from './Admin/EditProductsAdminPage';
 import NotFoundPage from './Common/404';
+import ProductDetailsPage from './Common/ProductDetailsPage';
 
 export {
   HomePage,
@@ -31,5 +32,6 @@ export {
   OrdersPage,
   ClientsPage,
   EditProductsAdminPage,
+  ProductDetailsPage,
   NotFoundPage,
 };
