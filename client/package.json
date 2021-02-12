@@ -9,10 +9,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
-<<<<<<< HEAD
-=======
     "clsx": "^1.1.1",
->>>>>>> a8ca31101b656679646789f8f3c69503c95050d2
     "jss": "^10.5.1",
     "jss-rtl": "^0.3.0",
     "prop-types": "^15.7.2",
