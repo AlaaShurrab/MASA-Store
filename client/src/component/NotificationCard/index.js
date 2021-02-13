@@ -84,5 +84,5 @@ NotificationCard.propTypes = {
   productName: PropTypes.string.isRequired,
   productImg: PropTypes.string.isRequired,
   userImg: PropTypes.string.isRequired,
-  orderDate: PropTypes.number.isRequired,
+  orderDate: PropTypes.string.isRequired,
 };
