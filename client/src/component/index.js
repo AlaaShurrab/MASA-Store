@@ -1,4 +1,5 @@
-import Footer from './Footer/index';
+import ProductCard from './ProductCard';
 import InputField from './InputField/index';
+import Footer from './Footer/index';
 
-export default { InputField, Footer };
+export { InputField, Footer, ProductCard };
