@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import timeDifference from '../../utilities/timeDifference';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,26 +48,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NotificationCard(props) {
-  const { orderDate, productName, userName, productImg, userImg } = props;
-  const date1 = Date.now();
-  const hours = Math.floor(Math.abs(date1 - orderDate) / 36e5);
-  const days = Math.floor(Math.abs(date1 - orderDate) / (36e5 * 24));
   const classes = useStyles();
+
+  const { orderDate, productName, userName, productImg, userImg } = props;
+
+  const { days, hours } = timeDifference(orderDate);
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.cover}
-        image={userImg}
-        title="Live from space album cover"
-      />
+      <CardMedia className={classes.cover} image={userImg} title={userName} />
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            {userName.substring(0, 20)}
+            {userName.substring(0, 15)}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            ثم شراء:{productName.substring(0, 20)}
+            ثم شراء:{productName.substring(0, 10)}
           </Typography>
           <p className={classes.time}>
             {days ? `${days} days` : `${hours} hours`}
@@ -76,7 +73,7 @@ export default function NotificationCard(props) {
       <CardMedia
         className={classes.product}
         image={productImg}
-        title="Live from space album cover"
+        title={productName}
       />
     </Card>
   );
