@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import {
