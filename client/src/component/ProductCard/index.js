@@ -71,18 +71,18 @@ export default function ProductCard(props) {
   const handelChecked = (e) => {
     setChecked(e.target.checked);
     if (checked) {
-      props.addFavorite(data.id);
-    } else {
       props.deleteFavorite(data.id);
+    } else {
+      props.addFavorite(data.id);
     }
   };
 
   const handelAddCart = (e) => {
     setAddCart(e.target.checked);
     if (added) {
-      props.addCart(data.id);
-    } else {
       props.deleteCart(data.id);
+    } else {
+      props.addCart(data.id);
     }
   };
 
