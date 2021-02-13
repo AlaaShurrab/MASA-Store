@@ -20,18 +20,24 @@ const useStyles = makeStyles((theme) => ({
   cover: {
     width: 100,
     height: 'Auto',
+    backgroundSize: 'contain',
     borderRadius: 50,
     margin: 5,
   },
   product: {
     width: 100,
     height: 'Auto',
-    borderRadius: 20,
+    backgroundSize: 'contain',
+    borderRadius: 5,
     margin: 5,
   },
   time: {
     margin: 0,
     fontSize: 12,
+    color: '#666666',
+    fontFamily: 'Tajawal,Harmattan,sans-serif',
+    fontWeight: 400,
+    lineHeight: 1.75,
   },
   controls: {
     display: 'flex',
@@ -63,10 +69,10 @@ export default function NotificationCard(props) {
             {userName.substring(0, 15)}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            ثم شراء:{productName.substring(0, 10)}
+            ثم شراء {productName.substring(0, 10)}
           </Typography>
           <p className={classes.time}>
-            {days ? `${days} days` : `${hours} hours`}
+            {days ? `منذ ${days} يوم` : `${hours} ساعة`}
           </p>
         </CardContent>
       </div>
