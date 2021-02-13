@@ -8,7 +8,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(() => ({
   hight: {
-    padding: '0px 30px',
+    padding: '6px 30px',
   },
 }));
 
