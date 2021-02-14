@@ -43,7 +43,7 @@ const App = () => {
     profileData: [],
   });
 
-  /* useEffect(() => {
+  useEffect(() => {
     const source = axios.CancelToken.source();
     const fetchUserData = async () => {
       const { data: response } = await axios('/api/v1/isAuth', {
@@ -66,7 +66,8 @@ const App = () => {
     return () => {
       source.cancel('Cancelling in request');
     };
-  }, []); */
+  }, [role]);
+
   switch (role) {
     case 'user':
       return (

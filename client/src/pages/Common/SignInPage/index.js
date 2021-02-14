@@ -1,10 +1,13 @@
 import { Helmet } from 'react-helmet';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import axios from 'axios';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -17,9 +20,9 @@ import logo from '../../../assets/sign-in.svg';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        MASA
+      {' جميع الحقوق محفوظة ©  '}
+      <Link color="inherit" to="/">
+        {' MASA '}
       </Link>
       {new Date().getFullYear()}
     </Typography>
@@ -44,73 +47,145 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  container: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
 }));
 
-const SignInPage = () => {
+const SignInPage = (props) => {
+  const history = useHistory();
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+  });
+  const [emailValidator, setEmailValidator] = useState('');
+  const [passwordValidator, setPasswordValidator] = useState('');
   const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="xs" className="container">
-      <Grid>
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            تسجيل الدخول
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="البريد الﻹلكتروني"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="كلمة المرور"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+  const handleChangInput = (e, type) => {
+    if (type === 'email') {
+      // eslint-disable-next-line no-useless-escape
+      const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+      if (!emailRegex.test(e.target.value)) {
+        setState({
+          ...state,
+          email: '',
+        });
+        return setEmailValidator('الايميل يجب ان يكون بالصيغة الصحيحة ');
+      }
+      setEmailValidator('');
+    }
+    if (type === 'password') {
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+      if (!passwordRegex.test(e.target.value)) {
+        setState({
+          ...state,
+          password: '',
+        });
+        return setPasswordValidator(
+          'يجب أن تحتوي كلمة المرور على 8 أحرف ، وعلى الأقل أحرف كبيرة وصغيرة ورقم وحرف خاصالايميل يجب ان يكون بالصيغة الصحيحة '
+        );
+      }
+      setPasswordValidator('');
+    }
+    return setState({
+      ...state,
+      [type]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = state;
+    if (email && password) {
+      axios
+        .post('api/v1/signin', { email, password })
+        .then((res) => {
+          props.setRole(res.data.clientData.role);
+        })
+        .then(() => history.push('/'))
+        .catch(() =>
+          setPasswordValidator(
+            'الرجاء التأكد من كلمة المرور والبريد الإلكتروني *'
+          )
+        );
+    }
+  };
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
+  return (
+    <>
+      <Helmet>
+        <title>تسجيل الدخول</title>
+      </Helmet>
+
+      <Container component="main" className={classes.container}>
+        <Grid>
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
               تسجيل الدخول
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link to="/sign-up" variant="body2">
-                  ليس لديك حساب ؟ سجل الآن
-                </Link>
+            </Typography>
+            <form className={classes.form}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="البريد الﻹلكتروني"
+                name="email"
+                autoFocus
+                helperText={emailValidator}
+                onChange={(e) => handleChangInput(e, 'email')}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="كلمة المرور"
+                type="password"
+                id="password"
+                helperText={passwordValidator}
+                onChange={(e) => handleChangInput(e, 'password')}
+              />
+
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleSubmit}
+              >
+                تسجيل الدخول
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link to="/sign-up" variant="body2">
+                    ليس لديك حساب ؟ سجل الآن
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Grid>
-      <Grid>
-        <img alt="logo" src={logo} />
-      </Grid>
-    </Container>
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Grid>
+        <Grid>
+          <img alt="logo" src={logo} />
+        </Grid>
+      </Container>
+    </>
   );
+};
+SignInPage.propTypes = {
+  setRole: PropTypes.func.isRequired,
 };
 
 export default SignInPage;
