@@ -1,4 +1,13 @@
-import Footer from './Footer/index';
-import InputField from './InputField/index';
+import Footer from './Footer';
+import InputField from './InputField';
+import NotificationCard from './NotificationCard';
+import ProductCard from './ProductCard';
+import ButtonComponent from './ButtonComponent';
 
-export { InputField, Footer };
+export {
+  InputField as default,
+  Footer,
+  NotificationCard,
+  ProductCard,
+  ButtonComponent,
+};
