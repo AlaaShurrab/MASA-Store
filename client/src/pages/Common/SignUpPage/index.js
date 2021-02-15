@@ -69,13 +69,39 @@ const SignUpPage = (props) => {
     email: '',
     password: '',
     confirmPassword: '',
+    firstName: '',
+    lastName: '',
   });
   const [emailValidator, setEmailValidator] = useState('');
   const [passwordValidator, setPasswordValidator] = useState('');
+  const [firstNameValidator, setFirstName] = useState('');
+  const [lastNameValidator, setLastName] = useState('');
   const [confirmPasswordValidator, setConfirmPasswordValidator] = useState('');
   const classes = useStyles();
 
   const handleChangInput = (e, type) => {
+    if (type === 'firstName') {
+      // eslint-disable-next-line no-useless-escape
+      if (e.target.value.length < 3) {
+        setState({
+          ...state,
+          firstName: '',
+        });
+        return setFirstName('يجب أن يحتوي الاسم علي 3 أحرف علي الأقل ');
+      }
+      setFirstName('');
+    }
+    if (type === 'lastName') {
+      // eslint-disable-next-line no-useless-escape
+      if (e.target.value.length < 3) {
+        setState({
+          ...state,
+          lastName: '',
+        });
+        return setLastName('يجب أن يحتوي الاسم علي 3 أحرف علي الأقل ');
+      }
+      setLastName('');
+    }
     if (type === 'email') {
       // eslint-disable-next-line no-useless-escape
       const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -121,19 +147,25 @@ const SignUpPage = (props) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password, confirmPassword } = state;
+    const { email, password, confirmPassword, firstName, lastName } = state;
     if (password !== confirmPassword) {
       return setConfirmPasswordValidator('كلمات المرور غير متطابقة!');
     }
     if (email && password && confirmPassword) {
       axios
-        .post('api/v1/signup', { email, password, confirmPassword })
+        .post('api/v1/signup', {
+          email,
+          password,
+          confirmPassword,
+          firstName,
+          lastName,
+        })
         .then((res) => {
           props.setRole(res.data.clientData.role);
         })
         .then(() => history.push('/'))
         .catch(() =>
-          setPasswordValidator(
+          setConfirmPasswordValidator(
             'الرجاء التأكد من كلمة المرور والبريد الإلكتروني *'
           )
         );
@@ -150,12 +182,14 @@ const SignUpPage = (props) => {
         <Grid>
           <CssBaseline />
           <div className={classes.paper}>
-            <Avatar className={classes.avatar} item xs={15} md={12}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              إنشاء حساب
-            </Typography>
+            <div>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                إنشاء حساب
+              </Typography>
+            </div>
             <form className={classes.form}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6} md={5}>
@@ -166,17 +200,24 @@ const SignUpPage = (props) => {
                     fullWidth
                     id="firstName"
                     label=" الأسم الأول "
+                    type="text"
                     autoFocus
+                    helperText={firstNameValidator}
+                    onChange={(e) => handleChangInput(e, 'firstName')}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={5}>
                   <TextField
+                    name="lastName"
                     variant="outlined"
                     required
                     fullWidth
                     id="lastName"
                     label="الأسم الثاني "
-                    name="lastName"
+                    type="text"
+                    autoFocus
+                    helperText={lastNameValidator}
+                    onChange={(e) => handleChangInput(e, 'lastName')}
                   />
                 </Grid>
                 <Grid item xs={12} md={10}>
@@ -225,13 +266,13 @@ const SignUpPage = (props) => {
                     className={classes.submit}
                     onClick={handleSubmit}
                   >
-                    تسجيل الدخول
+                    إنشاء حساب
                   </Button>
                 </Grid>
               </Grid>
 
               <Grid container>
-                <Grid item xs={12} md={10}>
+                <Grid item>
                   <Link to="/sign-in" variant="body2">
                     تسجيل الدخول
                   </Link>
