@@ -127,6 +127,7 @@ const CartCard = ({
   const [state, setState] = useState({
     checked: false,
   });
+  console.log('llllllllllllll', data);
   const [count, setCount] = useState(1);
 
   const handleChange = (event) => {
