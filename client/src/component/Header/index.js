@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     width: '40px',
-    marginTop: '-50px',
+    marginTop: '-45px',
     [theme.breakpoints.up('sm')]: {
       marginTop: '5px',
     },
@@ -187,7 +187,7 @@ const useStyles = makeStyles((theme) => ({
   },
   categoryLinksMob: {
     position: 'absolute',
-    top: '10px',
+    top: '2px',
     left: '50px',
     [theme.breakpoints.up('sm')]: {
       display: 'none',
@@ -270,18 +270,20 @@ export default function Header(props) {
   const handleSearch = () => {
     let url;
     const currentPage = location.pathname.split('/')[2];
-    if (
-      currentPage === 'fashion' ||
-      currentPage === 'electronics' ||
-      currentPage === 'accessories' ||
-      currentPage === 'health'
-    ) {
-      const category = currentPage;
-      url = `/search?category=${category}&word=${searchedWord}`;
-    } else {
-      url = `/search?&word=${searchedWord}`;
+    if (searchedWord) {
+      if (
+        currentPage === 'fashion' ||
+        currentPage === 'electronics' ||
+        currentPage === 'accessories' ||
+        currentPage === 'health'
+      ) {
+        const category = currentPage;
+        url = `/search?category=${category}&word=${searchedWord}`;
+      } else {
+        url = `/search?&word=${searchedWord}`;
+      }
+      history.push(url);
     }
-    history.push(url);
   };
 
   const menuUserId = 'logged-in-user-account-menu';
