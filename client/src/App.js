@@ -67,6 +67,7 @@ const App = () => {
     return () => {
       source.cancel('Cancelling in request');
     };
+<<<<<<< HEAD
   }, [role]); */
 
   switch (role) {
