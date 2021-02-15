@@ -36,6 +36,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  image: {
+    backgroundImage: `url(${logo})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundColor:
+      theme.palette.type === 'light'
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: 'contain',
+    backgroundPosition: 'center',
+  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.primary.main,
@@ -51,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
     width: '100%',
+    marginTop: 50,
   },
 }));
 
@@ -177,9 +188,7 @@ const SignInPage = (props) => {
             <Copyright />
           </Box>
         </Grid>
-        <Grid>
-          <img alt="logo" src={logo} />
-        </Grid>
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
       </Container>
     </>
   );
