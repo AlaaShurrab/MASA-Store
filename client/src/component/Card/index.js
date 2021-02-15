@@ -1,48 +1,49 @@
 import { React, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Checkbox from '@material-ui/core/Checkbox';
-import Typography from '@material-ui/core/Typography';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Button from '@material-ui/core/Button';
+import {
+  makeStyles,
+  Card,
+  CardContent,
+  CardMedia,
+  Checkbox,
+  Typography,
+  useMediaQuery,
+  Button,
+  TextField,
+  CardHeader,
+  CardActions,
+} from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import TextField from '@material-ui/core/TextField';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardActions from '@material-ui/core/CardActions';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
-import { red } from '@material-ui/core/colors';
-
-import logo from '../../assets/watch.jpg';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    padding: 10,
-    width: '70%',
+    padding: '.5rem',
+    maxWidth: '1000px',
   },
+
   details: {
     display: 'flex',
     flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-    textAlign: 'left',
   },
   contentActions: {
     flex: '1 0 auto',
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
   },
   cover: {
-    width: '30%',
+    width: '250px',
+    height: 'auto',
     borderRadius: '15px',
+    backgroundSize: 'contain',
   },
   controls: {
     display: 'flex',
@@ -50,47 +51,39 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     justifyContent: 'center',
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+    '& .MuiCardContent-root': {
+      padding: 0,
+    },
   },
   cartContent: {
     display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0 30px',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: '0 5px',
     textAlign: 'center',
     width: '100%',
   },
   ml20: {
     marginLeft: '20px',
+    padding: 0,
+    '& .MuiCardContent-root': {
+      padding: 0,
+    },
   },
   numberInput: {
-    width: '50px',
+    width: '40px',
     '& .MuiOutlinedInput-input': {
-      padding: '6px 5px',
+      padding: '6px 2px',
       textAlign: 'center',
     },
     '& .MuiOutlinedInput-root': {
       borderRadius: 0,
+      height: '31.9px',
     },
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
   },
   smallCard: {
     '& .MuiCardHeader-content': {
@@ -112,8 +105,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
+  quantityButtonRight: {
+    borderRadius: '5px 0px 0px 5px',
+    width: '.2rem',
+  },
+  quantityButtonLeft: {
+    borderRadius: 0,
+    width: '.5rem',
+    // eslint-disable-next-line no-dupe-keys
+    borderRadius: '0px 5px 5px 0px',
+  },
 }));
-const CartCard = () => {
+const CartCard = ({
+  data,
+  isFavorite,
+  deleteFavorite,
+  addFavorite,
+  handleDeleteItem,
+}) => {
   const classes = useStyles();
   const [state, setState] = useState({
     checked: false,
@@ -125,7 +134,19 @@ const CartCard = () => {
   };
 
   const { checked } = state;
-  const matches = useMediaQuery('(max-width:1000px)');
+
+  const [addedToFav, setAddedToFav] = useState(isFavorite);
+
+  const handelAddFav = (e) => {
+    setAddedToFav(e.target.checked);
+    if (addedToFav) {
+      deleteFavorite(data.id);
+    } else {
+      addFavorite(data.id);
+    }
+  };
+
+  const matches = useMediaQuery('(max-width:600px)');
 
   return (
     <>
@@ -137,68 +158,59 @@ const CartCard = () => {
             name="checked"
             color="primary"
           />
-          <CardMedia className={classes.cover} image={logo} />
+          <CardMedia className={classes.cover} image={data.img_url} />
           <div className={classes.cartContent}>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                  ساعة
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  تفاصيل الساعة
-                </Typography>
-              </CardContent>
-              <div className={classes.controls}>
-                <Typography className={classes.ml20} variant="h6">
-                  لون المنتج: <span>اسود</span>
-                </Typography>
-                <Typography className={classes.ml20} variant="h6">
-                  الحجم: <span>20</span>
-                </Typography>
-                <Typography className={classes.ml20} variant="h6">
-                  الوزن: <span>20</span>
-                </Typography>
-              </div>
-            </div>
+            <Typography component="h5" variant="h6">
+              {data.name}
+            </Typography>
+            <Typography className={classes.ml20} variant="body1">
+              {data.description}
+            </Typography>
           </div>
           <div className={classes.details}>
             <CardContent className={classes.contentActions}>
               <Button>
-                <FavoriteIcon color="primary" />
+                <Checkbox
+                  icon={<FavoriteBorder />}
+                  checkedIcon={<FavoriteIcon color="primary" />}
+                  checked={addedToFav}
+                  onChange={handelAddFav}
+                  name="checked"
+                />
               </Button>
-              <Button>
+              <Button onClick={handleDeleteItem}>
                 <DeleteRoundedIcon color="primary" />
               </Button>
             </CardContent>
             <div className={classes.controls}>
-              <ButtonGroup>
-                <Button
-                  variant="outlined"
-                  aria-label="reduce"
-                  onClick={() => {
-                    setCount(Math.max(count - 1, 0));
-                  }}
-                >
-                  <RemoveIcon fontSize="small" />
-                </Button>
-                <TextField
-                  value={count}
-                  id="outlined-basic"
-                  className={classes.numberInput}
-                />
-                <Button
-                  variant="outlined"
-                  aria-label="increase"
-                  onClick={() => {
-                    setCount(count + 1);
-                  }}
-                >
-                  <AddIcon fontSize="small" />
-                </Button>
-              </ButtonGroup>
+              <Button
+                variant="outlined"
+                aria-label="increase"
+                onClick={() => {
+                  setCount(count + 1);
+                }}
+                className={classes.quantityButtonRight}
+              >
+                <AddIcon fontSize="small" />
+              </Button>
+              <TextField
+                value={count}
+                variant="outlined"
+                className={classes.numberInput}
+              />
+              <Button
+                variant="outlined"
+                aria-label="reduce"
+                className={classes.quantityButtonLeft}
+                onClick={() => {
+                  setCount(Math.max(count - 1, 1));
+                }}
+              >
+                <RemoveIcon fontSize="small" />
+              </Button>
             </div>
             <div className={classes.priceLabel}>
-              <Typography variant="h6">155 NIS</Typography>
+              <Typography variant="h6">{data.new_price}₪</Typography>
             </div>
           </div>
         </Card>
@@ -215,65 +227,64 @@ const CartCard = () => {
             }
             title={
               <div className={classes.headerContent}>
-                <Typography variant="h6">ساعة</Typography>
-
+                <Typography variant="h6">{data.name}</Typography>
                 <CardActions>
                   <Button>
-                    <FavoriteIcon color="primary" />
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<FavoriteIcon color="primary" />}
+                      checked={addedToFav}
+                      onChange={handelAddFav}
+                      name="checked"
+                    />
                   </Button>
-                  <Button>
+                  <Button onClick={handleDeleteItem}>
                     <DeleteRoundedIcon color="primary" />
                   </Button>
                 </CardActions>
               </div>
             }
-            subheader="تفاصيل الساعة"
           />
 
-          <CardMedia className={classes.media} image={logo} />
+          <CardMedia className={classes.media} image={data.img_url} />
           <CardContent>
             <div className={classes.controls}>
               <Typography className={classes.ml20} variant="h6">
-                لون المنتج: <span>اسود</span>
-              </Typography>
-              <Typography className={classes.ml20} variant="h6">
-                الحجم: <span>20</span>
-              </Typography>
-              <Typography className={classes.ml20} variant="h6">
-                الوزن: <span>20</span>
+                {data.description}
               </Typography>
             </div>
           </CardContent>
 
           <div className={classes.controls}>
-            <ButtonGroup>
-              <Button
-                variant="outlined"
-                aria-label="reduce"
-                onClick={() => {
-                  setCount(Math.max(count - 1, 0));
-                }}
-              >
-                <RemoveIcon fontSize="small" />
-              </Button>
-              <TextField
-                value={count}
-                id="outlined-basic"
-                className={classes.numberInput}
-              />
-              <Button
-                variant="outlined"
-                aria-label="increase"
-                onClick={() => {
-                  setCount(count + 1);
-                }}
-              >
-                <AddIcon fontSize="small" />
-              </Button>
-            </ButtonGroup>
+            <Button
+              variant="outlined"
+              aria-label="reduce"
+              className={classes.quantityButtonRight}
+              onClick={() => {
+                setCount(Math.max(count - 1, 1));
+              }}
+            >
+              <RemoveIcon fontSize="small" />
+            </Button>
+            <TextField
+              value={count}
+              variant="outlined"
+              id="outlined-basic"
+              className={classes.numberInput}
+            />
+            <Button
+              variant="outlined"
+              aria-label="increase"
+              className={classes.quantityButtonLeft}
+              onClick={() => {
+                setCount(count + 1);
+              }}
+            >
+              <AddIcon fontSize="small" />
+            </Button>
           </div>
           <div className={classes.priceLabel}>
-            <Typography variant="h6">155 NIS</Typography>
+            <Typography variant="h6">{data.new_price} ₪ </Typography>
           </div>
         </Card>
       )}
@@ -281,18 +292,15 @@ const CartCard = () => {
   );
 };
 
-/* CartCard.propTypes = {
-  productName: PropTypes.string,
-  description: PropTypes.string,
-  productColor: PropTypes.string,
-  productٍSize: PropTypes.string,
-  productWeight: PropTypes.string,
+CartCard.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.object.isRequired,
+  isFavorite: PropTypes.bool,
+  deleteFavorite: PropTypes.func.isRequired,
+  addFavorite: PropTypes.func.isRequired,
+  handleDeleteItem: PropTypes.func.isRequired,
 };
 CartCard.defaultProps = {
-  productName: 'ساعة كلاسك',
-  description: 'وصف المنتج',
-  productColor: 'أسود',
-  productٍSize: '40ml',
-  productWeight: '40 KG',
-}; */
+  isFavorite: true,
+};
 export default CartCard;

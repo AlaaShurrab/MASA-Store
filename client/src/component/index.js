@@ -5,4 +5,10 @@ import CartCard from './Card/index';
 import Footer from './Footer/index';
 import ButtonComponent from './ButtonComponent';
 
-export { InputField, Footer, ProductCard, ButtonComponent, CartCard };
+export {
+  InputField as default,
+  Footer,
+  ProductCard,
+  ButtonComponent,
+  CartCard,
+};
