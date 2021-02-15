@@ -42,7 +42,6 @@ const App = () => {
     orderData: [],
     profileData: [],
   });
-  console.log(role);
 
   /* useEffect(() => {
     const source = axios.CancelToken.source();
@@ -67,8 +66,7 @@ const App = () => {
     return () => {
       source.cancel('Cancelling in request');
     };
-<<<<<<< HEAD
-  }, [role]); */
+  }, []); */
 
   switch (role) {
     case 'user':
