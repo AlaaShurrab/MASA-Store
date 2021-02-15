@@ -18,10 +18,7 @@ function Copyright() {
   return (
     <Typography variant="body2" align="left" className="footer-logo">
       <img alt="logo" src={logo} />
-      <div>
-        <span> جميع الحقوق محفوظة ©</span>
-        <span> MASA</span> {new Date().getFullYear()}
-      </div>
+      <span>جميع الحقوق محفوظة © MASA {new Date().getFullYear()}</span>
     </Typography>
   );
 }
