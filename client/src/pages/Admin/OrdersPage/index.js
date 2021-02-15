@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
-const OrdersPage = ({ role }) => (
+const OrdersPage = ({ type }) => (
   <>
     <Helmet>
       <title>Orders</title>
     </Helmet>
-    <p>Hi +{role}+,Welcome to Orders </p>
+    <p>Hi {type},Welcome to Orders </p>
   </>
 );
 
 OrdersPage.propTypes = {
-  role: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default OrdersPage;

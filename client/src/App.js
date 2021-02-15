@@ -14,6 +14,7 @@ import {
   HomePage,
   AddProductsAdminPage,
   CategoryProductPage,
+  SearchPage,
   FavoritePage,
   ProductsAdminPage,
   ProfilePage,
@@ -31,13 +32,24 @@ import {
 } from './pages';
 import theme from './component/theme/theme';
 import { Footer } from './component';
+import Header from './component/Header';
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = () => {
+<<<<<<< HEAD
   const [role, setRole] = useState('guest');
   const [userData, setData] = useState({});
 
+=======
+  const [type, setType] = useState('guest');
+  const [userData, setData] = useState({
+    cartProducts: [],
+    favoriteData: [],
+    orderData: [],
+    profileData: [],
+  });
+>>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
   useEffect(() => {
     const source = axios.CancelToken.source();
     const fetchUserData = async () => {
@@ -45,7 +57,7 @@ const App = () => {
         cancelToken: source.token,
       });
       if (response.status !== 200) {
-        setRole('guest');
+        setType('guest');
         setData({
           cartProducts: [],
           favoriteData: [],
@@ -53,6 +65,7 @@ const App = () => {
           profileData: [],
         });
       } else {
+<<<<<<< HEAD
         const favoriteData = response.data.favoriteData.map(
           (item) => item.product_id
         );
@@ -61,46 +74,51 @@ const App = () => {
         );
         setRole(response.data.role);
         setData({ ...response.data, favoriteData, cartProducts });
+=======
+        setType(response.data.role);
+        setData(response.data);
+>>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
       }
     };
     fetchUserData();
     return () => {
       source.cancel('Cancelling in request');
     };
-  }, []);
+  }, [type]);
 
-  switch (role) {
+  switch (type) {
     case 'user':
       return (
         <StylesProvider jss={jss}>
           <ThemeProvider theme={theme}>
+            <Header type="user" userData={userData} />
             <Switch>
               <Route exact path="/">
-                <HomePage role={role} userData={userData} />
+                <HomePage type="user" userData={userData} />
               </Route>
               <Route exact path="/products/:category">
-                <CategoryProductPage role={role} userData={userData} />
+                <CategoryProductPage type="user" userData={userData} />
               </Route>
               <Route exact path="/product/:productId">
-                <ProductDetailsPage role={role} userData={userData} />
+                <ProductDetailsPage type="user" userData={userData} />
               </Route>
               <Route exact path="/profile">
-                <ProfilePage role={role} userData={userData} />
+                <ProfilePage type="user" userData={userData} />
               </Route>
               <Route exact path="/favorite">
-                <FavoritePage role={role} userData={userData} />
+                <FavoritePage type="user" userData={userData} />
               </Route>
               <Route exact path="/payment">
-                <PaymentPage role={role} userData={userData} />
+                <PaymentPage type="user" userData={userData} />
               </Route>
               <Route exact path="/order">
-                <OrderPage role={role} userData={userData} />
+                <OrderPage type="user" userData={userData} />
               </Route>
               <Route exact path="/cart">
-                <CartPage role={role} userData={userData} />
+                <CartPage type="user" userData={userData} />
               </Route>
               <Route>
-                <NotFoundPage role={role} />
+                <NotFoundPage type="user" />
               </Route>
             </Switch>
             <Footer />
@@ -112,27 +130,28 @@ const App = () => {
       return (
         <StylesProvider jss={jss}>
           <ThemeProvider theme={theme}>
+            <Header type="admin" userData={userData} />
             <Switch>
               <Route exact path="/admin">
-                <AdminHomePage role={role} />
+                <AdminHomePage type="admin" />
               </Route>
               <Route exact path="/admin/products">
-                <ProductsAdminPage role={role} />
+                <ProductsAdminPage type="admin" />
               </Route>
               <Route exact path="/admin/add-product/:productId">
-                <AddProductsAdminPage role={role} />
+                <AddProductsAdminPage type="admin" />
               </Route>
               <Route exact path="/admin/orders">
-                <OrdersPage role={role} />
+                <OrdersPage type="admin" />
               </Route>
               <Route exact path="/admin/clients">
-                <ClientsPage role={role} />
+                <ClientsPage type="admin" />
               </Route>
               <Route exact path="/admin/edit-product/:productId">
-                <EditProductsAdminPage role={role} />
+                <EditProductsAdminPage type="admin" />
               </Route>
               <Route>
-                <NotFoundPage role={role} />
+                <NotFoundPage type="admin" />
               </Route>
             </Switch>
             <Footer type="admin" />
@@ -145,25 +164,34 @@ const App = () => {
           <ThemeProvider theme={theme}>
             <Switch>
               <Route exact path="/">
-                <HomePage role={role} userData={userData} />
+                <Header type="guest" userData={userData} />
+                <HomePage type="guest" />
                 <Footer />
               </Route>
               <Route exact path="/products/:category">
-                <CategoryProductPage role={role} userData={userData} />
+                <Header type="guest" userData={userData} />
+                <CategoryProductPage type="guest" userData={userData} />
+                <Footer />
+              </Route>
+              <Route exact path="/search">
+                <Header type="guest" userData={userData} />
+                <SearchPage type="guest" userData={userData} />
                 <Footer />
               </Route>
               <Route exact path="/sign-in">
-                <SignInPage setRole={setRole} setData={setData} />
+                <SignInPage setType={setType} />
               </Route>
               <Route exact path="/sign-up">
-                <SignUpPage setRole={setRole} setData={setData} />
+                <SignUpPage setType={setType} />
               </Route>
               <Route exact path="/product/:productId">
-                <ProductDetailsPage role={role} userData={userData} />
+                <Header type="guest" userData={userData} />
+                <ProductDetailsPage type="guest" userData={userData} />
                 <Footer />
               </Route>
               <Route>
-                <NotFoundPage role={role} />
+                <Header type="guest" userData={userData} />
+                <NotFoundPage type="guest" />
                 <Footer />
               </Route>
             </Switch>

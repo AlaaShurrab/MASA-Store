@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 
+<<<<<<< HEAD
 import { CardContainer } from '../../../component';
 import dataFormatter from '../../../utilities/dataFormatter';
 
@@ -93,6 +94,20 @@ HomePage.propTypes = {
       id: PropTypes.number,
     }),
   }).isRequired,
+=======
+const HomePage = ({ type }) => (
+  // console.log(location.search);
+  <>
+    <Helmet>
+      <title>Masa Market</title>
+    </Helmet>
+    <p>Hi ,Welcome to HomePage {type}</p>
+  </>
+);
+
+HomePage.propTypes = {
+  type: PropTypes.string.isRequired,
+>>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
 };
 
 export default HomePage;
