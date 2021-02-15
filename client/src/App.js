@@ -66,7 +66,7 @@ const App = () => {
     return () => {
       source.cancel('Cancelling in request');
     };
-  }, []);
+  }, [role]);
 
   switch (role) {
     case 'user':
