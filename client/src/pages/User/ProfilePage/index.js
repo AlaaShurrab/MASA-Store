@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
-const ProfilePage = ({ role }) => (
+const ProfilePage = ({ type }) => (
   <>
     <Helmet>
       <title>Profile</title>
     </Helmet>
-    <p>Hi {role},Welcome to ProfilePage </p>
+    <p>Hi {type},Welcome to ProfilePage </p>
   </>
 );
 
 ProfilePage.propTypes = {
-  role: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default ProfilePage;

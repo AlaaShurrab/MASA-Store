@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
-const AddProductsAdminPage = ({ role }) => {
+const AddProductsAdminPage = ({ type }) => {
   const { productId } = useParams();
   return (
     <>
@@ -10,14 +10,14 @@ const AddProductsAdminPage = ({ role }) => {
         <title>Add product</title>
       </Helmet>
       <p>
-        Hi {role},Welcome to Add product {productId} page{' '}
+        Hi {type},Welcome to Add product {productId} page{' '}
       </p>
     </>
   );
 };
 
 AddProductsAdminPage.propTypes = {
-  role: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default AddProductsAdminPage;
