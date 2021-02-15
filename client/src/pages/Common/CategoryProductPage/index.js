@@ -10,7 +10,7 @@ const appCategory = [
   'trending',
   'top-rated',
 ];
-const CategoryProductPage = ({ role }) => {
+const CategoryProductPage = ({ type }) => {
   const { category } = useParams();
   if (appCategory.includes(category)) {
     return (
@@ -19,7 +19,7 @@ const CategoryProductPage = ({ role }) => {
           <title>category</title>
         </Helmet>
         <p>
-          Hi {role},Welcome to product {category} page
+          Hi {type},Welcome to product {category} page
         </p>
       </>
     );
@@ -28,7 +28,7 @@ const CategoryProductPage = ({ role }) => {
 };
 
 CategoryProductPage.propTypes = {
-  role: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default CategoryProductPage;

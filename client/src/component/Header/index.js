@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -667,3 +668,17 @@ export default function Header(props) {
     </div>
   );
 }
+
+Header.propTypes = {
+  type: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  userData: PropTypes.object,
+};
+
+const profileData = {
+  first_name: 'مستخدم جديد',
+  avatar: 'https://aui.atlassian.com/aui/8.6/docs/images/avatar-person.svg',
+};
+Header.defaultProps = {
+  userData: [profileData],
+};

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
-const ProductDetailsPage = ({ role }) => {
+const ProductDetailsPage = ({ type }) => {
   const { productID } = useParams();
   return (
     <>
@@ -10,14 +10,14 @@ const ProductDetailsPage = ({ role }) => {
         <title>category</title>
       </Helmet>
       <p>
-        Hi {role},Welcome to {productID} product page
+        Hi {type},Welcome to {productID} product page
       </p>
     </>
   );
 };
 
 ProductDetailsPage.propTypes = {
-  role: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default ProductDetailsPage;

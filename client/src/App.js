@@ -77,31 +77,31 @@ const App = () => {
             <Header type="user" userData={userData} />
             <Switch>
               <Route exact path="/">
-                <HomePage type={type} userData={userData} />
+                <HomePage type="user" userData={userData} />
               </Route>
               <Route exact path="/products/:category">
-                <CategoryProductPage type={type} userData={userData} />
+                <CategoryProductPage type="user" userData={userData} />
               </Route>
               <Route exact path="/product/:productId">
-                <ProductDetailsPage type={type} userData={userData} />
+                <ProductDetailsPage type="user" userData={userData} />
               </Route>
               <Route exact path="/profile">
-                <ProfilePage type={type} userData={userData} />
+                <ProfilePage type="user" userData={userData} />
               </Route>
               <Route exact path="/favorite">
-                <FavoritePage type={type} userData={userData} />
+                <FavoritePage type="user" userData={userData} />
               </Route>
               <Route exact path="/payment">
-                <PaymentPage type={type} userData={userData} />
+                <PaymentPage type="user" userData={userData} />
               </Route>
               <Route exact path="/order">
-                <OrderPage type={type} userData={userData} />
+                <OrderPage type="user" userData={userData} />
               </Route>
               <Route exact path="/cart">
-                <CartPage type={type} userData={userData} />
+                <CartPage type="user" userData={userData} />
               </Route>
               <Route>
-                <NotFoundPage type={type} />
+                <NotFoundPage type="user" />
               </Route>
             </Switch>
             <Footer />
@@ -116,25 +116,25 @@ const App = () => {
             <Header type="admin" userData={userData} />
             <Switch>
               <Route exact path="/admin">
-                <AdminHomePage type={type} />
+                <AdminHomePage type="admin" />
               </Route>
               <Route exact path="/admin/products">
-                <ProductsAdminPage type={type} />
+                <ProductsAdminPage type="admin" />
               </Route>
               <Route exact path="/admin/add-product/:productId">
-                <AddProductsAdminPage type={type} />
+                <AddProductsAdminPage type="admin" />
               </Route>
               <Route exact path="/admin/orders">
-                <OrdersPage type={type} />
+                <OrdersPage type="admin" />
               </Route>
               <Route exact path="/admin/clients">
-                <ClientsPage type={type} />
+                <ClientsPage type="admin" />
               </Route>
               <Route exact path="/admin/edit-product/:productId">
-                <EditProductsAdminPage type={type} />
+                <EditProductsAdminPage type="admin" />
               </Route>
               <Route>
-                <NotFoundPage type={type} />
+                <NotFoundPage type="admin" />
               </Route>
             </Switch>
             <Footer type="admin" />
@@ -148,33 +148,33 @@ const App = () => {
             <Switch>
               <Route exact path="/">
                 <Header type="guest" userData={userData} />
-                <HomePage />
+                <HomePage type="guest" />
                 <Footer />
               </Route>
               <Route exact path="/products/:category">
                 <Header type="guest" userData={userData} />
-                <CategoryProductPage type={type} userData={userData} />
+                <CategoryProductPage type="guest" userData={userData} />
                 <Footer />
               </Route>
               <Route exact path="/search">
                 <Header type="guest" userData={userData} />
-                <SearchPage type={type} userData={userData} />
+                <SearchPage type="guest" userData={userData} />
                 <Footer />
               </Route>
               <Route exact path="/sign-in">
-                <SignInPage setType={setType} setData={setData} />
+                <SignInPage setType={setType} />
               </Route>
               <Route exact path="/sign-up">
-                <SignUpPage setType={setType} setData={setData} />
+                <SignUpPage setType={setType} />
               </Route>
               <Route exact path="/product/:productId">
                 <Header type="guest" userData={userData} />
-                <ProductDetailsPage type={type} userData={userData} />
+                <ProductDetailsPage type="guest" userData={userData} />
                 <Footer />
               </Route>
               <Route>
                 <Header type="guest" userData={userData} />
-                <NotFoundPage type={type} />
+                <NotFoundPage type="guest" />
                 <Footer />
               </Route>
             </Switch>
