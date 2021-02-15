@@ -36,12 +36,7 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = () => {
   const [role, setRole] = useState('guest');
-  const [userData, setData] = useState({
-    cartProducts: [],
-    favoriteData: [],
-    orderData: [],
-    profileData: [],
-  });
+  const [userData, setData] = useState({});
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -58,8 +53,14 @@ const App = () => {
           profileData: [],
         });
       } else {
+        const favoriteData = response.data.favoriteData.map(
+          (item) => item.product_id
+        );
+        const cartProducts = response.data.cartProducts.map(
+          (item) => item.product_id
+        );
         setRole(response.data.role);
-        setData(response.data);
+        setData({ ...response.data, favoriteData, cartProducts });
       }
     };
     fetchUserData();

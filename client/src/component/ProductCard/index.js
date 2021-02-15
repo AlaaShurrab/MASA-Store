@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProductCard(props) {
-  const { data, type, isFavorite, isCart } = props;
+  const { data, role, isFavorite, isCart } = props;
 
   const classes = useStyles();
   const [checked, setChecked] = React.useState(isFavorite);
@@ -96,7 +96,7 @@ export default function ProductCard(props) {
             checked={checked}
             onChange={handelChecked}
             name="checked"
-            disabled={type !== 'buyer'}
+            disabled={role !== 'user'}
           />
         }
       />
@@ -108,7 +108,7 @@ export default function ProductCard(props) {
       />
       <CardContent className={classes.content}>
         <Typography variant="body1" color="textPrimary" component="address">
-          {data.name.substring(0, 50)}
+          {data.name.substring(0, 30)}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.ph}>
@@ -126,7 +126,7 @@ export default function ProductCard(props) {
           </Grid>
 
           <Grid item xs={3}>
-            {type !== 'buyer' ? null : (
+            {role !== 'user' ? null : (
               <IconButton aria-label="add to cart" className={classes.addCart}>
                 <Checkbox
                   icon={<AddShoppingCartIcon fontSize="small" />}
@@ -147,7 +147,7 @@ export default function ProductCard(props) {
 }
 
 ProductCard.propTypes = {
-  type: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
   isFavorite: PropTypes.bool,
   isCart: PropTypes.bool,
   addFavorite: PropTypes.func.isRequired,
