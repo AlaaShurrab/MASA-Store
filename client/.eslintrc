@@ -1,7 +1,7 @@
 {
   "extends": ["react-app", "airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier"],
-  
+
   "rules": {
     "no-nested-ternary": "off",
     "react/jsx-props-no-spreading": 0,

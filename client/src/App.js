@@ -37,19 +37,15 @@ import Header from './component/Header';
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = () => {
-<<<<<<< HEAD
-  const [role, setRole] = useState('guest');
-  const [userData, setData] = useState({});
-
-=======
   const [type, setType] = useState('guest');
-  const [userData, setData] = useState({
+  // eslint-disable-next-line no-unused-vars
+  const [userData, setUserData] = useState({
     cartProducts: [],
     favoriteData: [],
     orderData: [],
     profileData: [],
   });
->>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     const fetchUserData = async () => {
@@ -58,26 +54,21 @@ const App = () => {
       });
       if (response.status !== 200) {
         setType('guest');
-        setData({
+        setUserData({
           cartProducts: [],
           favoriteData: [],
           orderData: [],
           profileData: [],
         });
       } else {
-<<<<<<< HEAD
-        const favoriteData = response.data.favoriteData.map(
+        const favoriteIds = response.data.favoriteData.map(
           (item) => item.product_id
         );
-        const cartProducts = response.data.cartProducts.map(
+        const cartIds = response.data.cartProducts.map(
           (item) => item.product_id
         );
-        setRole(response.data.role);
-        setData({ ...response.data, favoriteData, cartProducts });
-=======
         setType(response.data.role);
-        setData(response.data);
->>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
+        setUserData({ ...response.data, favoriteIds, cartIds });
       }
     };
     fetchUserData();
@@ -85,6 +76,8 @@ const App = () => {
       source.cancel('Cancelling in request');
     };
   }, [type]);
+
+  // setUserData({});
 
   switch (type) {
     case 'user':

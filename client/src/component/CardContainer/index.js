@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -123,7 +123,7 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
           onClose={handleClose}
           severity="error"
         >
-          error has ochered in the server , please try again later
+          يوجد ضغط حالياُ، الرجاء المحاولة مرة أخرى لاحقاً
         </MuiAlert>
       </Snackbar>
     </div>
@@ -131,15 +131,12 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
 };
 
 CardContainer.propTypes = {
-  pageTitle: propTypes.string.isRequired,
-  role: propTypes.string.isRequired,
-  data: propTypes.instanceOf(Array).isRequired,
-  pageTag: propTypes.string,
-  userData: propTypes.shape({
-    profileData: propTypes.shape({
-      id: propTypes.number,
-    }),
-  }).isRequired,
+  pageTitle: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  data: PropTypes.instanceOf(Array).isRequired,
+  pageTag: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  userData: PropTypes.object.isRequired,
 };
 
 CardContainer.defaultProps = {

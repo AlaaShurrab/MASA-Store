@@ -3,38 +3,34 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 
-<<<<<<< HEAD
 import { CardContainer } from '../../../component';
 import dataFormatter from '../../../utilities/dataFormatter';
 
-// eslint-disable-next-line react/prop-types
-const HomePage = ({ role, userData }) => {
+const HomePage = ({ type, userData }) => {
   const [data, setDate] = useState([]);
   const [trendingData, setTrendingData] = useState('');
   const [ratingData, setRatingData] = useState('');
 
   const dataCollector = async () => {
     if (userData) {
-      const { favoriteData, cartProducts } = userData;
-      if (favoriteData && cartProducts) {
+      const { favoriteIds, cartIds } = userData;
+      if (favoriteIds && cartIds) {
         const {
           data: { data: raring },
         } = await axios('/api/v1/products/top-rated', {});
-        setRatingData(
-          dataFormatter(raring.slice(0, 4), favoriteData, cartProducts)
-        );
+        setRatingData(dataFormatter(raring.slice(0, 4), favoriteIds, cartIds));
 
         const {
           data: { data: trending },
         } = await axios('/api/v1/products/trending', {});
         setTrendingData(
-          dataFormatter(trending.slice(0, 4), favoriteData, cartProducts)
+          dataFormatter(trending.slice(0, 4), favoriteIds, cartIds)
         );
 
         const {
           data: { data: allProducts },
         } = await axios('/api/v1/products', {});
-        setDate(dataFormatter(allProducts, favoriteData, cartProducts));
+        setDate(dataFormatter(allProducts, favoriteIds, cartIds));
       }
     }
   };
@@ -48,66 +44,46 @@ const HomePage = ({ role, userData }) => {
       <Helmet>
         <title>Masa Market</title>
       </Helmet>
-      <p>Hi {role} ,Welcome to HomePage </p>
       {ratingData ? (
         <CardContainer
           userData={userData}
-          role={role}
+          role={type}
           data={ratingData}
-          pageTitle="top-Rated"
+          pageTitle="الأعلى تقييماً"
           pageTag="top-rated"
         />
-      ) : (
-        <h1> no rated products</h1>
-      )}
+      ) : null}
       {trendingData ? (
         <CardContainer
           userData={userData}
-          role={role}
+          role={type}
           data={trendingData}
-          pageTitle="trending"
+          pageTitle="الأكثر مبيعاً"
           pageTag="trending"
         />
-      ) : (
-        <h1> no trending products</h1>
-      )}
+      ) : null}
       {data ? (
         <CardContainer
           userData={userData}
-          role={role}
+          role={type}
           data={data}
-          pageTitle="حقيبة لابتوب"
+          pageTitle="المزيد من المنتجات"
         />
       ) : (
-        <h1> no data</h1>
+        <h1> لا يوجد منتجات</h1>
       )}
     </>
   );
 };
 
 HomePage.propTypes = {
-  role: PropTypes.string.isRequired,
-  userData: PropTypes.shape({
-    favoriteData: PropTypes.instanceOf(Array),
-    cartProducts: PropTypes.instanceOf(Array),
-    profileData: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }).isRequired,
-=======
-const HomePage = ({ type }) => (
-  // console.log(location.search);
-  <>
-    <Helmet>
-      <title>Masa Market</title>
-    </Helmet>
-    <p>Hi ,Welcome to HomePage {type}</p>
-  </>
-);
-
-HomePage.propTypes = {
   type: PropTypes.string.isRequired,
->>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
+  // eslint-disable-next-line react/forbid-prop-types
+  userData: PropTypes.object,
+};
+
+HomePage.defaultProps = {
+  userData: {},
 };
 
 export default HomePage;

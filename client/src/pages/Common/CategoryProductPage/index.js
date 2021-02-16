@@ -15,29 +15,25 @@ const appCategory = [
   'trending',
   'top-rated',
 ];
-<<<<<<< HEAD
-const CategoryProductPage = ({ role, userData }) => {
+const CategoryProductPage = ({ type, userData }) => {
   const [data, setData] = useState([]);
-=======
-const CategoryProductPage = ({ type }) => {
->>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
   const { category } = useParams();
 
   const dataCollector = async () => {
     if (userData) {
-      const { favoriteData, cartProducts } = userData;
-      if (favoriteData && cartProducts) {
+      const { favoriteIds, cartIds } = userData;
+      if (favoriteIds && cartIds) {
         const {
           data: { data: raring },
         } = await axios(`/api/v1/products/${category}`, {});
-        setData(dataFormatter(raring, favoriteData, cartProducts));
+        setData(dataFormatter(raring, favoriteIds, cartIds));
       }
     }
   };
 
   useEffect(() => {
     dataCollector();
-  }, [userData]);
+  }, [category, userData]);
 
   if (appCategory.includes(category)) {
     return (
@@ -45,18 +41,12 @@ const CategoryProductPage = ({ type }) => {
         <Helmet>
           <title>category</title>
         </Helmet>
-<<<<<<< HEAD
         <CardContainer
           userData={userData}
-          role={role}
+          role={type}
           data={data}
           pageTitle={category}
         />
-=======
-        <p>
-          Hi {type},Welcome to product {category} page
-        </p>
->>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
       </>
     );
   }
@@ -64,18 +54,9 @@ const CategoryProductPage = ({ type }) => {
 };
 
 CategoryProductPage.propTypes = {
-<<<<<<< HEAD
-  role: PropTypes.string.isRequired,
-  userData: PropTypes.shape({
-    favoriteData: PropTypes.instanceOf(Array),
-    cartProducts: PropTypes.instanceOf(Array),
-    profileData: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }).isRequired,
-=======
   type: PropTypes.string.isRequired,
->>>>>>> 4b3df1444c5aba0d314e376875a75a0e7aab968d
+  // eslint-disable-next-line react/forbid-prop-types
+  userData: PropTypes.object.isRequired,
 };
 
 export default CategoryProductPage;
