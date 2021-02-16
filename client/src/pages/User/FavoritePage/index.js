@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
-const FavoritePage = ({ role }) => (
+const FavoritePage = ({ type }) => (
   <>
     <Helmet>
       <title>Favorite</title>
     </Helmet>
-    <p>Hi {role},Welcome to FavoritePage </p>
+    <p>Hi {type},Welcome to FavoritePage </p>
   </>
 );
 
 FavoritePage.propTypes = {
-  role: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 export default FavoritePage;

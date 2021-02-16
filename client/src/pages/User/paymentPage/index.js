@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
-const PaymentPage = ({ role }) => (
+const PaymentPage = ({ type }) => (
   <>
     <Helmet>
       <title>Payment</title>
     </Helmet>
-    <p>Hi {role},Welcome to PaymentPage </p>
+    <p>Hi {type},Welcome to PaymentPage </p>
   </>
 );
 
 PaymentPage.propTypes = {
-  role: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default PaymentPage;

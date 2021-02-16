@@ -1,6 +1,7 @@
 import HomePage from './Common/HomePage';
 import AddProductsAdminPage from './Admin/AddProductsAdminPage';
 import CategoryProductPage from './Common/CategoryProductPage';
+import SearchPage from './Common/SearchPage';
 import FavoritePage from './User/FavoritePage';
 import ProductsAdminPage from './Admin/ProductsAdminPage';
 import ProfilePage from './User/ProfilePage';
@@ -20,6 +21,7 @@ export {
   HomePage,
   AddProductsAdminPage,
   CategoryProductPage,
+  SearchPage,
   FavoritePage,
   ProductsAdminPage,
   ProfilePage,
