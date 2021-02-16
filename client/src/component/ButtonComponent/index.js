@@ -59,7 +59,7 @@ ButtonComponent.defaultProps = {
   variant: 'contained',
   color: 'secondary',
   longButton: false,
-  iconButton: true,
+  iconButton: false,
   outLinedIcon: <FavoriteBorderIcon color="primary" />,
   filledIcon: <FavoriteIcon color="primary" />,
 };
