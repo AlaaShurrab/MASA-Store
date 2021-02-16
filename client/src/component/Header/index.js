@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -21,6 +21,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import logo from '../../assets/logo.svg';
 
@@ -71,17 +72,19 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50px',
     border: 'solid #E24928 1px',
     width: '50%',
-    height: '5vh',
-    marginTop: '35px',
+    height: '2vh',
+    marginTop: '10px',
     marginLeft: '0',
     [theme.breakpoints.up('sm')]: {
       width: '40%',
       marginTop: '0',
+      marginBottom: '0',
       marginLeft: '100px',
     },
     [theme.breakpoints.up('md')]: {
       width: '40%',
       marginLeft: '10px',
+      marginBottom: '0',
     },
     [theme.breakpoints.up('lg')]: {
       marginTop: '0',
@@ -151,9 +154,11 @@ const useStyles = makeStyles((theme) => ({
     width: '40px',
     height: '40px',
     marginRight: '10px',
+    marginBottom: '10px',
   },
   accountIcon: {
     width: '100%',
+    borderRadius: '10px',
   },
   appBar: {
     display: 'flex',
@@ -210,12 +215,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
   const { type, userData } = props;
   const classes = useStyles(props);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [userAnchorEl, setUserAnchorEl] = React.useState(null);
-  const [categoryAnchorEl, setCategoryAnchorEl] = React.useState(null);
-  const [section, setSection] = React.useState(null);
-  const [searchedWord, setSearchedWord] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [userAnchorEl, setUserAnchorEl] = useState(null);
+  const [categoryAnchorEl, setCategoryAnchorEl] = useState(null);
+  const [section, setSection] = useState(null);
+  const [searchedWord, setSearchedWord] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -309,11 +314,16 @@ export default function Header(props) {
         </Typography>
       </Link>
 
-      <Link to="/api/v1/logout" className={classes.decoration}>
+      <Button
+        onClick={() =>
+          axios.post('/api/v1/signout').then(() => props.setType('guest'))
+        }
+        className={classes.decoration}
+      >
         <Typography variant="h6" style={{ color: '#3699FF' }}>
           <MenuItem onClick={handleUserMenuClose}>تسجيل الخروج</MenuItem>
         </Typography>
-      </Link>
+      </Button>
     </Menu>
   );
 
@@ -412,7 +422,7 @@ export default function Header(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={{ handleMobileMenuClose }}>
+      <MenuItem onClick={handleMobileMenuClose}>
         <Link to="/favorite" className={classes.decoration}>
           <IconButton aria-label="show favorites" color="primary">
             <FavoriteBorder />
@@ -420,7 +430,7 @@ export default function Header(props) {
           المفضلات
         </Link>
       </MenuItem>
-      <MenuItem onClick={{ handleMobileMenuClose }}>
+      <MenuItem onClick={handleMobileMenuClose}>
         <Link to="/cart" className={classes.decoration}>
           <IconButton aria-label="show cart" color="primary">
             <ShoppingCartIcon />
@@ -435,7 +445,7 @@ export default function Header(props) {
             aria-label="account of current"
             aria-controls={menuUserId}
             aria-haspopup="true"
-            color="black"
+            // color="black"
           >
             <AccountCircle />
           </IconButton>
@@ -447,7 +457,7 @@ export default function Header(props) {
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
             aria-haspopup="true"
-            color="black"
+            // color="black"
           >
             <AccountCircle />
           </IconButton>
@@ -626,7 +636,13 @@ export default function Header(props) {
               </IconButton>
             )}
             {type !== 'admin' && (
-              <div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  width: '100%',
+                }}
+              >
                 <Link to="/favorite">
                   <IconButton
                     aria-label="show favorites"
@@ -673,6 +689,7 @@ Header.propTypes = {
   type: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   userData: PropTypes.object,
+  setType: PropTypes.func.isRequired,
 };
 
 const profileData = {

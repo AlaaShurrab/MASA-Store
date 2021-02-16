@@ -74,7 +74,7 @@ const App = () => {
       return (
         <StylesProvider jss={jss}>
           <ThemeProvider theme={theme}>
-            <Header type="user" userData={userData} />
+            <Header type="user" userData={userData} setType={setType} />
             <Switch>
               <Route exact path="/">
                 <HomePage type="user" userData={userData} />
@@ -113,7 +113,7 @@ const App = () => {
       return (
         <StylesProvider jss={jss}>
           <ThemeProvider theme={theme}>
-            <Header type="admin" userData={userData} />
+            <Header type="admin" userData={userData} setType={setType} />
             <Switch>
               <Route exact path="/admin">
                 <AdminHomePage type="admin" />
@@ -147,17 +147,17 @@ const App = () => {
           <ThemeProvider theme={theme}>
             <Switch>
               <Route exact path="/">
-                <Header type="guest" userData={userData} />
+                <Header type="guest" userData={userData} setType={setType} />
                 <HomePage type="guest" />
                 <Footer />
               </Route>
               <Route exact path="/products/:category">
-                <Header type="guest" userData={userData} />
+                <Header type="guest" userData={userData} setType={setType} />
                 <CategoryProductPage type="guest" userData={userData} />
                 <Footer />
               </Route>
               <Route exact path="/search">
-                <Header type="guest" userData={userData} />
+                <Header type="guest" userData={userData} setType={setType} />
                 <SearchPage type="guest" userData={userData} />
                 <Footer />
               </Route>
@@ -168,12 +168,12 @@ const App = () => {
                 <SignUpPage setType={setType} />
               </Route>
               <Route exact path="/product/:productId">
-                <Header type="guest" userData={userData} />
+                <Header type="guest" userData={userData} setType={setType} />
                 <ProductDetailsPage type="guest" userData={userData} />
                 <Footer />
               </Route>
               <Route>
-                <Header type="guest" userData={userData} />
+                <Header type="guest" userData={userData} setType={setType} />
                 <NotFoundPage type="guest" />
                 <Footer />
               </Route>
