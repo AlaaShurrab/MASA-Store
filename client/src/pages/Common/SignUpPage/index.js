@@ -29,7 +29,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(6),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -60,6 +60,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     width: '100%',
     marginTop: 50,
+  },
+  iconLock: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: theme.spacing(16),
   },
 }));
 
@@ -178,11 +183,11 @@ const SignUpPage = (props) => {
       <Helmet>
         <title>تسجيل الدخول</title>
       </Helmet>
+      <CssBaseline />
       <Container component="main" className={classes.container}>
         <Grid>
-          <CssBaseline />
           <div className={classes.paper}>
-            <div>
+            <div className={classes.iconLock}>
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>
@@ -280,7 +285,7 @@ const SignUpPage = (props) => {
               </Grid>
             </form>
           </div>
-          <Box mt={8}>
+          <Box mt={4}>
             <Copyright />
           </Box>
         </Grid>

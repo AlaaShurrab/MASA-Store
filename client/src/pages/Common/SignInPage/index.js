@@ -184,7 +184,7 @@ const SignInPage = (props) => {
               </Grid>
             </form>
           </div>
-          <Box mt={8}>
+          <Box mt={5}>
             <Copyright />
           </Box>
         </Grid>
