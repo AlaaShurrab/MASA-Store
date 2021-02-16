@@ -38,12 +38,13 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = () => {
   const [type, setType] = useState('guest');
-  const [userData, setData] = useState({
+  const [userData, setUserData] = useState({
     cartProducts: [],
     favoriteData: [],
     orderData: [],
     profileData: [],
   });
+
   useEffect(() => {
     const source = axios.CancelToken.source();
     const fetchUserData = async () => {
@@ -52,15 +53,21 @@ const App = () => {
       });
       if (response.status !== 200) {
         setType('guest');
-        setData({
+        setUserData({
           cartProducts: [],
           favoriteData: [],
           orderData: [],
           profileData: [],
         });
       } else {
+        const favoriteIds = response.data.favoriteData.map(
+          (item) => item.product_id
+        );
+        const cartIds = response.data.cartProducts.map(
+          (item) => item.product_id
+        );
         setType(response.data.role);
-        setData(response.data);
+        setUserData({ ...response.data, favoriteIds, cartIds });
       }
     };
     fetchUserData();
@@ -84,6 +91,9 @@ const App = () => {
               </Route>
               <Route exact path="/product/:productId">
                 <ProductDetailsPage type="user" userData={userData} />
+              </Route>
+              <Route exact path="/search">
+                <SearchPage type="user" userData={userData} />
               </Route>
               <Route exact path="/profile">
                 <ProfilePage type="user" userData={userData} />

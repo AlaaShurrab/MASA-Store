@@ -1,0 +1,46 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 20px auto;
+  padding-bottom: 50px;
+  max-width: 1200px;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+}
+
+.category-name {
+  width: 100%;
+  margin-left: 1rem;
+  padding-right: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  padding-bottom: 0.5em;
+  margin-bottom: 1rem;
+  position: relative;
+  font-size: 0.7rem;
+  letter-spacing: 0.1ch;
+}
+
+.category-name:after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(135deg, #8a6c60, #E24928);
+  bottom: 0;
+}
+
+.moreBtn {
+  position: absolute;
+  left: 35px;
+  top: 20px;
+}
+
+.title {
+  font-family: "Tajawal", Harmattan, sans-serif !important;
+}
