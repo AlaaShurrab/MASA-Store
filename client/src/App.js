@@ -95,6 +95,9 @@ const App = () => {
               <Route exact path="/product/:productId">
                 <ProductDetailsPage type="user" userData={userData} />
               </Route>
+              <Route exact path="/search">
+                <SearchPage type="user" userData={userData} />
+              </Route>
               <Route exact path="/profile">
                 <ProfilePage type="user" userData={userData} />
               </Route>

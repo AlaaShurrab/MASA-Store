@@ -88,7 +88,7 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
     <div className="card-container">
       <div className="category-name">
         <h1 className="title">{pageTitle}</h1>
-        {pageTitle === 'top-Rated' || pageTitle === 'trending' ? (
+        {pageTag === 'top-rated' || pageTag === 'trending' ? (
           <Link to={`/products/${pageTag}`} className="moreBtn">
             <ButtonComponent text="more" iconButton={false} color="primary" />
           </Link>
