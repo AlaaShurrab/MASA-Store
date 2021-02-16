@@ -38,7 +38,6 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = () => {
   const [type, setType] = useState('guest');
-  // eslint-disable-next-line no-unused-vars
   const [userData, setUserData] = useState({
     cartProducts: [],
     favoriteData: [],
@@ -76,8 +75,6 @@ const App = () => {
       source.cancel('Cancelling in request');
     };
   }, [type]);
-
-  // setUserData({});
 
   switch (type) {
     case 'user':

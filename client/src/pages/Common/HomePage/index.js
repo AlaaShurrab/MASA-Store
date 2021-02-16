@@ -11,38 +11,37 @@ const HomePage = ({ type, userData }) => {
   const [trendingData, setTrendingData] = useState('');
   const [ratingData, setRatingData] = useState('');
 
-  const dataCollector = async () => {
-    if (userData) {
-      const { favoriteIds, cartIds } = userData;
-      if (favoriteIds && cartIds) {
-        const {
-          data: { data: raring },
-        } = await axios('/api/v1/products/top-rated', {});
-        setRatingData(dataFormatter(raring.slice(0, 4), favoriteIds, cartIds));
-
-        const {
-          data: { data: trending },
-        } = await axios('/api/v1/products/trending', {});
-        setTrendingData(
-          dataFormatter(trending.slice(0, 4), favoriteIds, cartIds)
-        );
-
-        const {
-          data: { data: allProducts },
-        } = await axios('/api/v1/products', {});
-        setDate(dataFormatter(allProducts, favoriteIds, cartIds));
-      }
-    }
-  };
-
   useEffect(() => {
+    const dataCollector = async () => {
+      if (userData) {
+        const { favoriteIds, cartIds } = userData;
+        if (favoriteIds && cartIds) {
+          const {
+            data: { data: topRatedProducts },
+          } = await axios('/api/v1/products/top-rated', {});
+          setRatingData(
+            dataFormatter(topRatedProducts.slice(0, 4), favoriteIds, cartIds)
+          );
+          const {
+            data: { data: trendyProducts },
+          } = await axios('/api/v1/products/trending', {});
+          setTrendingData(
+            dataFormatter(trendyProducts.slice(0, 4), favoriteIds, cartIds)
+          );
+          const {
+            data: { data: allProducts },
+          } = await axios('/api/v1/products', {});
+          setDate(dataFormatter(allProducts, favoriteIds, cartIds));
+        }
+      }
+    };
     dataCollector();
   }, [userData]);
 
   return (
     <>
       <Helmet>
-        <title>Masa Market</title>
+        <title>ماسا | الرئيسية</title>
       </Helmet>
       {ratingData ? (
         <CardContainer
@@ -70,7 +69,7 @@ const HomePage = ({ type, userData }) => {
           pageTitle="المزيد من المنتجات"
         />
       ) : (
-        <h1> لا يوجد منتجات</h1>
+        <h4> لا يوجد منتجات</h4>
       )}
     </>
   );

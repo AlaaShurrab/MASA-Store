@@ -20,31 +20,30 @@ const SearchPage = ({ type, userData }) => {
   const wordQuery = `word=${word}`;
   const categoryQuery = `&category=${category}`;
 
-  const dataCollector = async () => {
-    if (userData) {
-      const { favoriteIds, cartIds } = userData;
-      if (favoriteIds && cartIds) {
-        const {
-          data: { data: searchData },
-        } = await axios(
-          `/api/v1/product-search/?${word ? wordQuery : ''}${
-            category ? categoryQuery : ''
-          }`,
-          {}
-        );
-        setData(dataFormatter(searchData, favoriteIds, cartIds));
-      }
-    }
-  };
-
   useEffect(() => {
+    const dataCollector = async () => {
+      if (userData) {
+        const { favoriteIds, cartIds } = userData;
+        if (favoriteIds && cartIds) {
+          const {
+            data: { data: searchData },
+          } = await axios(
+            `/api/v1/product-search/?${word ? wordQuery : ''}${
+              category ? categoryQuery : ''
+            }`,
+            {}
+          );
+          setData(dataFormatter(searchData, favoriteIds, cartIds));
+        }
+      }
+    };
     dataCollector();
-  }, [category, word, userData]);
+  }, [category, word, userData, wordQuery, categoryQuery]);
 
   return (
     <>
       <Helmet>
-        <title>Masa Market</title>
+        <title>البحث عن المنتجات</title>
       </Helmet>
       <CardContainer
         userData={userData}

@@ -27,19 +27,18 @@ const CategoryProductPage = ({ type, userData }) => {
   const [data, setData] = useState([]);
   const { category } = useParams();
 
-  const dataCollector = async () => {
-    if (userData) {
-      const { favoriteIds, cartIds } = userData;
-      if (favoriteIds && cartIds) {
-        const {
-          data: { data: raring },
-        } = await axios(`/api/v1/products/${category}`, {});
-        setData(dataFormatter(raring, favoriteIds, cartIds));
-      }
-    }
-  };
-
   useEffect(() => {
+    const dataCollector = async () => {
+      if (userData) {
+        const { favoriteIds, cartIds } = userData;
+        if (favoriteIds && cartIds) {
+          const {
+            data: { data: raring },
+          } = await axios(`/api/v1/products/${category}`, {});
+          setData(dataFormatter(raring, favoriteIds, cartIds));
+        }
+      }
+    };
     dataCollector();
   }, [category, userData]);
 

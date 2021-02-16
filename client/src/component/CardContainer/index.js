@@ -1,31 +1,29 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-// import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './CardContainer.css';
 
 // eslint-disable-next-line import/no-cycle
-import ProductCard from '../ProductCard';
-// eslint-disable-next-line import/no-cycle
-import { ButtonComponent } from '../index';
+import { ButtonComponent, ProductCard } from '../index';
 
 const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClose = (event, reason) => {
-    if (reason !== 'clickaway') {
+    if (reason !== 'idc') {
       setOpen(false);
     }
   };
 
-  const deleteFavorite = (id) => {
+  const deleteFavorite = async (id) => {
     try {
-      axios({
+      await axios({
         method: 'delete',
         url: `/api/v1/favorite/${userData.profileData.id}`,
         headers: {},
@@ -53,9 +51,9 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
     }
   };
 
-  const deleteCart = (id) => {
+  const deleteCart = async (id) => {
     try {
-      axios({
+      await axios({
         method: 'delete',
         url: `/api/v1/cart/${userData.profileData.id}`,
         headers: {},
@@ -68,9 +66,9 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
     }
   };
 
-  const addCart = (id) => {
+  const addCart = async (id) => {
     try {
-      axios({
+      await axios({
         method: 'post',
         url: `/api/v1/cart/${userData.profileData.id}`,
         headers: {},
@@ -90,7 +88,11 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
         <h1 className="title">{pageTitle}</h1>
         {pageTag === 'top-rated' || pageTag === 'trending' ? (
           <Link to={`/products/${pageTag}`} className="moreBtn">
-            <ButtonComponent text="more" iconButton={false} color="primary" />
+            <ButtonComponent
+              text="عرض المزيد"
+              iconButton={false}
+              color="primary"
+            />
           </Link>
         ) : null}
         <div className="category-line" />
@@ -121,9 +123,9 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
           elevation={6}
           variant="filled"
           onClose={handleClose}
-          severity="error"
+          severity="info"
         >
-          يوجد ضغط حالياُ، الرجاء المحاولة مرة أخرى لاحقاً
+          ازا في حاجة مغلباك اعمل تحديث للصفحة
         </MuiAlert>
       </Snackbar>
     </div>
@@ -131,10 +133,10 @@ const CardContainer = ({ role, data, pageTitle, pageTag, userData }) => {
 };
 
 CardContainer.propTypes = {
-  pageTitle: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  data: PropTypes.instanceOf(Array).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   pageTag: PropTypes.string,
+  role: PropTypes.string.isRequired,
+  pageTitle: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   userData: PropTypes.object.isRequired,
 };
