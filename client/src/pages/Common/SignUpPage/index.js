@@ -166,9 +166,11 @@ const SignUpPage = (props) => {
           lastName,
         })
         .then((res) => {
-          props.setRole(res.data.clientData.role);
+          props.setType(res.data.clientData.role);
         })
-        .then(() => history.push('/'))
+        .then(() => {
+          history.push('/');
+        })
         .catch(() =>
           setConfirmPasswordValidator(
             'الرجاء التأكد من كلمة المرور والبريد الإلكتروني *'
@@ -181,7 +183,7 @@ const SignUpPage = (props) => {
   return (
     <>
       <Helmet>
-        <title>تسجيل الدخول</title>
+        <title>انشاء حساب</title>
       </Helmet>
       <CssBaseline />
       <Container component="main" className={classes.container}>
@@ -294,7 +296,8 @@ const SignUpPage = (props) => {
     </>
   );
 };
+
 SignUpPage.propTypes = {
-  setRole: PropTypes.func.isRequired,
+  setType: PropTypes.func.isRequired,
 };
 export default SignUpPage;

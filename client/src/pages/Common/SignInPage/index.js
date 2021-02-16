@@ -113,7 +113,7 @@ const SignInPage = (props) => {
       axios
         .post('api/v1/signin', { email, password })
         .then((res) => {
-          props.setRole(res.data.clientData.role);
+          props.setType(res.data.clientData.role);
         })
         .then(() => history.push('/'))
         .catch(() =>
@@ -194,7 +194,7 @@ const SignInPage = (props) => {
   );
 };
 SignInPage.propTypes = {
-  setRole: PropTypes.func.isRequired,
+  setType: PropTypes.func.isRequired,
 };
 
 export default SignInPage;
