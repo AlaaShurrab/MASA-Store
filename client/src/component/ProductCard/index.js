@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Favorite from '@material-ui/icons/Favorite';
@@ -100,17 +101,20 @@ export default function ProductCard(props) {
           />
         }
       />
+      <Link to={`/product/${data.id}`}>
+        <CardMedia
+          className={classes.media}
+          image={data.img_url}
+          title={data.name}
+        />
 
-      <CardMedia
-        className={classes.media}
-        image={data.img_url}
-        title={data.name}
-      />
-      <CardContent className={classes.content}>
-        <Typography variant="body1" color="textPrimary" component="address">
-          {data.name.substring(0, 30)}
-        </Typography>
-      </CardContent>
+        <CardContent className={classes.content}>
+          <Typography variant="body1" color="textPrimary" component="address">
+            {data.name.substring(0, 30)}
+          </Typography>
+        </CardContent>
+      </Link>
+
       <CardActions disableSpacing className={classes.ph}>
         <Grid container spacing={2} justify="space-between" alignItems="center">
           <Grid item xs={3}>
