@@ -15,6 +15,14 @@ const appCategory = [
   'trending',
   'top-rated',
 ];
+const arabicCategory = {
+  fashion: 'أزياء',
+  electronics: 'الكترونيات',
+  accessories: 'اكسسوارات',
+  health: 'صحة',
+  trending: 'الأكثر مبيعاً',
+  'top-rated': 'الأعلى تقييماً',
+};
 const CategoryProductPage = ({ type, userData }) => {
   const [data, setData] = useState([]);
   const { category } = useParams();
@@ -45,7 +53,7 @@ const CategoryProductPage = ({ type, userData }) => {
           userData={userData}
           role={type}
           data={data}
-          pageTitle={category}
+          pageTitle={arabicCategory[category]}
         />
       </>
     );
