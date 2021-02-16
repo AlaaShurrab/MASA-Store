@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
 import Grid from '@material-ui/core/Grid';
@@ -46,21 +46,14 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '40px',
     },
   },
-  emailProfil: {
+  emailProfile: {
     marginTop: '20px',
   },
 }));
 
 const ProfilePage = ({ userData }) => {
-  const [details, setDetails] = useState({});
-  useEffect(() => {
-    if (Object.keys(userData.profileData).length !== 0) {
-      setDetails(userData.profileData);
-    }
-  }, [userData.profileData]);
-  console.log(userData.profileData.first_name);
+  useEffect(() => {}, [userData.profileData]);
   const classes = useStyles();
-  console.log(Object.keys(userData.profileData).length !== 0);
   return (
     <>
       {Object.keys(userData.profileData).length !== 0 ? (
@@ -110,7 +103,7 @@ const ProfilePage = ({ userData }) => {
                   />
                 </Grid>
               </Grid>
-              <Grid className={classes.emailProfil} container spacing={3}>
+              <Grid className={classes.emailProfile} container spacing={3}>
                 <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     variant="outlined"
@@ -238,8 +231,19 @@ const ProfilePage = ({ userData }) => {
   );
 };
 ProfilePage.propTypes = {
-  profileData: PropTypes.shape({
-    first_name: PropTypes.string,
+  userData: PropTypes.shape({
+    profileData: PropTypes.shape({
+      first_name: PropTypes.string,
+      last_name: PropTypes.string,
+      avatar: PropTypes.string,
+      email: PropTypes.string,
+      payment_card_name: PropTypes.string,
+      payment_card_number: PropTypes.string,
+      payment_card_expire_date: PropTypes.string,
+      city: PropTypes.string,
+      shipping_address1: PropTypes.string,
+      shipping_address2: PropTypes.string,
+    }),
   }).isRequired,
 };
 
