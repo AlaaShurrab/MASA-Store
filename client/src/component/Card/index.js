@@ -123,22 +123,15 @@ const CartCard = ({
   addFavorite,
   handleDeleteItem,
   handleEditItem,
-  handleChecked,
   addCheckedProducts,
   deleteCheckedProducts,
-  setEditCount,
 }) => {
   const classes = useStyles();
-  const [state, setState] = useState({
-    checked: false,
-  });
-
   const [checked, setChecked] = useState(false);
   const [count, setCount] = useState(data.quantity);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    console.log(event.target.checked);
   };
 
   useEffect(() => {
@@ -321,4 +314,18 @@ const CartCard = ({
   );
 };
 
+CartCard.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.object.isRequired,
+  isFavorite: PropTypes.bool,
+  deleteFavorite: PropTypes.func.isRequired,
+  addFavorite: PropTypes.func.isRequired,
+  handleDeleteItem: PropTypes.func.isRequired,
+  handleEditItem: PropTypes.func.isRequired,
+  addCheckedProducts: PropTypes.func.isRequired,
+  deleteCheckedProducts: PropTypes.func.isRequired,
+};
+CartCard.defaultProps = {
+  isFavorite: true,
+};
 export default CartCard;

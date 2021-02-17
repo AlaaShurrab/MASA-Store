@@ -2,14 +2,20 @@ import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import CartCard from '../../../component/Card/index';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { CartCard } from '../../../component/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,42 +36,54 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
 }));
-const CartPage = (props) => {
+const CartPage = ({ userData }) => {
   const classes = useStyles();
 
-  const { favoriteData, profileData, cartProducts } = props.userData;
-  const [products, setProducts] = useState();
+  const { favoriteData, profileData, cartProducts } = userData;
+  const [products, setProducts] = useState([]);
   const [checkedProductsId, setCheckedProductsId] = useState([]);
   const [checkedProducts, setCheckedProducts] = useState([]);
   const [numberOfProducts, setNumberOfProducts] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-
-  const { type, setType } = props;
+  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
-  const [state, setState] = useState({
-    checked: false,
-  });
+
   const purchasedProducts = [];
-  let fa = [];
-  favoriteData.length !== 0 && cartProducts.length !== 0
-    ? (fa = favoriteData.map((product) => product.product_id))
-    : (fa = null);
+  let favoritesArray = [];
+
+  if (favoriteData.length && cartProducts.length) {
+    favoritesArray = favoriteData.map((product) => product.product_id);
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason !== 'idc') {
+      setOpen(false);
+    }
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   useEffect(() => {
-    axios
-      .get(`/api/v1/cart/${profileData.id}`)
-      .then((response) => {
-        setProducts(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return () => {};
+    if (profileData.id) {
+      axios
+        .get(`/api/v1/cart/${profileData.id}`)
+        .then((response) => {
+          setProducts(response.data.data);
+        })
+        .catch(() => {
+          setOpen(true);
+        });
+    }
   }, [profileData.id]);
 
-  const deleteFavorite = (id) => {
+  const deleteFavorite = async (id) => {
     try {
-      axios({
+      await axios({
         method: 'delete',
         url: `/api/v1/favorite/${profileData.id}`,
         headers: {},
@@ -74,7 +92,7 @@ const CartPage = (props) => {
         },
       });
     } catch (error) {
-      console.log(error);
+      setOpen(true);
     }
   };
 
@@ -89,7 +107,7 @@ const CartPage = (props) => {
         },
       });
     } catch (error) {
-      console.log(error);
+      setOpen(true);
     }
   };
 
@@ -104,7 +122,7 @@ const CartPage = (props) => {
     })
       .then(() => products.filter((item) => item.product_id !== id))
       .then((result) => setProducts(result))
-      .catch();
+      .catch(() => setOpen(true));
   };
 
   const handleEditItem = (id, quantity) => {
@@ -118,17 +136,15 @@ const CartPage = (props) => {
       },
     })
       .then((result) => {
-        if (result.data.status === 200)
-          axios
-            .get(`/api/v1/cart/${profileData.id}`)
-            .then((response) => {
-              setProducts(response.data.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+        if (result.data.status === 200) {
+          return axios.get(`/api/v1/cart/${profileData.id}`);
+        }
+        return new Error();
       })
-      .catch();
+      .then((response) => {
+        setProducts(response.data.data);
+      })
+      .catch(() => setOpen(true));
   };
 
   const addCheckedProducts = (id) => {
@@ -141,15 +157,15 @@ const CartPage = (props) => {
     setCheckedProductsId(checkedProductsId.filter((item) => item !== id));
   };
 
-  const handleChangeCheck = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   const purchase = () => {
-    history.push({
-      pathname: '/payment',
-      state: { checkedProducts },
-    });
+    if (!checkedProducts.length) {
+      setOpenDialog(true);
+    } else {
+      history.push({
+        pathname: '/payment',
+        state: { checkedProducts },
+      });
+    }
   };
 
   useEffect(() => {
@@ -161,7 +177,7 @@ const CartPage = (props) => {
       )
     );
 
-    purchasedProducts.map((product) => {
+    purchasedProducts.forEach((product) => {
       price += product.new_price * product.quantity;
       numberProducts += product.quantity;
     });
@@ -185,9 +201,9 @@ const CartPage = (props) => {
             >
               عربة التسوق
             </Typography>
-            {products &&
+            {products.length ? (
               products.map((product) => {
-                const isFavorite = fa.includes(product.product_id);
+                const isFavorite = favoritesArray.includes(product.product_id);
                 return (
                   <div className={classes.cartProduct}>
                     <CartCard
@@ -199,11 +215,23 @@ const CartPage = (props) => {
                       handleEditItem={handleEditItem}
                       addCheckedProducts={addCheckedProducts}
                       deleteCheckedProducts={deleteCheckedProducts}
-                      handleChangeCheck={handleChangeCheck}
                     />
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <Typography
+                color="textPrimary"
+                variant="body1"
+                style={{
+                  fontWeight: 'bold',
+                  textAlign: 'start',
+                  marginTop: '15px',
+                }}
+              >
+                لا يوجد منتجات في عربة التسوق الخاصة بك
+              </Typography>
+            )}
           </Grid>
           <Grid item sm={3}>
             <Paper className={classes.paper} elevation={3}>
@@ -247,9 +275,39 @@ const CartPage = (props) => {
             </Paper>
           </Grid>
         </Grid>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={handleClose}
+            severity="info"
+          >
+            عذراً حدث خطأ ما
+          </MuiAlert>
+        </Snackbar>
+        <Dialog
+          fullScreen={fullScreen}
+          open={openDialog}
+          onClose={handleCloseDialog}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">
+            قم بإضافة منتجات أولاً قبل عملية الشراء
+          </DialogTitle>
+          <DialogActions>
+            <Button autoFocus onClick={handleCloseDialog} color="primary">
+              موافق
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </>
   );
+};
+
+CartPage.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  userData: PropTypes.object.isRequired,
 };
 
 export default CartPage;

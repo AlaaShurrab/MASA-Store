@@ -108,12 +108,7 @@ const App = () => {
                 <OrderPage type="user" userData={userData} />
               </Route>
               <Route exact path="/cart">
-                <CartPage
-                  type="user"
-                  setType={setType}
-                  userData={userData}
-                  setData={setData}
-                />
+                <CartPage type="user" setType={setType} userData={userData} />
               </Route>
               <Route>
                 <NotFoundPage type="user" />
