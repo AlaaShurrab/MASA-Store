@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Favorite from '@material-ui/icons/Favorite';
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProductCard(props) {
-  const { data, type, isFavorite, isCart } = props;
+  const { data, role, isFavorite, isCart } = props;
 
   const classes = useStyles();
   const [checked, setChecked] = React.useState(isFavorite);
@@ -96,21 +97,24 @@ export default function ProductCard(props) {
             checked={checked}
             onChange={handelChecked}
             name="checked"
-            disabled={type !== 'buyer'}
+            disabled={role !== 'user'}
           />
         }
       />
+      <Link to={`/product/${data.id}`}>
+        <CardMedia
+          className={classes.media}
+          image={data.img_url}
+          title={data.name}
+        />
 
-      <CardMedia
-        className={classes.media}
-        image={data.img_url}
-        title={data.name}
-      />
-      <CardContent className={classes.content}>
-        <Typography variant="body1" color="textPrimary" component="address">
-          {data.name.substring(0, 50)}
-        </Typography>
-      </CardContent>
+        <CardContent className={classes.content}>
+          <Typography variant="body1" color="textPrimary" component="address">
+            {data.name.substring(0, 30)}
+          </Typography>
+        </CardContent>
+      </Link>
+
       <CardActions disableSpacing className={classes.ph}>
         <Grid container spacing={2} justify="space-between" alignItems="center">
           <Grid item xs={3}>
@@ -126,7 +130,7 @@ export default function ProductCard(props) {
           </Grid>
 
           <Grid item xs={3}>
-            {type !== 'buyer' ? null : (
+            {role !== 'user' ? null : (
               <IconButton aria-label="add to cart" className={classes.addCart}>
                 <Checkbox
                   icon={<AddShoppingCartIcon fontSize="small" />}
@@ -147,7 +151,7 @@ export default function ProductCard(props) {
 }
 
 ProductCard.propTypes = {
-  type: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
   isFavorite: PropTypes.bool,
   isCart: PropTypes.bool,
   addFavorite: PropTypes.func.isRequired,

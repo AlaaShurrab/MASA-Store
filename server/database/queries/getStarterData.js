@@ -3,7 +3,7 @@ const {
   getProfileDataById,
   getFavorite,
   getCartProducts,
-  getOrders,
+  getOrdersByUsersId,
 } = require('./index');
 
 const getStarterData = async (userId) => {
@@ -21,7 +21,7 @@ const getStarterData = async (userId) => {
       ] = await Promise.all([
         getFavorite(userId),
         getCartProducts(userId),
-        getOrders(userId),
+        getOrdersByUsersId(userId),
       ]);
       favoriteData = favoriteDataQuery.rows;
       cartProducts = cartProductsQuery.rows;
