@@ -173,9 +173,9 @@ const ProfilePage = ({ userData }) => {
                     <Avatar
                       alt="profile"
                       src={
-                        state.avatar
+                        userData.profileData.avatar
                           ? state.avatar
-                          : userData.profileData.avatar
+                          : state.avatar
                       }
                       className={classes.large}
                     />
