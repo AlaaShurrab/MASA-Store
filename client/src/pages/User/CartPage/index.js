@@ -205,7 +205,10 @@ const CartPage = ({ userData }) => {
               products.map((product) => {
                 const isFavorite = favoritesArray.includes(product.product_id);
                 return (
-                  <div className={classes.cartProduct}>
+                  <div
+                    className={classes.cartProduct}
+                    key={product.product_id + product.name}
+                  >
                     <CartCard
                       data={product}
                       isFavorite={isFavorite}
