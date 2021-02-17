@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   makeStyles,
   Card,
@@ -122,30 +122,59 @@ const CartCard = ({
   deleteFavorite,
   addFavorite,
   handleDeleteItem,
+  handleEditItem,
+  handleChecked,
+  addCheckedProducts,
+  deleteCheckedProducts,
+  setEditCount,
 }) => {
   const classes = useStyles();
   const [state, setState] = useState({
     checked: false,
   });
-  console.log('llllllllllllll', data);
-  const [count, setCount] = useState(1);
+
+  const [checked, setChecked] = useState(false);
+  const [count, setCount] = useState(data.quantity);
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setChecked(event.target.checked);
+    console.log(event.target.checked);
   };
 
-  const { checked } = state;
+  useEffect(() => {
+    if (checked) {
+      addCheckedProducts(data.product_id);
+    } else {
+      deleteCheckedProducts(data.product_id);
+    }
+  }, [checked]);
 
   const [addedToFav, setAddedToFav] = useState(isFavorite);
 
   const handelAddFav = (e) => {
     setAddedToFav(e.target.checked);
     if (addedToFav) {
-      deleteFavorite(data.id);
+      deleteFavorite(data.product_id);
     } else {
-      addFavorite(data.id);
+      addFavorite(data.product_id);
     }
   };
+
+  const handleDeleteFromCart = () => {
+    handleDeleteItem(data.product_id);
+  };
+
+  const handleAddQuantity = () => {
+    setCount(count + 1);
+  };
+
+  const handleSubQuantity = () => {
+    setCount(Math.max(count - 1, 1));
+  };
+
+  useEffect(() => {
+    handleEditItem(data.product_id, count);
+  }, [count]);
 
   const matches = useMediaQuery('(max-width:600px)');
 
@@ -154,10 +183,11 @@ const CartCard = ({
       {!matches ? (
         <Card className={classes.root}>
           <Checkbox
-            checked={checked}
             onChange={handleChange}
             name="checked"
+            checked={checked}
             color="primary"
+            value={data.product_id}
           />
           <CardMedia className={classes.cover} image={data.img_url} />
           <div className={classes.cartContent}>
@@ -179,7 +209,7 @@ const CartCard = ({
                   name="checked"
                 />
               </Button>
-              <Button onClick={handleDeleteItem}>
+              <Button onClick={handleDeleteFromCart}>
                 <DeleteRoundedIcon color="primary" />
               </Button>
             </CardContent>
@@ -187,9 +217,7 @@ const CartCard = ({
               <Button
                 variant="outlined"
                 aria-label="increase"
-                onClick={() => {
-                  setCount(count + 1);
-                }}
+                onClick={handleAddQuantity}
                 className={classes.quantityButtonRight}
               >
                 <AddIcon fontSize="small" />
@@ -203,15 +231,15 @@ const CartCard = ({
                 variant="outlined"
                 aria-label="reduce"
                 className={classes.quantityButtonLeft}
-                onClick={() => {
-                  setCount(Math.max(count - 1, 1));
-                }}
+                onClick={handleSubQuantity}
               >
                 <RemoveIcon fontSize="small" />
               </Button>
             </div>
             <div className={classes.priceLabel}>
-              <Typography variant="h6">{data.new_price}₪</Typography>
+              <Typography variant="h6" color="primary">
+                {data.new_price}₪
+              </Typography>
             </div>
           </div>
         </Card>
@@ -239,7 +267,7 @@ const CartCard = ({
                       name="checked"
                     />
                   </Button>
-                  <Button onClick={handleDeleteItem}>
+                  <Button onClick={handleDeleteFromCart}>
                     <DeleteRoundedIcon color="primary" />
                   </Button>
                 </CardActions>
@@ -293,15 +321,4 @@ const CartCard = ({
   );
 };
 
-CartCard.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  data: PropTypes.object.isRequired,
-  isFavorite: PropTypes.bool,
-  deleteFavorite: PropTypes.func.isRequired,
-  addFavorite: PropTypes.func.isRequired,
-  handleDeleteItem: PropTypes.func.isRequired,
-};
-CartCard.defaultProps = {
-  isFavorite: true,
-};
 export default CartCard;
