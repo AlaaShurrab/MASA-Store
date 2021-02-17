@@ -103,187 +103,193 @@ const ProfilePage = ({ userData }) => {
     <>
       {Object.keys(userData.profileData).length !== 0 ? (
         <>
-          <Helmet>
-            <title>Profile</title>
-          </Helmet>
-          <Container component="main" className={classes.container}>
-            <CssBaseline />
+          <div className={classes.c}>
+            <Helmet>
+              <title>Profile</title>
+            </Helmet>
+            <Container component="main" className={classes.container}>
+              <CssBaseline />
 
-            <div>
-              <AccountBoxRoundedIcon className={classes.large} />
-              <Typography variant="h5" gutterBottom className={classes.mtb20}>
-                حسابي
-              </Typography>
-            </div>
+              <div>
+                <AccountBoxRoundedIcon className={classes.large} />
+                <Typography variant="h5" gutterBottom className={classes.mtb20}>
+                  حسابي
+                </Typography>
+              </div>
 
-            <form className={classes.form}>
-              <Typography
-                className={classes.mtb20}
-                variant="h6"
-                color="primary"
-                gutterBottom
-              >
-                معلوماتي الشخصية
-              </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} md={4}>
-                  <TextField
-                    defaultValue={userData.profileData.first_name}
-                    name="first_name"
-                    variant="outlined"
-                    label="الأسم الأول "
-                    type="text"
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'first_name')}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <TextField
-                    name="last_name"
-                    variant="outlined"
-                    defaultValue={userData.profileData.last_name}
-                    required
-                    label="الأسم الثاني "
-                    type="text"
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'last_name')}
-                  />
-                </Grid>
-              </Grid>
-              <Grid className={classes.emailProfile} container spacing={3}>
-                <Grid item xs={12} sm={6} md={4}>
-                  <TextField
-                    variant="outlined"
-                    defaultValue={userData.profileData.avatar}
-                    required
-                    label="رابط الصورة الشخصية "
-                    name="avatar"
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'avatar')}
-                  />
-                  <div className={classes.emailDiv}>
-                    <Typography className={classes.mtb20} variant="h6">
-                      البريد الالكتروني
-                    </Typography>
-                    <Link to="Email"> {userData.profileData.email}</Link>
-                  </div>
-                </Grid>
-                <Grid tem xs={12} sm={6} md={4}>
-                  <div className={classes.profilePhoto}>
-                    <Avatar
-                      alt="profile"
-                      src={
-                        userData.profileData.avatar
-                          ? state.avatar
-                          : state.avatar
-                      }
-                      className={classes.large}
+              <form className={classes.form}>
+                <Typography
+                  className={classes.mtb20}
+                  variant="h6"
+                  color="primary"
+                  gutterBottom
+                >
+                  معلوماتي الشخصية
+                </Typography>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <TextField
+                      defaultValue={userData.profileData.first_name}
+                      name="first_name"
+                      variant="outlined"
+                      label="الأسم الأول "
+                      type="text"
+                      fullWidth
+                      onChange={(e) => handleChangInput(e, 'first_name')}
                     />
-                  </div>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <TextField
+                      name="last_name"
+                      variant="outlined"
+                      defaultValue={userData.profileData.last_name}
+                      required
+                      label="الأسم الثاني "
+                      type="text"
+                      fullWidth
+                      onChange={(e) => handleChangInput(e, 'last_name')}
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Typography
-                className={classes.container}
-                variant="h6"
-                color="primary"
-                gutterBottom
-              >
-                معلومات الدفع
-              </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} md={8}>
-                  <TextField
-                    name="payment_card_name"
-                    variant="outlined"
-                    required
-                    id="cardName"
-                    defaultValue={userData.profileData.payment_card_name}
-                    label="الاسم علي البطاقة"
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'payment_card_name')}
-                  />
+                <Grid className={classes.emailProfile} container spacing={3}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <TextField
+                      variant="outlined"
+                      defaultValue={userData.profileData.avatar}
+                      required
+                      label="رابط الصورة الشخصية "
+                      name="avatar"
+                      fullWidth
+                      onChange={(e) => handleChangInput(e, 'avatar')}
+                    />
+                    <div className={classes.emailDiv}>
+                      <Typography className={classes.mtb20} variant="h6">
+                        البريد الالكتروني
+                      </Typography>
+                      <Link to="Email"> {userData.profileData.email}</Link>
+                    </div>
+                  </Grid>
+                  <Grid tem xs={12} sm={6} md={4}>
+                    <div className={classes.profilePhoto}>
+                      <Avatar
+                        alt="profile"
+                        src={
+                          userData.profileData.avatar
+                            ? state.avatar
+                            : state.avatar
+                        }
+                        className={classes.large}
+                      />
+                    </div>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6} md={8}>
-                  <TextField
-                    variant="outlined"
-                    name="payment_card_number"
-                    required
-                    id="cardNumber"
-                    defaultValue={userData.profileData.payment_card_number}
-                    label="رقم البطاقة "
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'payment_card_number')}
-                  />
+                <Typography
+                  className={classes.container}
+                  variant="h6"
+                  color="primary"
+                  gutterBottom
+                >
+                  معلومات الدفع
+                </Typography>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6} md={8}>
+                    <TextField
+                      name="payment_card_name"
+                      variant="outlined"
+                      required
+                      id="cardName"
+                      defaultValue={userData.profileData.payment_card_name}
+                      label="الاسم علي البطاقة"
+                      fullWidth
+                      onChange={(e) => handleChangInput(e, 'payment_card_name')}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={8}>
+                    <TextField
+                      variant="outlined"
+                      name="payment_card_number"
+                      required
+                      id="cardNumber"
+                      defaultValue={userData.profileData.payment_card_number}
+                      label="رقم البطاقة "
+                      fullWidth
+                      onChange={(e) =>
+                        handleChangInput(e, 'payment_card_number')
+                      }
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={8}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      name="payment_card_expire_date"
+                      id="expDate"
+                      defaultValue={
+                        userData.profileData.payment_card_expire_date
+                      }
+                      label="تاريخ الإنتهاء"
+                      fullWidth
+                      onChange={(e) =>
+                        handleChangInput(e, 'payment_card_expire_date')
+                      }
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6} md={8}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    name="payment_card_expire_date"
-                    id="expDate"
-                    defaultValue={userData.profileData.payment_card_expire_date}
-                    label="تاريخ الإنتهاء"
-                    fullWidth
-                    onChange={(e) =>
-                      handleChangInput(e, 'payment_card_expire_date')
-                    }
-                  />
+                <Typography
+                  className={classes.mtb20}
+                  variant="h6"
+                  color="primary"
+                  gutterBottom
+                >
+                  عنواني
+                </Typography>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6} md={8}>
+                    <TextField
+                      name="city"
+                      variant="outlined"
+                      required
+                      defaultValue={userData.profileData.city}
+                      id="city"
+                      label="المدينة"
+                      fullWidth
+                      onChange={(e) => handleChangInput(e, 'city')}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={8}>
+                    <TextField
+                      name="shipping_address1"
+                      variant="outlined"
+                      required
+                      defaultValue={userData.profileData.shipping_address1}
+                      id="shipping_address1"
+                      label="العنوان الأول"
+                      fullWidth
+                      onChange={(e) => handleChangInput(e, 'shipping_address1')}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={8}>
+                    <TextField
+                      name="shipping_address2"
+                      variant="outlined"
+                      required
+                      defaultValue={userData.profileData.shipping_address2}
+                      id="shipping_address2"
+                      label="العنوان الثاني "
+                      fullWidth
+                      onChange={(e) => handleChangInput(e, 'shipping_address2')}
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Typography
+              </form>
+              <ButtonComponent
                 className={classes.mtb20}
-                variant="h6"
+                text="تحديث"
                 color="primary"
-                gutterBottom
-              >
-                عنواني
-              </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} md={8}>
-                  <TextField
-                    name="city"
-                    variant="outlined"
-                    required
-                    defaultValue={userData.profileData.city}
-                    id="city"
-                    label="المدينة"
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'city')}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={8}>
-                  <TextField
-                    name="shipping_address1"
-                    variant="outlined"
-                    required
-                    defaultValue={userData.profileData.shipping_address1}
-                    id="shipping_address1"
-                    label="العنوان الأول"
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'shipping_address1')}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={8}>
-                  <TextField
-                    name="shipping_address2"
-                    variant="outlined"
-                    required
-                    defaultValue={userData.profileData.shipping_address2}
-                    id="shipping_address2"
-                    label="العنوان الثاني "
-                    fullWidth
-                    onChange={(e) => handleChangInput(e, 'shipping_address2')}
-                  />
-                </Grid>
-              </Grid>
-            </form>
-            <ButtonComponent
-              className={classes.mtb20}
-              text="تحديث"
-              color="primary"
-              onClick={handleSubmit}
-            />
-          </Container>
+                onClick={handleSubmit}
+              />
+            </Container>
+          </div>
         </>
       ) : (
         <Container component="main" className={classes.container}>
