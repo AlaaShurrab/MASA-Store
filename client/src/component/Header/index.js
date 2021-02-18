@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,6 +23,9 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import clsx from 'clsx';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import logo from '../../assets/logo.svg';
 
@@ -226,19 +229,22 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
   const { type, userData, setType } = props;
   const classes = useStyles(props);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [userAnchorEl, setUserAnchorEl] = React.useState(null);
-  const [categoryAnchorEl, setCategoryAnchorEl] = React.useState(null);
-  const [section, setSection] = React.useState(null);
-  const [searchedWord, setSearchedWord] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [userAnchorEl, setUserAnchorEl] = useState(null);
+  const [section, setSection] = useState(null);
+  const [searchedWord, setSearchedWord] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isUserMenuOpen = Boolean(userAnchorEl);
-  const isCategoriesMenuOpen = Boolean(categoryAnchorEl);
   const location = useLocation();
   const history = useHistory();
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -277,8 +283,19 @@ export default function Header(props) {
   };
 
   const handleCartButton = () => {
-    // if (type !== 'user') {
-    // }
+    if (type !== 'user') {
+      setOpenDialog(true);
+    } else {
+      history.push('/cart');
+    }
+  };
+
+  const handleFavoriteButton = () => {
+    if (type !== 'user') {
+      setOpenDialog(true);
+    } else {
+      history.push('/favorite');
+    }
   };
 
   const handleSearch = () => {
@@ -296,6 +313,7 @@ export default function Header(props) {
       } else {
         url = `/search?&word=${searchedWord}`;
       }
+      setSearchedWord('');
       history.push(url);
     }
   };
@@ -323,7 +341,10 @@ export default function Header(props) {
       </Link>
       <Button
         onClick={() =>
-          axios.post('/api/v1/signout').then(() => setType('guest'))
+          axios
+            .post('/api/v1/signout')
+            .then(() => setType('guest'))
+            .then(() => history.push('/'))
         }
         className={classes.decoration}
       >
@@ -511,6 +532,7 @@ export default function Header(props) {
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                value={searchedWord}
               />
               <div>
                 <Button
@@ -646,7 +668,7 @@ export default function Header(props) {
             )}
             {type !== 'admin' && (
               <div>
-                <Link to="/favorite">
+                <Button onClick={handleFavoriteButton}>
                   <IconButton
                     aria-label="show favorites"
                     color="primary"
@@ -654,17 +676,15 @@ export default function Header(props) {
                   >
                     <FavoriteBorder />
                   </IconButton>
-                </Link>
+                </Button>
                 <Button onClick={handleCartButton}>
-                  <Link to="/cart">
-                    <IconButton
-                      aria-label="show cart"
-                      color="primary"
-                      className={classes.buttonIcons}
-                    >
-                      <ShoppingCartIcon />
-                    </IconButton>
-                  </Link>
+                  <IconButton
+                    aria-label="show cart"
+                    color="primary"
+                    className={classes.buttonIcons}
+                  >
+                    <ShoppingCartIcon />
+                  </IconButton>
                 </Button>
               </div>
             )}
@@ -682,6 +702,26 @@ export default function Header(props) {
           </div>
         </Toolbar>
       </AppBar>
+      <Dialog
+        // fullScreen={fullScreen}
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          يرجى تسجيل الدخول أولاً
+        </DialogTitle>
+        <DialogActions>
+          <Link to="/sign-in" className={classes.decoration}>
+            <Typography variant="h6" color="primary">
+              تسجيل الدخول
+            </Typography>
+          </Link>
+          <Button autoFocus onClick={handleCloseDialog}>
+            موافق
+          </Button>
+        </DialogActions>
+      </Dialog>
       {renderMobileMenu}
       {renderUserMenu}
       {renderMenu}
