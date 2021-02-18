@@ -38,7 +38,6 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = () => {
   const [type, setType] = useState('guest');
-  // eslint-disable-next-line no-unused-vars
   const [userData, setUserData] = useState({
     cartProducts: [],
     favoriteData: [],
@@ -77,8 +76,6 @@ const App = () => {
     };
   }, [type]);
 
-  // setUserData({});
-
   switch (type) {
     case 'user':
       return (
@@ -111,7 +108,7 @@ const App = () => {
                 <OrderPage type="user" userData={userData} />
               </Route>
               <Route exact path="/cart">
-                <CartPage type="user" userData={userData} />
+                <CartPage type="user" setType={setType} userData={userData} />
               </Route>
               <Route>
                 <NotFoundPage type="user" />
