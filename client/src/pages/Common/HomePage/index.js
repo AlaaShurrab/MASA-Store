@@ -43,7 +43,7 @@ const HomePage = ({ type, userData }) => {
             data: { data: allProducts },
           } = await axios('/api/v1/products', {});
           setDate(dataFormatter(allProducts, favoriteIds, cartIds));
-        } else {
+        } else if (type !== 'user') {
           const {
             data: { data: topRatedProducts },
           } = await axios('/api/v1/products/top-rated', {});
@@ -60,6 +60,7 @@ const HomePage = ({ type, userData }) => {
       }
     };
     dataCollector();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData]);
 
   return (
