@@ -3,7 +3,7 @@ const { throwError } = require('../../utilities');
 
 const isAuth = (req, res, next) => {
   const { userID } = req;
-  getStarterData(userID || 1)
+  getStarterData(userID)
     .then((data) => {
       if (!data.profileData) {
         throw throwError(400, 'no data for this user yet ');
