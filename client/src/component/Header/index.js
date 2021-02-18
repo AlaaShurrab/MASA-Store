@@ -233,7 +233,7 @@ export default function Header(props) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [userAnchorEl, setUserAnchorEl] = useState(null);
   const [section, setSection] = useState(null);
-  const [searchedWord, setSearchedWord] = useState(null);
+  const [searchedWord, setSearchedWord] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -668,24 +668,22 @@ export default function Header(props) {
             )}
             {type !== 'admin' && (
               <div>
-                <Button onClick={handleFavoriteButton}>
-                  <IconButton
-                    aria-label="show favorites"
-                    color="primary"
-                    className={classes.buttonIcons}
-                  >
-                    <FavoriteBorder />
-                  </IconButton>
-                </Button>
-                <Button onClick={handleCartButton}>
-                  <IconButton
-                    aria-label="show cart"
-                    color="primary"
-                    className={classes.buttonIcons}
-                  >
-                    <ShoppingCartIcon />
-                  </IconButton>
-                </Button>
+                <IconButton
+                  onClick={handleFavoriteButton}
+                  aria-label="show favorites"
+                  color="primary"
+                  className={classes.buttonIcons}
+                >
+                  <FavoriteBorder />
+                </IconButton>
+                <IconButton
+                  onClick={handleCartButton}
+                  aria-label="show cart"
+                  color="primary"
+                  className={classes.buttonIcons}
+                >
+                  <ShoppingCartIcon />
+                </IconButton>
               </div>
             )}
           </div>
