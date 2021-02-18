@@ -31,7 +31,7 @@
   position: absolute;
   width: 100px;
   height: 4px;
-  background: linear-gradient(135deg, #8a6c60, #E24928);
+  background: linear-gradient(135deg, #8a6c60, #e24928);
   bottom: 0;
 }
 
@@ -39,7 +39,7 @@
   position: absolute;
   left: 35px;
   top: 20px;
-  text-decoration: 'none';
+  text-decoration: none;
 }
 
 .title {

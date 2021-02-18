@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  linkStyle: {
+    textDecoration: 'none',
+  },
 }));
 
 export default function ProductCard(props) {
@@ -101,7 +104,7 @@ export default function ProductCard(props) {
           />
         }
       />
-      <Link to={`/product/${data.id}`}>
+      <Link to={`/product/${data.id}`} className={classes.linkStyle}>
         <CardMedia
           className={classes.media}
           image={data.img_url}
