@@ -32,6 +32,19 @@ const HomePage = ({ type, userData }) => {
             data: { data: allProducts },
           } = await axios('/api/v1/products', {});
           setDate(dataFormatter(allProducts, favoriteIds, cartIds));
+        } else {
+          const {
+            data: { data: topRatedProducts },
+          } = await axios('/api/v1/products/top-rated', {});
+          setRatingData(dataFormatter(topRatedProducts.slice(0, 4), [], []));
+          const {
+            data: { data: trendyProducts },
+          } = await axios('/api/v1/products/trending', {});
+          setTrendingData(dataFormatter(trendyProducts.slice(0, 4), [], []));
+          const {
+            data: { data: allProducts },
+          } = await axios('/api/v1/products', {});
+          setDate(dataFormatter(allProducts, [], []));
         }
       }
     };

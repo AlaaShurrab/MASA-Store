@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
@@ -10,7 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import Skeleton from '@material-ui/lab/Skeleton';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import { ButtonComponent } from '../../../component';
 
@@ -73,28 +73,29 @@ const ProfilePage = ({ userData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       avatar,
-      payment_card_name,
-      payment_card_number,
-      payment_card_expire_date,
+      paymentCardName,
+      paymentCardNumber,
+      paymentCardExpireDate,
       city,
-      shipping_address1,
-      shipping_address2,
+      shippingAddress1,
+      shippingAddress2,
     } = state;
     axios
       .put(`api/v1//profile/${userData.profileData.id}`, {
-        firstName: first_name,
-        lastName: last_name,
+        firstName,
+        lastName,
         avatar,
-        shippingAddress1: shipping_address1,
-        shippingAddress2: shipping_address2,
+        shippingAddress1,
+        shippingAddress2,
         city,
-        paymentCardName: payment_card_name,
-        paymentCardNumber: payment_card_number,
-        paymentCardExpireDate: payment_card_expire_date,
+        paymentCardName,
+        paymentCardNumber,
+        paymentCardExpireDate,
       })
+      // eslint-disable-next-line no-alert
       .then(() => alert('تم تحدث البيانات بنجاح '));
   };
 
@@ -129,7 +130,7 @@ const ProfilePage = ({ userData }) => {
                 <Grid item xs={12} sm={6} md={4}>
                   <TextField
                     defaultValue={userData.profileData.first_name}
-                    name="first_name"
+                    name="firstName"
                     variant="outlined"
                     label="الأسم الأول "
                     type="text"
@@ -139,7 +140,7 @@ const ProfilePage = ({ userData }) => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                   <TextField
-                    name="last_name"
+                    name="lastName"
                     variant="outlined"
                     defaultValue={userData.profileData.last_name}
                     required
@@ -168,7 +169,7 @@ const ProfilePage = ({ userData }) => {
                     <Link to="Email"> {userData.profileData.email}</Link>
                   </div>
                 </Grid>
-                <Grid tem xs={12} sm={6} md={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <div className={classes.profilePhoto}>
                     <Avatar
                       alt="profile"
@@ -193,7 +194,7 @@ const ProfilePage = ({ userData }) => {
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6} md={8}>
                   <TextField
-                    name="payment_card_name"
+                    name="paymentCardName"
                     variant="outlined"
                     required
                     id="cardName"
@@ -206,7 +207,7 @@ const ProfilePage = ({ userData }) => {
                 <Grid item xs={12} sm={6} md={8}>
                   <TextField
                     variant="outlined"
-                    name="payment_card_number"
+                    name="paymentCardNumber"
                     required
                     id="cardNumber"
                     defaultValue={userData.profileData.payment_card_number}
@@ -219,7 +220,7 @@ const ProfilePage = ({ userData }) => {
                   <TextField
                     variant="outlined"
                     required
-                    name="payment_card_expire_date"
+                    name="paymentCardExpireDate"
                     id="expDate"
                     defaultValue={userData.profileData.payment_card_expire_date}
                     label="تاريخ الإنتهاء"
@@ -253,7 +254,7 @@ const ProfilePage = ({ userData }) => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={8}>
                   <TextField
-                    name="shipping_address1"
+                    name="shippingAddress1"
                     variant="outlined"
                     required
                     defaultValue={userData.profileData.shipping_address1}
@@ -265,7 +266,7 @@ const ProfilePage = ({ userData }) => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={8}>
                   <TextField
-                    name="shipping_address2"
+                    name="shippingAddress2"
                     variant="outlined"
                     required
                     defaultValue={userData.profileData.shipping_address2}
@@ -296,24 +297,6 @@ const ProfilePage = ({ userData }) => {
       )}
     </>
   );
-};
-
-ProfilePage.propTypes = {
-  userData: PropTypes.shape({
-    profileData: PropTypes.shape({
-      first_name: PropTypes.string,
-      last_name: PropTypes.string,
-      avatar: PropTypes.string,
-      email: PropTypes.string,
-      payment_card_name: PropTypes.string,
-      payment_card_number: PropTypes.number,
-      payment_card_expire_date: PropTypes.number,
-      city: PropTypes.string,
-      shipping_address1: PropTypes.string,
-      shipping_address2: PropTypes.string,
-      id: PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default ProfilePage;
