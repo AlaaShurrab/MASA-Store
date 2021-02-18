@@ -52,15 +52,15 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfilePage = ({ userData }) => {
   const [state, setState] = useState({
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     avatar: '',
-    payment_card_name: '',
-    payment_card_number: 0,
-    payment_card_expire_date: 0,
+    paymentCardName: '',
+    paymentCardNumber: 0,
+    paymentCardExpireDate: 0,
     city: '',
-    shipping_address1: '',
-    shipping_address2: '',
+    shippingAddress1: '',
+    shippingAddress2: '',
   });
   useEffect(() => {}, [userData.profileData]);
 
@@ -135,7 +135,7 @@ const ProfilePage = ({ userData }) => {
                     label="الأسم الأول "
                     type="text"
                     fullWidth
-                    onChange={(e) => handleChangInput(e, 'first_name')}
+                    onChange={(e) => handleChangInput(e, 'firstName')}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -147,7 +147,7 @@ const ProfilePage = ({ userData }) => {
                     label="الأسم الثاني "
                     type="text"
                     fullWidth
-                    onChange={(e) => handleChangInput(e, 'last_name')}
+                    onChange={(e) => handleChangInput(e, 'lastName')}
                   />
                 </Grid>
               </Grid>
@@ -201,7 +201,7 @@ const ProfilePage = ({ userData }) => {
                     defaultValue={userData.profileData.payment_card_name}
                     label="الاسم علي البطاقة"
                     fullWidth
-                    onChange={(e) => handleChangInput(e, 'payment_card_name')}
+                    onChange={(e) => handleChangInput(e, 'paymentCardName')}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={8}>
@@ -213,7 +213,7 @@ const ProfilePage = ({ userData }) => {
                     defaultValue={userData.profileData.payment_card_number}
                     label="رقم البطاقة "
                     fullWidth
-                    onChange={(e) => handleChangInput(e, 'payment_card_number')}
+                    onChange={(e) => handleChangInput(e, 'paymentCardNumber')}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={8}>
@@ -226,7 +226,7 @@ const ProfilePage = ({ userData }) => {
                     label="تاريخ الإنتهاء"
                     fullWidth
                     onChange={(e) =>
-                      handleChangInput(e, 'payment_card_expire_date')
+                      handleChangInput(e, 'paymentCardExpireDate')
                     }
                   />
                 </Grid>
@@ -261,7 +261,7 @@ const ProfilePage = ({ userData }) => {
                     id="shipping_address1"
                     label="العنوان الأول"
                     fullWidth
-                    onChange={(e) => handleChangInput(e, 'shipping_address1')}
+                    onChange={(e) => handleChangInput(e, 'shippingAddress1')}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={8}>
@@ -273,7 +273,7 @@ const ProfilePage = ({ userData }) => {
                     id="shipping_address2"
                     label="العنوان الثاني "
                     fullWidth
-                    onChange={(e) => handleChangInput(e, 'shipping_address2')}
+                    onChange={(e) => handleChangInput(e, 'shippingAddress2')}
                   />
                 </Grid>
               </Grid>
