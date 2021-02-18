@@ -12,6 +12,7 @@
 }
 .content {
   grid-area: m;
+  max-width: 700px;
 }
 
 .mainTitle {
@@ -42,4 +43,16 @@
 .counter {
   display: flex;
   align-items: flex-end;
+}
+
+@media screen and (max-width: 992px) {
+  .productInfo {
+    display: flex;
+    /* grid-template-columns: 0.45fr 350px 0.092fr 829px 0.45fr; */
+    /* grid-template-areas: ". p . m ."; */
+    font-family: "Tajawal", Harmattan, sans-serif !important;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

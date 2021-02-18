@@ -13,6 +13,15 @@ import './productPage.css';
 import dataFormatter from '../../../utilities/dataFormatter';
 import { CardContainer, ButtonComponent } from '../../../component';
 
+const arabicCategory = {
+  fashion: 'أزياء',
+  electronics: 'الكترونيات',
+  accessories: 'اكسسوارات',
+  health: 'صحة',
+  trending: 'الأكثر مبيعاً',
+  'top-rated': 'الأعلى تقييماً',
+};
+
 const ProductDetailsPage = ({ type, userData }) => {
   const [data, setData] = useState([]);
   const [relatedData, setRelatedData] = useState([]);
@@ -193,7 +202,11 @@ const ProductDetailsPage = ({ type, userData }) => {
             <strong>السعر : </strong>
             {data.new_price} ₪
           </p>
-          الفئة :<Link to={`/products/${data.category}`}> {data.category}</Link>
+          الفئة :
+          <Link to={`/products/${data.category}`}>
+            {' '}
+            {arabicCategory[data.category]}
+          </Link>
           <br />
           <div className="counter">
             <TextField
