@@ -2,11 +2,44 @@
 
 # description
 
-A lot of e-commerce pages are published recently in Gaza especially on Facebook and Instagram, without the existence of a website which make shopping is a tedious work for customer and buyer, we are going to introduce our app to help both customers and sellers. the website will represent who the seller is and what he does and make an impression on his customers and form a competitive advantage within the increasing competition between online shops. It will be much easier for the buyers to have a place to display the list of orders and all the needed details instead of communication on private messages like they do in social media, As will as for customers, it is a better user experience to display the products and all the details with prices and easily make orders.
+A lot of e-commerce pages are published recently in Gaza especially on Facebook and Instagram, without the existence of a website which makes shopping is a tedious work for customer and buyer, we are going to introduce our app to help both customers and sellers. the website will represent who the seller is and what he does and make an impression on his customers and form a competitive advantage within the increasing competition between online shops. It will be much easier for the buyers to have a place to display the list of orders and all the needed details instead of communication on private messages like they do in social media, As well as for customers, it is a better user experience to display the products and all the details with prices and easily make orders.
+
 
 ## Application Setup :mag:
 
-coming soon
+- clone this repo 
+`git clone https://github.com/GSG-G9/MASA-Store.git`
+
+- run `npm i  && cd client npm i `  to install all dependencies & dev-dependencies for the server and clinet(react-app) .
+
+- add .env file that contains SECRET_KEY as Environmental Variable and PostgreSQL URLs for your database. 
+
+
+##### Environment Variables
+Environment variables are one of the ways that we use to keep our product safe. If you want to access our app locally you will need to add your own.
+
+First, create a **.env** file and add the following variables:
+
+```
+SECRET_KEY='add your secret key here'
+```
+
+##### Database Setup
+
+- If you don't install PostgreSQL yet in your machine follow [this link](https://github.com/coding-wiki/learn-sql/tree/master/postgresql/installation).
+- then create two databases locally one for testing and one for development for more help follow [this link](https://github.com/foundersandcoders/sql-commands-intro).
+- now add your newly created database to the .env file
+  ```
+  DB_DEV_URL=postgres://{userName}:{password}@localhost:5432/{databaseName}
+  DB_TEST_URL=postgres://{userName}:{password}@localhost:5432/{databaseName}
+  ```
+
+- Now in the Terminal types `psql YourdataBaseUrl` and then type `\i server/database/data/build.sql` and finally type  `\i server/database/data/fakeData.sql`
+
+##### Run the Project
+
+- In terminal access to project folder on your machine write: `npm run dev` to start the server and in another terminal type `npm run client` to run the react app
+
 
 ### The Problem Statement:
 
@@ -19,7 +52,7 @@ coming soon
 
 ### User Journey :
 
-- In this project we have two client so we will describe that as seller,and buyer(customer)
+- In this project, we have two clients so we will describe that as seller, and buyer(customer)
 
 #### "As a buyer:"
 
@@ -27,7 +60,7 @@ coming soon
 
 #### "As a seller"
 
-- I can see all the important activities on the website, I can add product to the site.
+- I can see all the important activities on the website, I can add a product to the site.
 
 ### User Stories :
 
