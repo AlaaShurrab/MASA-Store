@@ -22,6 +22,7 @@ import Select from '@material-ui/core/Select';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import clsx from 'clsx';
 
 import logo from '../../assets/logo.svg';
 
@@ -30,19 +31,30 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     color: 'secondary',
   },
+
+  appBarContainer: {
+    height: '80px',
+    [theme.breakpoints.up('md')]: {
+      height: '125px',
+    },
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   logo: {
     width: '40px',
-    marginTop: '-45px',
+    marginTop: '20px',
+    marginLeft: '-8px',
+
     [theme.breakpoints.up('sm')]: {
-      marginTop: '5px',
+      marginTop: '20px',
+      width: '50px',
+      marginLeft: '-5px',
     },
     [theme.breakpoints.up('md')]: {
       width: '100px',
       display: 'block',
-      marginTop: '5px',
+      marginTop: '15px',
       marginLeft: '15vw',
     },
   },
@@ -52,15 +64,16 @@ const useStyles = makeStyles((theme) => ({
     left: '50%',
     webkitTransform: 'translate(-50%, -50%)',
     transform: 'translate(-50%, -50%)',
-    marginTop: '40px',
+    marginTop: '10px',
     borderRadius: '50px',
     outline: 'none',
     border: 'solid #E24928 1px',
     backgroundColor: 'white',
-    width: '90%',
+    width: '65%',
+    fontSize: '12px',
     [theme.breakpoints.up('sm')]: {
       width: '70%',
-      marginTop: '10px',
+      marginTop: '6px',
     },
     [theme.breakpoints.up('md')]: {
       width: '40%',
@@ -161,9 +174,9 @@ const useStyles = makeStyles((theme) => ({
   },
   links: {
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       texDecoration: 'none',
-      width: '70%',
+      width: '40%',
       position: 'absolute',
       top: '100px',
       left: '50%',
@@ -172,9 +185,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       justifyContent: 'space-between',
       flexWrap: 'wrap',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '40%',
     },
   },
   avatar: {
@@ -196,15 +206,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   moreIcon: {
-    marginTop: '-50px',
+    marginTop: '10px',
+    marginRight: '-15px',
     [theme.breakpoints.up('sm')]: {
-      marginTop: '0px',
+      marginRight: '0px',
     },
   },
 
   decoration: {
     textDecoration: 'none',
     color: theme.palette.text.primary,
+  },
+
+  menuLinksMargin: {
+    marginRight: '15px',
   },
 }));
 
@@ -233,16 +248,8 @@ export default function Header(props) {
     setUserAnchorEl(event.currentTarget);
   };
 
-  const handleCategoriesMenuOpen = (event) => {
-    setCategoryAnchorEl(event.currentTarget);
-  };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-  };
-
-  const handleCategoriesMenuClose = () => {
-    setCategoryAnchorEl(null);
   };
 
   const handleMenuClose = () => {
@@ -359,58 +366,6 @@ export default function Header(props) {
     </Menu>
   );
 
-  const menuCategories = 'category-menu-mobile';
-  const renderMenuCategories = (
-    <Menu
-      anchorEl={categoryAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuCategories}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isCategoriesMenuOpen}
-      onClose={handleCategoriesMenuClose}
-    >
-      <Link
-        to={type !== 'admin' ? '/' : '/admin'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleCategoriesMenuClose}>الرئيسية</MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/fashion' : '/admin/orders'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleCategoriesMenuClose}>
-          {type !== 'admin' ? 'أزياء' : 'الطلبات'}
-        </MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/electronics' : '/admin/products'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleCategoriesMenuClose}>
-          {type !== 'admin' ? 'إلكترونيات' : 'المنتجات'}
-        </MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/accessories' : '/admin/add-product'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleCategoriesMenuClose}>
-          {type !== 'admin' ? 'حقائب وأحذية' : 'إضافة منتج'}
-        </MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/health' : '/admin/clients'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleCategoriesMenuClose}>
-          {type !== 'admin' ? 'صحة' : 'العملاء'}
-        </MenuItem>
-      </Link>
-    </Menu>
-  );
-
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -438,44 +393,6 @@ export default function Header(props) {
           عربة التسوق
         </Link>
       </MenuItem>
-      <Link
-        to={type !== 'admin' ? '/' : '/admin'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleMobileMenuClose}>الرئيسية</MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/fashion' : '/admin/orders'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleMobileMenuClose}>
-          {type !== 'admin' ? 'أزياء' : 'الطلبات'}
-        </MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/electronics' : '/admin/products'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleMobileMenuClose}>
-          {type !== 'admin' ? 'إلكترونيات' : 'المنتجات'}
-        </MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/accessories' : '/admin/add-product'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleMobileMenuClose}>
-          {type !== 'admin' ? 'حقائب وأحذية' : 'إضافة منتج'}
-        </MenuItem>
-      </Link>
-      <Link
-        to={type !== 'admin' ? '/products/health' : '/admin/clients'}
-        className={classes.decoration}
-      >
-        <MenuItem onClick={handleMobileMenuClose}>
-          {type !== 'admin' ? 'صحة' : 'العملاء'}
-        </MenuItem>
-      </Link>
 
       {type === 'user' ? (
         <MenuItem onClick={handleUserMenuOpen}>
@@ -497,33 +414,86 @@ export default function Header(props) {
           >
             <AccountCircle />
           </IconButton>
-          <p>مستخدم جديد</p>
+          <p>ضيف</p>
         </MenuItem>
       )}
+      <Divider />
+      <Typography
+        style={{
+          marginTop: '20px',
+          fontWeight: 'bold',
+          marginRight: '30px',
+        }}
+      >
+        الفئات
+      </Typography>
+
+      <Link
+        to={type !== 'admin' ? '/' : '/admin'}
+        className={clsx(classes.decoration, classes.menuLinksMargin)}
+      >
+        <MenuItem
+          onClick={handleMobileMenuClose}
+          style={{ marginTop: '10px', marginRight: '15px' }}
+        >
+          الرئيسية
+        </MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/fashion' : '/admin/orders'}
+        className={clsx(classes.decoration, classes.menuLinksMargin)}
+      >
+        <MenuItem
+          onClick={handleMobileMenuClose}
+          style={{ marginTop: '5px', marginRight: '15px' }}
+        >
+          {type !== 'admin' ? 'أزياء' : 'الطلبات'}
+        </MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/electronics' : '/admin/products'}
+        className={clsx(classes.decoration, classes.menuLinksMargin)}
+      >
+        <MenuItem
+          onClick={handleMobileMenuClose}
+          style={{ marginTop: '5px', marginRight: '15px' }}
+        >
+          {type !== 'admin' ? 'إلكترونيات' : 'المنتجات'}
+        </MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/accessories' : '/admin/add-product'}
+        className={clsx(classes.decoration, classes.menuLinksMargin)}
+      >
+        <MenuItem
+          onClick={handleMobileMenuClose}
+          style={{ marginTop: '5px', marginRight: '15px' }}
+        >
+          {type !== 'admin' ? 'حقائب وأحذية' : 'إضافة منتج'}
+        </MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/health' : '/admin/clients'}
+        className={clsx(classes.decoration, classes.menuLinksMargin)}
+      >
+        <MenuItem
+          onClick={handleMobileMenuClose}
+          style={{ marginTop: '5px', marginRight: '15px' }}
+        >
+          {type !== 'admin' ? 'صحة' : 'العملاء'}
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
   return (
-    <div className={classes.grow} style={{ height: '125px' }}>
+    <div className={clsx(classes.grow, classes.appBarContainer)}>
       <AppBar
         position="static"
         style={{ backgroundColor: '#92929230', height: '100%' }}
       >
         <Toolbar className={classes.appBar}>
           <img src={logo} alt="logo" className={classes.logo} />
-          <div className={classes.categoryLinksMob}>
-            <IconButton
-              aria-label="category-menu-mobile"
-              aria-controls={menuCategories}
-              aria-haspopup="true"
-              onClick={handleCategoriesMenuOpen}
-            >
-              <ExpandMoreIcon />
-              <Typography color="textPrimary" variant="h6">
-                الفئات
-              </Typography>
-            </IconButton>
-          </div>
           <div style={{ display: 'flex', width: '80%' }}>
             <div
               className={
@@ -535,7 +505,7 @@ export default function Header(props) {
               </div>
               <InputBase
                 onChange={handleSearchChange}
-                placeholder="ابحث عن أي منتج"
+                placeholder="البحث"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -668,7 +638,7 @@ export default function Header(props) {
               >
                 <ExpandMoreIcon />
                 <Typography color="textPrimary" variant="h6">
-                  مستخدم جديد
+                  ضيف
                 </Typography>
 
                 <AccountCircle style={{ fontSize: '40' }} />
@@ -712,7 +682,6 @@ export default function Header(props) {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMenuCategories}
       {renderMobileMenu}
       {renderUserMenu}
       {renderMenu}
