@@ -140,6 +140,7 @@ const CartCard = ({
     } else {
       deleteCheckedProducts(data.product_id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 
   const [addedToFav, setAddedToFav] = useState(isFavorite);
@@ -167,6 +168,7 @@ const CartCard = ({
 
   useEffect(() => {
     handleEditItem(data.product_id, count);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   const matches = useMediaQuery('(max-width:600px)');
