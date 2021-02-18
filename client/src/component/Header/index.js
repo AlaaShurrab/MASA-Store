@@ -21,13 +21,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import logo from '../../assets/logo.svg';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    height: '13vh',
     color: 'secondary',
   },
   menuButton: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     left: '50%',
     webkitTransform: 'translate(-50%, -50%)',
     transform: 'translate(-50%, -50%)',
-    marginTop: '18px',
+    marginTop: '40px',
     borderRadius: '50px',
     outline: 'none',
     border: 'solid #E24928 1px',
@@ -60,10 +60,11 @@ const useStyles = makeStyles((theme) => ({
     width: '90%',
     [theme.breakpoints.up('sm')]: {
       width: '70%',
-      marginTop: '-10px',
+      marginTop: '10px',
     },
     [theme.breakpoints.up('md')]: {
       width: '40%',
+      marginTop: '-10px',
     },
   },
   sectionSearch: {
@@ -208,7 +209,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header(props) {
-  const { type, userData } = props;
+  const { type, userData, setType } = props;
   const classes = useStyles(props);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -268,6 +269,11 @@ export default function Header(props) {
     setSearchedWord(value);
   };
 
+  const handleCartButton = () => {
+    // if (type !== 'user') {
+    // }
+  };
+
   const handleSearch = () => {
     let url;
     const currentPage = location.pathname.split('/')[2];
@@ -308,12 +314,16 @@ export default function Header(props) {
           <MenuItem onClick={handleUserMenuClose}>طلباتي</MenuItem>
         </Typography>
       </Link>
-
-      <Link to="/api/v1/logout" className={classes.decoration}>
+      <Button
+        onClick={() =>
+          axios.post('/api/v1/signout').then(() => setType('guest'))
+        }
+        className={classes.decoration}
+      >
         <Typography variant="h6" style={{ color: '#3699FF' }}>
           <MenuItem onClick={handleUserMenuClose}>تسجيل الخروج</MenuItem>
         </Typography>
-      </Link>
+      </Button>
     </Menu>
   );
 
@@ -412,7 +422,7 @@ export default function Header(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={{ handleMobileMenuClose }}>
+      <MenuItem onClick={handleMobileMenuClose}>
         <Link to="/favorite" className={classes.decoration}>
           <IconButton aria-label="show favorites" color="primary">
             <FavoriteBorder />
@@ -420,7 +430,7 @@ export default function Header(props) {
           المفضلات
         </Link>
       </MenuItem>
-      <MenuItem onClick={{ handleMobileMenuClose }}>
+      <MenuItem onClick={handleMobileMenuClose}>
         <Link to="/cart" className={classes.decoration}>
           <IconButton aria-label="show cart" color="primary">
             <ShoppingCartIcon />
@@ -428,6 +438,44 @@ export default function Header(props) {
           عربة التسوق
         </Link>
       </MenuItem>
+      <Link
+        to={type !== 'admin' ? '/' : '/admin'}
+        className={classes.decoration}
+      >
+        <MenuItem onClick={handleMobileMenuClose}>الرئيسية</MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/fashion' : '/admin/orders'}
+        className={classes.decoration}
+      >
+        <MenuItem onClick={handleMobileMenuClose}>
+          {type !== 'admin' ? 'أزياء' : 'الطلبات'}
+        </MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/electronics' : '/admin/products'}
+        className={classes.decoration}
+      >
+        <MenuItem onClick={handleMobileMenuClose}>
+          {type !== 'admin' ? 'إلكترونيات' : 'المنتجات'}
+        </MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/accessories' : '/admin/add-product'}
+        className={classes.decoration}
+      >
+        <MenuItem onClick={handleMobileMenuClose}>
+          {type !== 'admin' ? 'حقائب وأحذية' : 'إضافة منتج'}
+        </MenuItem>
+      </Link>
+      <Link
+        to={type !== 'admin' ? '/products/health' : '/admin/clients'}
+        className={classes.decoration}
+      >
+        <MenuItem onClick={handleMobileMenuClose}>
+          {type !== 'admin' ? 'صحة' : 'العملاء'}
+        </MenuItem>
+      </Link>
 
       {type === 'user' ? (
         <MenuItem onClick={handleUserMenuOpen}>
@@ -435,7 +483,6 @@ export default function Header(props) {
             aria-label="account of current"
             aria-controls={menuUserId}
             aria-haspopup="true"
-            color="black"
           >
             <AccountCircle />
           </IconButton>
@@ -447,19 +494,21 @@ export default function Header(props) {
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
             aria-haspopup="true"
-            color="black"
           >
             <AccountCircle />
           </IconButton>
-          <p>الحساب</p>
+          <p>مستخدم جديد</p>
         </MenuItem>
       )}
     </Menu>
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static" style={{ backgroundColor: '#92929230' }}>
+    <div className={classes.grow} style={{ height: '125px' }}>
+      <AppBar
+        position="static"
+        style={{ backgroundColor: '#92929230', height: '100%' }}
+      >
         <Toolbar className={classes.appBar}>
           <img src={logo} alt="logo" className={classes.logo} />
           <div className={classes.categoryLinksMob}>
@@ -619,7 +668,7 @@ export default function Header(props) {
               >
                 <ExpandMoreIcon />
                 <Typography color="textPrimary" variant="h6">
-                  الحساب
+                  مستخدم جديد
                 </Typography>
 
                 <AccountCircle style={{ fontSize: '40' }} />
@@ -636,15 +685,17 @@ export default function Header(props) {
                     <FavoriteBorder />
                   </IconButton>
                 </Link>
-                <Link to="/cart">
-                  <IconButton
-                    aria-label="show cart"
-                    color="primary"
-                    className={classes.buttonIcons}
-                  >
-                    <ShoppingCartIcon />
-                  </IconButton>
-                </Link>
+                <Button onClick={handleCartButton}>
+                  <Link to="/cart">
+                    <IconButton
+                      aria-label="show cart"
+                      color="primary"
+                      className={classes.buttonIcons}
+                    >
+                      <ShoppingCartIcon />
+                    </IconButton>
+                  </Link>
+                </Button>
               </div>
             )}
           </div>
@@ -673,6 +724,7 @@ Header.propTypes = {
   type: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   userData: PropTypes.object,
+  setType: PropTypes.func.isRequired,
 };
 
 const profileData = {
