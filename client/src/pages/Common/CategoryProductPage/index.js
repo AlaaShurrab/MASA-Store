@@ -47,7 +47,7 @@ const CategoryProductPage = ({ type, userData }) => {
             data: { data: raring },
           } = await axios(`/api/v1/products/${category}`, {});
           setData(dataFormatter(raring, favoriteIds, cartIds));
-        } else {
+        } else if (type !== 'user') {
           const {
             data: { data: raring },
           } = await axios(`/api/v1/products/${category}`, {});

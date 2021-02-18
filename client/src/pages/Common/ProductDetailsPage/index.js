@@ -69,6 +69,15 @@ const ProductDetailsPage = ({ type, userData }) => {
           data: { data: extra },
         } = await axios(`/api/v1/products/${productData[0].category}`, {});
         setRelatedData(dataFormatter(extra.slice(0, 4), favoriteIds, cartIds));
+      } else if (type !== 'user') {
+        const {
+          data: { data: productData },
+        } = await axios(`/api/v1/product/${productId}`, {});
+        setData(dataFormatter(productData, [], [])[0]);
+        const {
+          data: { data: extra },
+        } = await axios(`/api/v1/products/${productData[0].category}`, {});
+        setRelatedData(dataFormatter(extra.slice(0, 4), [], []));
       }
     }
   };
@@ -204,12 +213,12 @@ const ProductDetailsPage = ({ type, userData }) => {
           </p>
           الفئة :
           <Link to={`/products/${data.category}`}>
-            {' '}
             {arabicCategory[data.category]}
           </Link>
           <br />
           <div className="counter">
             <TextField
+              value={quantity}
               size="medium"
               type="number"
               InputProps={{
