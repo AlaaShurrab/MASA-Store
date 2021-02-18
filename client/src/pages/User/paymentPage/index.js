@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import { Helmet } from 'react-helmet';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -65,20 +64,20 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['عنوان الشحن', 'بيانات الدفع', 'راجع طلباتك'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
+export default function Checkout({ userData }) {
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm userData={userData} />;
+      case 1:
+        return <PaymentForm userData={userData} />;
+      case 2:
+        return <Review userData={userData} />;
+      default:
+        throw new Error('Unknown step');
+    }
   }
-}
 
-export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -92,6 +91,9 @@ export default function Checkout() {
 
   return (
     <>
+      <Helmet>
+        <title>Payment</title>
+      </Helmet>
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
@@ -111,10 +113,6 @@ export default function Checkout() {
                 <Typography variant="h5" gutterBottom>
                   شكرا لطلبك .
                 </Typography>
-                <Typography variant="subtitle1">
-                  رقم طلبك هو # 2001539. لقد أرسلنا طلبك بالبريد الإلكتروني
-                  التأكيد ، وسوف نرسل لك تحديثًا عندما يتم إرسال طلبك شحنها.
-                </Typography>
               </>
             ) : (
               <>
@@ -131,7 +129,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'التالي'}
+                    {activeStep === steps.length - 1 ? 'تنفيذ' : 'التالي'}
                   </Button>
                 </div>
               </>

@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function AddressForm() {
+export default function AddressForm({ userData }) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -15,6 +15,7 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            defaultValue={userData.profileData.first_name}
             variant="outlined"
             id="firstName"
             name="firstName"
@@ -25,6 +26,7 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            defaultValue={userData.profileData.last_name}
             variant="outlined"
             id="lastName"
             name="lastName"
@@ -35,6 +37,7 @@ export default function AddressForm() {
         <Grid item xs={12}>
           <TextField
             required
+            defaultValue={userData.profileData.shipping_address1}
             variant="outlined"
             id="address1"
             name="address1"
@@ -45,6 +48,7 @@ export default function AddressForm() {
         <Grid item xs={12}>
           <TextField
             variant="outlined"
+            defaultValue={userData.profileData.shipping_address2}
             id="address2"
             name="address2"
             label=" العنوان الثاني"
@@ -55,6 +59,7 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            defaultValue={userData.profileData.city}
             variant="outlined"
             id="city"
             name="city"
@@ -65,18 +70,15 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             variant="outlined"
             id="state"
             name="state"
             label="المحافظة"
             fullWidth
-            variant="outlined"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             variant="outlined"
             id="zip"
             name="zip"
@@ -87,7 +89,6 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             variant="outlined"
             id="country"
             name="country"
