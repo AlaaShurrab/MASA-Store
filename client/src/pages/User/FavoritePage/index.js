@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { Redirect, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
@@ -18,26 +17,23 @@ const FavoritePage = ({ type, userData }) => {
           const {
             data: { data: favorite },
           } = await axios(`/api/v1/favorite/${userData.profileData.id}`, {});
-          // console.log(favorite);
-          setData(dataFormatter(favorite, favoriteIds, cartIds));
+          setData(dataFormatter(favorite, favoriteIds, cartIds, true));
         }
       }
     };
     dataCollector();
   }, [userData]);
 
-  // console.log(data);
   return (
     <>
       <Helmet>
         <title>Favorite</title>
       </Helmet>
-      <p>Hi {type},Welcome to FavoritePage </p>
       <CardContainer
         userData={userData}
         role={type}
         data={data}
-        pageTitle="favoriteIds"
+        pageTitle="قائمة الرغبات"
       />
     </>
   );
