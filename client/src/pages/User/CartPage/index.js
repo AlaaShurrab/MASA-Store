@@ -184,6 +184,7 @@ const CartPage = ({ userData }) => {
     setTotalPrice(price);
     setNumberOfProducts(numberProducts);
     setCheckedProducts(purchasedProducts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkedProductsId, products]);
 
   return (
